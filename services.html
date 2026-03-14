@@ -1,0 +1,306 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Services - KMEP</title>
+
+    <!-- Google Fonts -->
+    <link
+      href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap"
+      rel="stylesheet"
+    />
+
+    <!-- Font Awesome -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"
+    />
+    <script src="script.js"></script>
+
+    <style>
+      /* Reset & Base */
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        width: auto;
+      }
+      body {
+        font-family: "Roboto", sans-serif;
+        line-height: 1.6;
+        color: #fff;
+        background: rgba(128, 128, 128, 0.473);
+        width: auto;
+      }
+      img {
+        max-width: 100%;
+        display: block;
+      }
+      a {
+        text-decoration: none;
+        color: inherit;
+      }
+      #page-wrapper {
+        display: flex;
+        flex-direction: column;
+        min-height: 100vh;
+      }
+      main-header,
+      main-footer {
+        display: block;
+      }
+
+      /* Hero Section */
+      .hero {
+        height: 100vh;
+        background: url("images/service.jpg") center/cover no-repeat;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        position: relative;
+        transition: height 0.3s ease;
+        /* padding-top: 100px; */
+      }
+      .hero h1 {
+        color: #ffffff;
+        font-size: 3rem;
+        text-align: center;
+        background: rgba(0, 0, 0, 0.4);
+        padding: 20px 40px;
+        border-radius: 10px;
+      }
+
+      /* SERVICES CONTENT SECTION */
+      .team-section {
+        padding: 80px 20px;
+        background: #0b1220;
+      }
+      .team-section .container {
+        max-width: 1200px;
+        margin: 0 auto;
+      }
+      .team-section h2 {
+        font-size: 2.8rem;
+        margin-bottom: 40px;
+        color: #0a79e7;
+        text-align: center;
+      }
+      .team-section p {
+        margin-bottom: 20px;
+        font-size: 1.1rem;
+        color: #ccc;
+      }
+
+      /* Cards */
+      .cards {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 20px;
+        margin-top: 50px;
+      }
+      .cards .card {
+        flex: 1 1 45%;
+        background: rgba(255, 255, 255, 0.05);
+        border-radius: 10px;
+        padding: 30px;
+        box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+        transition: transform 0.3s, box-shadow 0.3s;
+      }
+      .cards .card:hover {
+        transform: translateY(-10px);
+        box-shadow: 0 12px 25px rgba(0, 0, 0, 0.3);
+      }
+      .cards .card h3 {
+        font-size: 1.5rem;
+        margin-bottom: 15px;
+        display: flex;
+        align-items: center;
+        color: #0a79e7;
+      }
+      .cards .card h3 i {
+        margin-right: 10px;
+        color: #0a79e7;
+      }
+      .cards .card p {
+        color: #ccc;
+        font-size: 1rem;
+      }
+      .card-img {
+        width: 100%;
+        height: 180px;
+        object-fit: cover;
+        border-radius: 10px;
+        margin-bottom: 20px;
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+      }
+
+      /* Mobile Text Clarity Fix */
+      @media (max-width: 900px) {
+        .hero {
+          position: relative;
+        }
+
+        .hero::after {
+          content: "";
+          position: absolute;
+          top: 0;
+          left: 0;
+          width: 100%;
+          height: 100%;
+          background: rgba(0, 0, 0, 0.55);
+          z-index: 1;
+        }
+
+        .hero h1 {
+          font-size: 2rem;
+          position: relative;
+          z-index: 2;
+          color: #fff;
+          text-shadow: 0 2px 10px rgba(0, 0, 0, 0.9);
+        }
+      }
+    </style>
+  </head>
+
+  <body>
+    <div style="padding-bottom: 100px">
+      <kmep-header></kmep-header>
+    </div>
+    <div id="page-wrapper">
+      <!-- Hero Section -->
+      <section class="hero" id="hero">
+        <h1>Our Services</h1>
+      </section>
+
+      <!-- Services Content Section -->
+      <section class="team-section">
+        <div class="container">
+          <p>
+            Keerthan MEP Engineers offers engineering solutions for a wide
+            spectrum of industries including HVAC, mechanical, electrical,
+            plumbing, BMS, energy conservation, energy audits, and indoor air
+            quality.
+          </p>
+
+          <p>
+            Our team focuses on delivering precise, efficient, and
+            cost-effective engineering services using modern technology and
+            practical field expertise for all types of projects.
+          </p>
+
+          <h2><i class="fas fa-cogs"></i> Service Categories</h2>
+
+          <!-- Service Cards -->
+          <div class="cards">
+            <!-- HVAC -->
+            <div class="card">
+              <img
+                src="images/HVAC_.webp"
+                alt="HVAC Service"
+                class="card-img"
+              />
+              <h3><i class="fas fa-fan"></i> HVAC</h3>
+              <p>
+                Creating the perfect indoor environment with expert heating,
+                ventilation, and air-conditioning solutions.
+              </p>
+              <p>
+                <i class="fas fa-check-circle"></i> HVAC System Design and
+                Installation
+              </p>
+              <p>
+                <i class="fas fa-check-circle"></i> Ventilation & Indoor Air
+                Quality
+              </p>
+              <p>
+                <i class="fas fa-check-circle"></i> Energy-efficient Cooling &
+                Heating Systems
+              </p>
+            </div>
+
+            <!-- Mechanical -->
+            <div class="card">
+              <img
+                src="images/mechanical.png"
+                alt="Mechanical Service"
+                class="card-img"
+              />
+              <h3><i class="fas fa-tools"></i> Mechanical</h3>
+              <p>
+                End-to-end mechanical system design, optimization, and
+                maintenance for industrial and commercial needs.
+              </p>
+              <p>
+                <i class="fas fa-check-circle"></i> Mechanical System Layout &
+                Planning
+              </p>
+              <p>
+                <i class="fas fa-check-circle"></i> Energy-efficient Mechanical
+                Solutions
+              </p>
+              <p>
+                <i class="fas fa-check-circle"></i> System Upgrades & Retrofits
+              </p>
+            </div>
+
+            <!-- Electrical -->
+            <div class="card">
+              <img
+                src="images/elctrical_.png"
+                alt="Electrical Service"
+                class="card-img"
+              />
+              <h3><i class="fas fa-bolt"></i> Electrical</h3>
+              <p>
+                Safe, efficient, and optimized electrical engineering services
+                for diverse project requirements.
+              </p>
+              <p>
+                <i class="fas fa-check-circle"></i> Electrical Design & Layout
+              </p>
+              <p>
+                <i class="fas fa-check-circle"></i> Power Distribution Systems
+              </p>
+              <p>
+                <i class="fas fa-check-circle"></i> Lighting Design &
+                Installation
+              </p>
+              <p>
+                <i class="fas fa-check-circle"></i> Energy-efficient Lighting
+                Systems
+              </p>
+            </div>
+
+            <!-- Plumbing -->
+            <div class="card">
+              <img
+                src="images/plumbing.png"
+                alt="Plumbing Service"
+                class="card-img"
+              />
+              <h3><i class="fas fa-wrench"></i> Plumbing</h3>
+              <p>
+                Sustainable and reliable plumbing design and implementation for
+                residential and industrial projects.
+              </p>
+              <p>
+                <i class="fas fa-check-circle"></i> Plumbing Layout & Design
+              </p>
+              <p>
+                <i class="fas fa-check-circle"></i> Water Supply & Distribution
+              </p>
+              <p>
+                <i class="fas fa-check-circle"></i> Sustainable Plumbing
+                Solutions
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Footer -->
+      <kmep-footer></kmep-footer>
+    </div>
+  </body>
+</html>

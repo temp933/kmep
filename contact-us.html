@@ -1,0 +1,318 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Contact Us - KMEP</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"
+    />
+    <script src="script.js"></script>
+
+    <style>
+      /* GLOBAL */
+      body {
+        margin: 0;
+        background: rgba(128, 128, 128, 0.473);
+        color: #ddd;
+        font-family: "Segoe UI", sans-serif;
+        overflow-x: hidden;
+      }
+
+      h2,
+      h3 {
+        color: #a05cff;
+        font-weight: 600;
+      }
+
+      a {
+        color: #ccc;
+        text-decoration: none;
+        transition: 0.3s;
+      }
+
+      a:hover {
+        color: #f11717;
+        text-shadow: 0 0 8px #a05cffaa;
+      }
+
+      .container {
+        width: 92%;
+        max-width: 1200px;
+        margin: auto;
+        margin-bottom: 90px;
+      }
+
+      .row {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 20px;
+      }
+
+      .col-8 {
+        width: 65%;
+      }
+      .col-4 {
+        width: 30%;
+      }
+
+      @media (max-width: 768px) {
+        .col-8,
+        .col-4 {
+          width: 100%;
+        }
+      }
+
+      /* CARDS */
+      .box {
+        background: #1e22417a;
+        margin-top: 10px;
+        padding: 25px;
+        padding-top: 10px;
+        border-radius: 12px;
+        border: 1px solid #222;
+        box-shadow: 0 0 20px #000;
+        opacity: 0;
+        transform: translateY(30px);
+        transition: 1s ease;
+      }
+
+      .visible {
+        opacity: 1 !important;
+        transform: translateY(0px) !important;
+      }
+
+      /* Spotlight Image */
+      .spotlight img {
+        width: 100%;
+        border-radius: 12px;
+        margin-bottom: 15px;
+        box-shadow: 0 0 20px #000;
+      }
+
+      /* GRAPH SECTION */
+      .graph-box {
+        padding: 20px;
+        background: #1e22417a;
+        border-radius: 10px;
+        margin-top: 20px;
+        color: #fff;
+      }
+
+      .graph-title {
+        font-size: 24px;
+        font-weight: bold;
+        margin-bottom: 20px;
+        text-align: center;
+      }
+
+      .bar-chart {
+        display: flex;
+        justify-content: space-between;
+        gap: 20px;
+      }
+
+      .bar {
+        width: 40px;
+        background: #6a00ff;
+        border-radius: 6px;
+        margin: 0 auto 10px auto;
+        transition: height 1s ease-in-out;
+        height: 0px;
+      }
+
+      .bar-label {
+        text-align: center;
+        color: #bbb;
+      }
+
+      .bar-label img {
+        width: 120px;
+        height: 120px;
+        object-fit: cover;
+        margin-top: 5px;
+        border-radius: 10px;
+        transition: transform 0.3s ease;
+      }
+
+      .bar-label img:hover {
+        transform: scale(1.08);
+      }
+
+      /* MOBILE FIXES FOR GRAPH */
+      @media (max-width: 700px) {
+        /* Stack items in 2×2 grid instead of one long row */
+        .bar-chart {
+          display: grid !important;
+          grid-template-columns: repeat(2, 1fr);
+          gap: 25px;
+          text-align: center;
+        }
+
+        /* Shrink bar width */
+        .bar-chart > div > div[data-height] {
+          width: 28px !important;
+          margin: 0 auto;
+        }
+
+        /* Reduce image size */
+        .bar-label img {
+          width: 150px !important;
+          height: 150px !important;
+        }
+
+        /* Reduce label font size */
+        .bar-label {
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          margin-top: 8px;
+          color: #bbb;
+          font-size: 16px;
+        }
+
+        /* Graph title spacing */
+        .graph-title {
+          font-size: 20px;
+          margin-bottom: 15px;
+        }
+
+        /* Graph box padding */
+        .graph-box {
+          padding: 15px;
+        }
+      }
+
+      .header,
+kmep-header {
+  width: 100% !important;
+  max-width: 100% !important;
+  box-sizing: border-box;
+}
+    </style>
+  </head>
+
+  <body>
+    <div id="main-wrapper">
+      <div style="padding-bottom: 100px">
+        <kmep-header
+          style="
+            width: calc(100% - 10px);
+            margin-right: 10px;
+            box-sizing: border-box;
+          "
+        ></kmep-header>
+      </div>
+
+      <div class="container">
+        <h2 style="margin-bottom: 25px">Contact Us</h2>
+
+        <div class="row">
+          <!-- LEFT -->
+          <div class="col-8">
+            <div class="box fade">
+              <h3><i class="fas fa-phone"></i> Phone</h3>
+              <p>
+                <strong><a href="tel:+919710439000">+91 97104 39000</a></strong>
+              </p>
+              <p>
+                <strong><a href="tel:+919176670447">+91 91766 70447</a></strong>
+              </p>
+            </div>
+
+            <div class="box fade">
+              <h3><i class="fas fa-envelope"></i> Email</h3>
+              <p>
+                <strong
+                  ><a href="mailto:rajesh@kmep.co.in"
+                    >rajesh@kmep.co.in</a
+                  ></strong
+                >
+              </p>
+            </div>
+
+            <!-- GRAPH -->
+            <div class="graph-box fade">
+              <div class="graph-title">Branch's</div>
+
+              <div class="bar-chart" id="graph">
+                <div>
+                  <div data-height="70"></div>
+                  <div class="bar-label">
+                    <a
+                      href="https://maps.app.goo.gl/skqbtQh8dWbNBoRF8"
+                      target="_blank"
+                    >
+                      <img src="images/office.png" />
+                    </a>
+                    Chennai
+                  </div>
+                </div>
+
+                <div>
+                  <div data-height="50"></div>
+                  <div class="bar-label">
+                    <a
+                      href="https://maps.app.goo.gl/skqbtQh8dWbNBoRF8"
+                      target="_blank"
+                    >
+                      <img src="images/1.jfif" />
+                    </a>
+                    Hosur
+                  </div>
+                </div>
+
+                <div>
+                  <div data-height="40"></div>
+                  <div class="bar-label">
+                    <a
+                      href="https://maps.app.goo.gl/skqbtQh8dWbNBoRF8"
+                      target="_blank"
+                    >
+                      <img src="images/2.jfif" />
+                    </a>
+                    Trichy
+                  </div>
+                </div>
+
+                <div>
+                  <div data-height="65"></div>
+                  <div class="bar-label">
+                    <a
+                      href="https://maps.app.goo.gl/skqbtQh8dWbNBoRF8"
+                      target="_blank"
+                    >
+                      <img src="images/3.jfif" />
+                    </a>
+                    Bangalore
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- RIGHT -->
+          <div class="col-4">
+            <div class="box spotlight fade">
+              <img src="images/office.png" />
+
+              <h3>Registered Office</h3>
+              <a
+                href="https://maps.app.goo.gl/skqbtQh8dWbNBoRF8"
+                target="_blank"
+              >
+                Plot No. 17, Door No. 4<br />
+                Thiruppur Kumaran Street<br />
+                Senthil Nagar<br />
+                Chennai – 600 062<br />
+                Tamil Nadu, India
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
