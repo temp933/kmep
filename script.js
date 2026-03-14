@@ -265,7 +265,7 @@ class KmepHeader extends HTMLElement {
   <div class="header-left">
     <div class="logo">
       <a href="about.html">
-        <img src="images/logo.png" alt="Logo" />
+        <img src="IMAGES/logo.png" alt="Logo" />
       </a>
     </div>
 
