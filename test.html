@@ -1,0 +1,2551 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>KMEP — Keerthan MEP Engineers</title>
+    <link rel="icon" href="images/logo.png" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&family=Playfair+Display:ital,wght@0,700;0,800;1,700&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
+    <script src="script.js" defer></script>
+
+    <style>
+      /* ============================================================
+         RESET
+      ============================================================ */
+      *,
+      *::before,
+      *::after {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
+      html {
+        scroll-behavior: smooth;
+      }
+      body {
+        font-family: "Outfit", sans-serif;
+        background: #fff;
+        color: #1a2332;
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+        overflow-x: hidden;
+        line-height: 1.6;
+      }
+      a {
+        color: inherit;
+        text-decoration: none;
+      }
+      img {
+        display: block;
+        max-width: 100%;
+        height: auto;
+      }
+      ul {
+        list-style: none;
+      }
+
+      /* ============================================================
+         TOKENS
+      ============================================================ */
+      :root {
+        --navy: #0c1e35;
+        --blue: #1558b0;
+        --blue2: #1a6fd4;
+        --sky: #0ea5e9;
+        --teal: #0d9488;
+        --off: #f7f9fc;
+        --off2: #eef2f7;
+        --slate: #5a6a7e;
+        --muted: #94a3b8;
+        --border: #dde4ed;
+        --text: #1a2332;
+        --sh: 0 2px 20px rgba(12, 30, 53, 0.07);
+        --sh2: 0 10px 50px rgba(12, 30, 53, 0.14);
+        --r: 14px;
+        --NAV-H: 76px;
+      }
+
+      /* ============================================================
+         LAYOUT
+      ============================================================ */
+      .wrap {
+        max-width: 1180px;
+        margin: 0 auto;
+        padding: 0 52px;
+      }
+
+      /* ============================================================
+         SCROLL REVEAL
+      ============================================================ */
+      .rv {
+        opacity: 0;
+        transform: translateY(28px);
+        transition:
+          opacity 0.65s ease,
+          transform 0.65s ease;
+      }
+      .rv-l {
+        opacity: 0;
+        transform: translateX(-28px);
+        transition:
+          opacity 0.7s ease,
+          transform 0.7s ease;
+      }
+      .rv-r {
+        opacity: 0;
+        transform: translateX(28px);
+        transition:
+          opacity 0.7s ease,
+          transform 0.7s ease;
+      }
+      .rv.on,
+      .rv-l.on,
+      .rv-r.on {
+        opacity: 1;
+        transform: none;
+      }
+      .d1 {
+        transition-delay: 0.08s;
+      }
+      .d2 {
+        transition-delay: 0.18s;
+      }
+      .d3 {
+        transition-delay: 0.28s;
+      }
+      .d4 {
+        transition-delay: 0.38s;
+      }
+
+      /* ============================================================
+         SECTION TYPOGRAPHY
+      ============================================================ */
+      .sec-tag {
+        display: inline-flex;
+        align-items: center;
+        gap: 9px;
+        font-size: 11.5px;
+        font-weight: 700;
+        letter-spacing: 2.5px;
+        text-transform: uppercase;
+        color: var(--blue);
+        margin-bottom: 14px;
+      }
+      .sec-tag::before {
+        content: "";
+        display: block;
+        width: 24px;
+        height: 2px;
+        background: var(--sky);
+        border-radius: 2px;
+        flex-shrink: 0;
+      }
+      .sec-tag-c {
+        display: inline-flex;
+        align-items: center;
+        gap: 9px;
+        font-size: 11.5px;
+        font-weight: 700;
+        letter-spacing: 2.5px;
+        text-transform: uppercase;
+        color: var(--blue);
+        margin-bottom: 14px;
+      }
+      .sec-tag-c::before,
+      .sec-tag-c::after {
+        content: "";
+        display: block;
+        width: 22px;
+        height: 2px;
+        background: var(--sky);
+        border-radius: 2px;
+        flex-shrink: 0;
+      }
+      .display-h {
+        font-family: "Playfair Display", serif;
+        font-weight: 800;
+        letter-spacing: -1.5px;
+        color: var(--navy);
+        line-height: 1.1;
+      }
+      .sec-sub {
+        font-size: 16px;
+        color: var(--slate);
+        line-height: 1.8;
+        max-width: 520px;
+        margin: 14px auto 0;
+      }
+      .sec-header {
+        text-align: center;
+        margin-bottom: 64px;
+      }
+
+      /* ============================================================
+         NAV
+      ============================================================ */
+      .nav {
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        z-index: 1000;
+        height: var(--NAV-H);
+        transition:
+          background 0.4s,
+          box-shadow 0.4s;
+      }
+      .nav.scrolled {
+        background: rgba(255, 255, 255, 0.97);
+        backdrop-filter: blur(22px);
+        -webkit-backdrop-filter: blur(22px);
+        box-shadow:
+          0 1px 0 var(--border),
+          var(--sh);
+      }
+      .nav-inner {
+        max-width: 1180px;
+        margin: 0 auto;
+        padding: 0 52px;
+        height: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+      }
+      .nav-logo {
+        display: flex;
+        align-items: center;
+        gap: 11px;
+        flex-shrink: 0;
+      }
+      .nav-logo img {
+        width: 42px;
+        border-radius: 9px;
+      }
+      .nav-brand {
+        font-weight: 800;
+        font-size: 22px;
+        letter-spacing: 3px;
+        background: linear-gradient(90deg, #fff 0%, #93c5fd 100%);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+      }
+      .nav.scrolled .nav-brand {
+        background: linear-gradient(90deg, var(--navy) 0%, var(--blue2) 100%);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+      }
+      .nav-menu {
+        display: flex;
+        align-items: center;
+        gap: 4px;
+      }
+      .nav-menu > a {
+        padding: 9px 16px;
+        border-radius: 9px;
+        font-size: 15px;
+        font-weight: 600;
+        color: rgba(255, 255, 255, 0.85);
+        transition:
+          color 0.2s,
+          background 0.2s;
+      }
+      .nav-menu > a:hover {
+        color: #fff;
+        background: rgba(255, 255, 255, 0.1);
+      }
+      .nav.scrolled .nav-menu > a {
+        color: var(--slate);
+      }
+      .nav.scrolled .nav-menu > a:hover {
+        color: var(--navy);
+        background: var(--off2);
+      }
+      .nav-dd {
+        position: relative;
+      }
+      .nav-dd > a {
+        display: flex;
+        align-items: center;
+        gap: 6px;
+        padding: 9px 16px;
+        border-radius: 9px;
+        font-size: 15px;
+        font-weight: 600;
+        color: rgba(255, 255, 255, 0.85);
+        cursor: pointer;
+        transition:
+          color 0.2s,
+          background 0.2s;
+      }
+      .nav-dd > a:hover {
+        color: #fff;
+        background: rgba(255, 255, 255, 0.1);
+      }
+      .nav.scrolled .nav-dd > a {
+        color: var(--slate);
+      }
+      .nav.scrolled .nav-dd > a:hover {
+        color: var(--navy);
+        background: var(--off2);
+      }
+      .chev {
+        font-size: 9px;
+        opacity: 0.6;
+        transition: transform 0.25s;
+      }
+      .nav-dd:hover .chev {
+        transform: rotate(180deg);
+      }
+      .dd-panel {
+        display: none;
+        position: absolute;
+        top: calc(100% + 8px);
+        left: 0;
+        background: #fff;
+        border: 1px solid var(--border);
+        border-radius: 13px;
+        padding: 7px;
+        min-width: 180px;
+        box-shadow: var(--sh2);
+      }
+      .nav-dd:hover .dd-panel {
+        display: block;
+      }
+      .dd-panel a {
+        display: block;
+        padding: 10px 15px;
+        border-radius: 8px;
+        font-size: 14px;
+        font-weight: 500;
+        color: var(--text);
+        transition:
+          background 0.2s,
+          color 0.2s;
+      }
+      .dd-panel a:hover {
+        background: var(--off2);
+        color: var(--blue);
+      }
+      .nav-cta {
+        background: var(--sky);
+        color: #fff;
+        padding: 10px 26px;
+        border-radius: 9px;
+        margin-left: 10px;
+        font-size: 14.5px;
+        font-weight: 700;
+        transition:
+          background 0.2s,
+          transform 0.2s,
+          box-shadow 0.2s;
+        white-space: nowrap;
+      }
+      .nav-cta:hover {
+        background: #0284c7;
+        transform: translateY(-1px);
+        box-shadow: 0 6px 20px rgba(14, 165, 233, 0.35);
+      }
+      .nav-toggle {
+        display: none;
+        flex-direction: column;
+        gap: 5px;
+        width: 30px;
+        cursor: pointer;
+        padding: 4px 0;
+        flex-shrink: 0;
+      }
+      .nav-toggle span {
+        display: block;
+        height: 2px;
+        background: #fff;
+        border-radius: 2px;
+        transition: all 0.3s;
+      }
+      .nav.scrolled .nav-toggle span {
+        background: var(--navy);
+      }
+      .nav-toggle.open span:nth-child(1) {
+        transform: translateY(7px) rotate(45deg);
+      }
+      .nav-toggle.open span:nth-child(2) {
+        opacity: 0;
+      }
+      .nav-toggle.open span:nth-child(3) {
+        transform: translateY(-7px) rotate(-45deg);
+      }
+      .nav-drawer {
+        display: none;
+        position: fixed;
+        top: var(--NAV-H);
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: rgba(255, 255, 255, 0.99);
+        padding: 28px 32px 48px;
+        flex-direction: column;
+        overflow-y: auto;
+        z-index: 999;
+      }
+      .nav-drawer.open {
+        display: flex;
+      }
+      .nav-drawer a {
+        padding: 16px 0;
+        font-size: 18px;
+        font-weight: 600;
+        color: var(--text);
+        border-bottom: 1px solid var(--border);
+        display: block;
+        transition: color 0.2s;
+      }
+      .nav-drawer a:last-of-type {
+        border-bottom: none;
+      }
+      .nav-drawer a:hover {
+        color: var(--blue);
+      }
+      .drawer-cta {
+        margin-top: 24px;
+        background: var(--blue);
+        color: #fff !important;
+        padding: 16px 24px;
+        border-radius: 10px;
+        text-align: center;
+        font-size: 16px;
+        font-weight: 700;
+        border-bottom: none !important;
+      }
+      .drawer-cta:hover {
+        background: var(--blue2) !important;
+      }
+
+      #hero {
+        position: relative;
+        display: flex;
+        align-items: center;
+        min-height: 100vh;
+        padding-top: calc(var(--NAV-H) + 56px);
+        /* Enough room so absolute .hero-cue at bottom:28px never
+           visually overlaps the stats strip in normal flow above it */
+        padding-bottom: 180px;
+        background: linear-gradient(
+          140deg,
+          #091828 0%,
+          #0d2744 45%,
+          #0a3060 75%,
+          #091e38 100%
+        );
+        overflow: hidden;
+      }
+      .hbg-glow {
+        position: absolute;
+        inset: 0;
+        z-index: 0;
+        pointer-events: none;
+        background:
+          radial-gradient(
+            ellipse 65% 55% at 78% 50%,
+            rgba(14, 165, 233, 0.22) 0%,
+            transparent 60%
+          ),
+          radial-gradient(
+            ellipse 38% 48% at 5% 85%,
+            rgba(13, 148, 136, 0.14) 0%,
+            transparent 55%
+          );
+      }
+      .hbg-grid {
+        position: absolute;
+        inset: 0;
+        z-index: 0;
+        pointer-events: none;
+        background-image:
+          linear-gradient(rgba(255, 255, 255, 0.028) 1px, transparent 1px),
+          linear-gradient(
+            90deg,
+            rgba(255, 255, 255, 0.028) 1px,
+            transparent 1px
+          );
+        background-size: 80px 80px;
+      }
+      .hbg-photo {
+        position: absolute;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        width: 46%;
+        z-index: 0;
+        clip-path: polygon(12% 0, 100% 0, 100% 100%, 0 100%);
+        overflow: hidden;
+        pointer-events: none;
+      }
+      .hbg-photo::after {
+        content: "";
+        position: absolute;
+        inset: 0;
+        z-index: 1;
+        background: linear-gradient(
+          90deg,
+          #091828 0%,
+          rgba(9, 24, 40, 0.65) 28%,
+          rgba(9, 24, 40, 0.04) 100%
+        );
+      }
+      .hbg-photo img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        opacity: 0.4;
+      }
+      .hbg-orb {
+        position: absolute;
+        bottom: -120px;
+        right: 14%;
+        z-index: 0;
+        width: 380px;
+        height: 380px;
+        border-radius: 50%;
+        background: radial-gradient(
+          circle,
+          rgba(14, 165, 233, 0.1),
+          transparent 70%
+        );
+        pointer-events: none;
+      }
+      .hero-body {
+        position: relative;
+        z-index: 1;
+        width: 100%;
+        max-width: 1180px;
+        margin: 0 auto;
+        padding: 0 52px;
+      }
+
+      /* Hero children — visible by default; animated only on first load */
+      .hero-eyebrow,
+      .hero-h1,
+      .hero-sub,
+      .hero-btns,
+      .hero-stats {
+        opacity: 1;
+        transform: none;
+      }
+      #hero.hero-animate .hero-eyebrow {
+        animation: hfadeIn 0.9s 0s ease forwards;
+      }
+      #hero.hero-animate .hero-h1 {
+        animation: hfadeIn 0.9s 0.12s ease forwards;
+      }
+      #hero.hero-animate .hero-sub {
+        animation: hfadeIn 0.9s 0.24s ease forwards;
+      }
+      #hero.hero-animate .hero-btns {
+        animation: hfadeIn 0.9s 0.36s ease forwards;
+      }
+      #hero.hero-animate .hero-stats {
+        animation: hfadeIn 0.9s 0.5s ease forwards;
+      }
+      @keyframes hfadeIn {
+        from {
+          opacity: 0;
+          transform: translateY(20px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      .hero-eyebrow {
+        display: inline-flex;
+        align-items: center;
+        gap: 11px;
+        background: rgba(255, 255, 255, 0.07);
+        border: 1px solid rgba(255, 255, 255, 0.14);
+        border-radius: 100px;
+        padding: 8px 20px;
+        margin-bottom: 30px;
+      }
+      .hero-pulse {
+        width: 8px;
+        height: 8px;
+        border-radius: 50%;
+        background: var(--sky);
+        flex-shrink: 0;
+        animation: blinkanim 2.4s ease infinite;
+      }
+      @keyframes blinkanim {
+        0%,
+        100% {
+          opacity: 1;
+          box-shadow: 0 0 0 0 rgba(14, 165, 233, 0.5);
+        }
+        50% {
+          opacity: 0.4;
+          box-shadow: 0 0 0 6px rgba(14, 165, 233, 0);
+        }
+      }
+      .hero-eyebrow-text {
+        font-size: 12px;
+        font-weight: 700;
+        letter-spacing: 2.5px;
+        text-transform: uppercase;
+        color: rgba(255, 255, 255, 0.72);
+      }
+      .hero-h1 {
+        font-family: "Playfair Display", serif;
+        font-size: clamp(44px, 6vw, 84px);
+        font-weight: 800;
+        line-height: 1.05;
+        letter-spacing: -2.5px;
+        color: #fff;
+        max-width: 680px;
+        margin-bottom: 24px;
+      }
+      .hero-h1 em {
+        font-style: normal;
+        background: linear-gradient(90deg, #38bdf8, #93c5fd);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+      }
+      .hero-sub {
+        font-size: 18px;
+        color: rgba(255, 255, 255, 0.6);
+        max-width: 500px;
+        line-height: 1.85;
+        margin-bottom: 44px;
+        font-weight: 400;
+      }
+      .hero-btns {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 14px;
+      }
+      .hbtn-sky {
+        display: inline-flex;
+        align-items: center;
+        gap: 10px;
+        background: var(--sky);
+        color: #fff;
+        padding: 15px 32px;
+        border-radius: 11px;
+        font-weight: 700;
+        font-size: 15px;
+        transition:
+          background 0.2s,
+          transform 0.2s,
+          box-shadow 0.2s;
+      }
+      .hbtn-sky:hover {
+        background: #0284c7;
+        transform: translateY(-2px);
+        box-shadow: 0 12px 32px rgba(14, 165, 233, 0.38);
+      }
+      .hbtn-out {
+        display: inline-flex;
+        align-items: center;
+        gap: 10px;
+        background: rgba(255, 255, 255, 0.07);
+        border: 1.5px solid rgba(255, 255, 255, 0.22);
+        color: rgba(255, 255, 255, 0.88);
+        padding: 15px 32px;
+        border-radius: 11px;
+        font-weight: 600;
+        font-size: 15px;
+        transition:
+          background 0.2s,
+          border-color 0.2s;
+      }
+      .hbtn-out:hover {
+        background: rgba(255, 255, 255, 0.14);
+        border-color: rgba(255, 255, 255, 0.42);
+      }
+
+      /* Stats strip — normal flow, sits above cue naturally via padding-bottom on #hero */
+      .hero-stats {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        margin-top: 68px;
+        background: rgba(255, 255, 255, 0.07);
+        border: 1px solid rgba(255, 255, 255, 0.12);
+        border-radius: 16px;
+        overflow: hidden;
+        max-width: 640px;
+      }
+      .hst {
+        padding: 22px 18px;
+        text-align: center;
+        border-right: 1px solid rgba(255, 255, 255, 0.08);
+      }
+      .hst:last-child {
+        border-right: none;
+      }
+      .hst-n {
+        display: block;
+        font-family: "Playfair Display", serif;
+        font-size: 30px;
+        font-weight: 800;
+        color: #fff;
+        line-height: 1;
+      }
+      .hst-l {
+        display: block;
+        font-size: 10px;
+        font-weight: 700;
+        letter-spacing: 1.5px;
+        text-transform: uppercase;
+        color: rgba(255, 255, 255, 0.42);
+        margin-top: 6px;
+      }
+      .hero-cue {
+        position: absolute;
+        bottom: 28px;
+        left: 50%;
+        transform: translateX(-50%);
+        z-index: 2;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 7px;
+        pointer-events: none;
+      }
+      .hcue-line {
+        width: 1px;
+        height: 36px;
+        background: linear-gradient(
+          to bottom,
+          transparent,
+          rgba(14, 165, 233, 0.65)
+        );
+        animation: cline 2s ease infinite;
+      }
+      .hcue-txt {
+        font-size: 9px;
+        letter-spacing: 3px;
+        text-transform: uppercase;
+        color: rgba(255, 255, 255, 0.28);
+        font-weight: 700;
+      }
+      @keyframes cline {
+        0%,
+        100% {
+          opacity: 0.3;
+          transform: scaleY(0.5);
+          transform-origin: top;
+        }
+        50% {
+          opacity: 1;
+          transform: scaleY(1);
+        }
+      }
+
+      /* ============================================================
+         ABOUT
+      ============================================================ */
+      #about {
+        padding: 108px 0;
+        background: #fff;
+      }
+      .about-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 84px;
+        align-items: start;
+      }
+      .about-h {
+        font-size: clamp(30px, 3.8vw, 46px);
+        margin-bottom: 20px;
+      }
+      .about-h span {
+        color: var(--blue2);
+      }
+      .about-p {
+        font-size: 16.5px;
+        color: var(--slate);
+        line-height: 1.9;
+        margin-bottom: 36px;
+      }
+      .pillar-list {
+        display: flex;
+        flex-direction: column;
+        gap: 14px;
+      }
+      .pillar {
+        display: flex;
+        gap: 16px;
+        align-items: flex-start;
+        padding: 20px 22px;
+        border-radius: 13px;
+        border: 1.5px solid var(--border);
+        background: #fff;
+        transition:
+          border-color 0.3s,
+          box-shadow 0.3s,
+          background 0.3s;
+      }
+      .pillar:hover {
+        border-color: rgba(21, 101, 192, 0.28);
+        box-shadow: 0 6px 28px rgba(21, 101, 192, 0.09);
+        background: var(--off);
+      }
+      .p-ico {
+        width: 44px;
+        height: 44px;
+        border-radius: 11px;
+        flex-shrink: 0;
+        background: linear-gradient(135deg, #dbeafe, #bfdbfe);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 18px;
+        color: var(--blue);
+      }
+      .p-tag {
+        font-size: 10px;
+        letter-spacing: 2px;
+        text-transform: uppercase;
+        color: var(--muted);
+        font-weight: 700;
+        margin-bottom: 3px;
+      }
+      .pillar h3 {
+        font-size: 15px;
+        font-weight: 800;
+        color: var(--navy);
+        margin-bottom: 5px;
+      }
+      .pillar p {
+        font-size: 13.5px;
+        color: var(--slate);
+        line-height: 1.65;
+      }
+      .about-right {
+        display: flex;
+        flex-direction: column;
+        gap: 22px;
+      }
+      .about-img {
+        width: 100%;
+        border-radius: 18px;
+        overflow: hidden;
+        box-shadow: var(--sh2);
+        aspect-ratio: 16 / 11;
+        position: relative;
+      }
+      .about-img::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        height: 4px;
+        z-index: 1;
+        background: linear-gradient(
+          90deg,
+          var(--blue),
+          var(--sky),
+          var(--teal)
+        );
+      }
+      .about-img img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        display: block;
+      }
+      .svc-mini {
+        background: var(--off2);
+        border: 1.5px solid var(--border);
+        border-radius: 14px;
+        padding: 24px 26px;
+      }
+      .svc-mini h4 {
+        font-size: 11px;
+        letter-spacing: 2.5px;
+        text-transform: uppercase;
+        color: var(--muted);
+        font-weight: 700;
+        margin-bottom: 16px;
+      }
+      .svc-mini-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 12px;
+      }
+      .svc-mini-row {
+        display: flex;
+        align-items: center;
+        gap: 9px;
+        font-size: 14.5px;
+        font-weight: 700;
+        color: var(--navy);
+      }
+      .svc-mini-row i {
+        color: var(--teal);
+        font-size: 13px;
+        flex-shrink: 0;
+      }
+
+      /* ============================================================
+         STATS BAND
+      ============================================================ */
+      #stats {
+        background: linear-gradient(135deg, var(--navy) 0%, #1558b0 100%);
+        position: relative;
+        overflow: hidden;
+      }
+      #stats::before {
+        content: "";
+        position: absolute;
+        inset: 0;
+        pointer-events: none;
+        background: url("data:image/svg+xml,%3Csvg width='64' height='64' xmlns='http://www.w3.org/2000/svg'%3E%3Ccircle cx='32' cy='32' r='26' fill='none' stroke='rgba(255,255,255,0.04)' stroke-width='1'/%3E%3C/svg%3E")
+          center / 64px repeat;
+      }
+      .stats-row {
+        position: relative;
+        z-index: 1;
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+      }
+      .st {
+        padding: 56px 28px;
+        text-align: center;
+        border-right: 1px solid rgba(255, 255, 255, 0.1);
+        transition: background 0.3s;
+      }
+      .st:last-child {
+        border-right: none;
+      }
+      .st:hover {
+        background: rgba(255, 255, 255, 0.05);
+      }
+      .st-n {
+        display: block;
+        font-family: "Playfair Display", serif;
+        font-size: clamp(42px, 4.5vw, 60px);
+        font-weight: 800;
+        color: #fff;
+        line-height: 1;
+        margin-bottom: 12px;
+      }
+      .st-l {
+        display: block;
+        font-size: 12px;
+        font-weight: 700;
+        letter-spacing: 1.5px;
+        text-transform: uppercase;
+        color: rgba(255, 255, 255, 0.5);
+      }
+
+      /* ============================================================
+         SERVICES
+      ============================================================ */
+      #services {
+        padding: 108px 0;
+        background: var(--off);
+      }
+      .svc-grid {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 20px;
+      }
+      .svc-card {
+        background: #fff;
+        border-radius: var(--r);
+        border: 1.5px solid var(--border);
+        display: flex;
+        flex-direction: column;
+        overflow: hidden;
+        text-decoration: none;
+        position: relative;
+        transition:
+          border-color 0.3s,
+          transform 0.35s,
+          box-shadow 0.35s;
+      }
+      .svc-card::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        height: 3px;
+        background: linear-gradient(90deg, var(--blue), var(--sky));
+        transform: scaleX(0);
+        transform-origin: left;
+        transition: transform 0.4s;
+      }
+      .svc-card:hover {
+        border-color: rgba(21, 101, 192, 0.22);
+        transform: translateY(-7px);
+        box-shadow: 0 20px 56px rgba(12, 30, 53, 0.12);
+      }
+      .svc-card:hover::before {
+        transform: scaleX(1);
+      }
+      .svc-thumb {
+        height: 170px;
+        overflow: hidden;
+        background: linear-gradient(135deg, #dbeafe 0%, #eff6ff 100%);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 24px;
+      }
+      .svc-thumb img {
+        height: 118px;
+        object-fit: contain;
+        transition: transform 0.45s;
+      }
+      .svc-card:hover .svc-thumb img {
+        transform: scale(1.08);
+      }
+      .svc-body {
+        padding: 24px;
+        display: flex;
+        flex-direction: column;
+        flex: 1;
+      }
+      .svc-top {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        margin-bottom: 13px;
+      }
+      .svc-ico {
+        width: 38px;
+        height: 38px;
+        border-radius: 9px;
+        background: linear-gradient(135deg, #dbeafe, #bfdbfe);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: var(--blue);
+        font-size: 16px;
+      }
+      .svc-arr {
+        width: 30px;
+        height: 30px;
+        border-radius: 50%;
+        border: 1.5px solid var(--border);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: var(--muted);
+        font-size: 10px;
+        transition: all 0.3s;
+      }
+      .svc-card:hover .svc-arr {
+        background: var(--blue);
+        border-color: var(--blue);
+        color: #fff;
+        transform: translate(2px, -2px);
+      }
+      .svc-name {
+        font-size: 17px;
+        font-weight: 800;
+        color: var(--navy);
+        margin-bottom: 9px;
+      }
+      .svc-desc {
+        font-size: 13.5px;
+        color: var(--slate);
+        line-height: 1.7;
+        flex: 1;
+      }
+      .svc-link {
+        margin-top: 15px;
+        font-size: 13px;
+        font-weight: 700;
+        color: var(--blue);
+        display: flex;
+        align-items: center;
+        gap: 6px;
+        opacity: 0;
+        transform: translateY(5px);
+        transition:
+          opacity 0.3s,
+          transform 0.3s;
+      }
+      .svc-card:hover .svc-link {
+        opacity: 1;
+        transform: translateY(0);
+      }
+      .svc-note {
+        margin-top: 44px;
+        font-size: 16px;
+        color: var(--slate);
+        line-height: 1.85;
+        text-align: center;
+        max-width: 800px;
+        margin-left: auto;
+        margin-right: auto;
+      }
+
+      /* ============================================================
+         WHY CHOOSE US
+      ============================================================ */
+      #why {
+        padding: 108px 0;
+        background: #fff;
+      }
+      .why-grid {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        border: 1.5px solid var(--border);
+        border-radius: 20px;
+        overflow: hidden;
+        box-shadow: var(--sh);
+      }
+      .wc {
+        padding: 42px 36px;
+        border-right: 1.5px solid var(--border);
+        border-bottom: 1.5px solid var(--border);
+        background: #fff;
+        position: relative;
+        overflow: hidden;
+        transition: background 0.3s;
+      }
+      .wc:nth-child(3n) {
+        border-right: none;
+      }
+      .wc:nth-child(4),
+      .wc:nth-child(5),
+      .wc:nth-child(6) {
+        border-bottom: none;
+      }
+      .wc::after {
+        content: "";
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        height: 3px;
+        background: linear-gradient(90deg, var(--blue), var(--sky));
+        transform: scaleX(0);
+        transform-origin: left;
+        transition: transform 0.4s;
+      }
+      .wc:hover {
+        background: var(--off);
+      }
+      .wc:hover::after {
+        transform: scaleX(1);
+      }
+      .wc-num {
+        position: absolute;
+        top: 14px;
+        right: 18px;
+        font-family: "Playfair Display", serif;
+        font-size: 58px;
+        font-weight: 800;
+        color: var(--off2);
+        line-height: 1;
+        pointer-events: none;
+        transition: color 0.3s;
+      }
+      .wc:hover .wc-num {
+        color: #dbeafe;
+      }
+      .wc-ico {
+        width: 52px;
+        height: 52px;
+        border-radius: 13px;
+        background: linear-gradient(135deg, #dbeafe, #eff6ff);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 22px;
+        color: var(--blue);
+        margin-bottom: 22px;
+      }
+      .wc-title {
+        font-size: 17px;
+        font-weight: 800;
+        color: var(--navy);
+        margin-bottom: 12px;
+      }
+      .wc-desc {
+        font-size: 14px;
+        color: var(--slate);
+        line-height: 1.75;
+      }
+
+      /* ============================================================
+         SPOTLIGHT
+      ============================================================ */
+      #spotlight {
+        padding: 108px 0;
+        background: var(--off);
+      }
+      .spot-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 88px;
+        align-items: center;
+      }
+      .spot-visual {
+        display: flex;
+        flex-direction: column;
+        gap: 22px;
+      }
+      .spot-img {
+        width: 100%;
+        border-radius: 20px;
+        overflow: hidden;
+        box-shadow: var(--sh2);
+        aspect-ratio: 1 / 1;
+        background: linear-gradient(135deg, var(--off2), #fff);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 42px;
+        position: relative;
+      }
+      .spot-img::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        height: 4px;
+        background: linear-gradient(90deg, var(--blue), var(--sky));
+        z-index: 1;
+      }
+      .spot-img img {
+        max-width: 88%;
+        max-height: 88%;
+        object-fit: contain;
+        transition: transform 0.5s;
+      }
+      .spot-img:hover img {
+        transform: scale(1.05);
+      }
+      .spot-badge {
+        background: var(--navy);
+        color: #fff;
+        border-radius: 15px;
+        padding: 22px 26px;
+        box-shadow: var(--sh2);
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        gap: 16px;
+      }
+      .sb-t strong {
+        display: block;
+        font-family: "Playfair Display", serif;
+        font-size: 17px;
+        margin-bottom: 5px;
+      }
+      .sb-t small {
+        font-size: 11px;
+        color: rgba(255, 255, 255, 0.5);
+        letter-spacing: 1.5px;
+        text-transform: uppercase;
+      }
+      .sb-ico {
+        width: 44px;
+        height: 44px;
+        border-radius: 11px;
+        flex-shrink: 0;
+        background: rgba(255, 255, 255, 0.1);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 20px;
+        color: var(--sky);
+      }
+      .spot-h {
+        font-size: clamp(28px, 3.2vw, 44px);
+        margin-bottom: 18px;
+      }
+      .spot-p {
+        font-size: 16.5px;
+        color: var(--slate);
+        line-height: 1.85;
+        margin-bottom: 30px;
+      }
+      .chips {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 11px;
+        margin-bottom: 34px;
+      }
+      .chip {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        padding: 12px 20px;
+        border-radius: 10px;
+        background: #fff;
+        border: 1.5px solid var(--border);
+        font-size: 14px;
+        font-weight: 700;
+        color: var(--navy);
+        transition:
+          border-color 0.3s,
+          box-shadow 0.3s;
+      }
+      .chip:hover {
+        border-color: var(--blue);
+        box-shadow: 0 4px 16px rgba(21, 101, 192, 0.1);
+      }
+      .chip-dot {
+        width: 8px;
+        height: 8px;
+        border-radius: 50%;
+        background: var(--sky);
+        flex-shrink: 0;
+      }
+
+      /* ============================================================
+         CLIENTS
+      ============================================================ */
+      #clients {
+        padding: 90px 0;
+        background: var(--navy);
+        overflow: hidden;
+      }
+      .clients-header .sec-tag-c {
+        color: rgba(255, 255, 255, 0.45);
+      }
+      .clients-header .sec-tag-c::before,
+      .clients-header .sec-tag-c::after {
+        background: rgba(255, 255, 255, 0.2);
+      }
+      .mq-wrap {
+        overflow: hidden;
+        margin-top: 52px;
+        -webkit-mask-image: linear-gradient(
+          90deg,
+          transparent,
+          #fff 12%,
+          #fff 88%,
+          transparent
+        );
+        mask-image: linear-gradient(
+          90deg,
+          transparent,
+          #fff 12%,
+          #fff 88%,
+          transparent
+        );
+      }
+      .mq-track {
+        display: flex;
+        align-items: center;
+        gap: 64px;
+        width: max-content;
+        animation: mqs 40s linear infinite;
+      }
+      .mq-track:hover {
+        animation-play-state: paused;
+      }
+      /* Natural colours — no destructive filter */
+      .mq-track img {
+        height: 52px;
+        width: auto;
+        object-fit: contain;
+        flex-shrink: 0;
+        opacity: 0.75;
+        transition:
+          opacity 0.3s,
+          transform 0.3s;
+      }
+      .mq-track img:hover {
+        opacity: 1;
+        transform: scale(1.05);
+      }
+      @keyframes mqs {
+        from {
+          transform: translateX(0);
+        }
+        to {
+          transform: translateX(-50%);
+        }
+      }
+
+      /* ============================================================
+         CTA
+      ============================================================ */
+      #cta {
+        padding: 108px 0;
+        background: var(--off);
+      }
+      .cta-box {
+        position: relative;
+        overflow: hidden;
+        background: linear-gradient(135deg, var(--navy) 0%, #1558b0 100%);
+        border-radius: 24px;
+        padding: 96px 64px;
+        text-align: center;
+        box-shadow: 0 28px 80px rgba(12, 30, 53, 0.22);
+      }
+      .cta-box::before {
+        content: "";
+        position: absolute;
+        top: -100px;
+        right: -100px;
+        width: 360px;
+        height: 360px;
+        border-radius: 50%;
+        background: radial-gradient(
+          circle,
+          rgba(255, 255, 255, 0.06),
+          transparent
+        );
+        pointer-events: none;
+      }
+      .cta-box::after {
+        content: "";
+        position: absolute;
+        bottom: -100px;
+        left: -100px;
+        width: 320px;
+        height: 320px;
+        border-radius: 50%;
+        background: radial-gradient(
+          circle,
+          rgba(14, 165, 233, 0.16),
+          transparent
+        );
+        pointer-events: none;
+      }
+      .cta-tag {
+        font-size: 12px;
+        letter-spacing: 3px;
+        text-transform: uppercase;
+        color: rgba(255, 255, 255, 0.45);
+        font-weight: 700;
+        margin-bottom: 16px;
+      }
+      .cta-h {
+        font-size: clamp(30px, 4.5vw, 56px);
+        color: #fff;
+        margin-bottom: 16px;
+        position: relative;
+        z-index: 1;
+      }
+      .cta-p {
+        font-size: 17px;
+        color: rgba(255, 255, 255, 0.55);
+        margin-bottom: 46px;
+        position: relative;
+        z-index: 1;
+      }
+      .cta-btns {
+        display: flex;
+        gap: 16px;
+        justify-content: center;
+        flex-wrap: wrap;
+        position: relative;
+        z-index: 1;
+      }
+      .cta-btn1 {
+        display: inline-flex;
+        align-items: center;
+        gap: 9px;
+        background: #fff;
+        color: var(--blue);
+        padding: 15px 34px;
+        border-radius: 11px;
+        font-weight: 800;
+        font-size: 15px;
+        transition:
+          background 0.2s,
+          transform 0.2s,
+          box-shadow 0.2s;
+      }
+      .cta-btn1:hover {
+        background: var(--off);
+        transform: translateY(-2px);
+        box-shadow: 0 12px 30px rgba(0, 0, 0, 0.15);
+      }
+      .cta-btn2 {
+        display: inline-flex;
+        align-items: center;
+        gap: 9px;
+        background: rgba(255, 255, 255, 0.1);
+        border: 1.5px solid rgba(255, 255, 255, 0.26);
+        color: #fff;
+        padding: 15px 34px;
+        border-radius: 11px;
+        font-weight: 600;
+        font-size: 15px;
+        transition:
+          background 0.2s,
+          border-color 0.2s;
+      }
+      .cta-btn2:hover {
+        background: rgba(255, 255, 255, 0.18);
+        border-color: rgba(255, 255, 255, 0.45);
+      }
+
+      /* ============================================================
+         FOOTER
+      ============================================================ */
+      footer {
+        background: var(--navy);
+        border-top: 1px solid rgba(255, 255, 255, 0.05);
+        padding: 76px 0 30px;
+      }
+      .ft-grid {
+        display: grid;
+        grid-template-columns: 2.2fr 1fr 1fr 1fr;
+        gap: 52px;
+        padding-bottom: 52px;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+      }
+      .ft-brand img {
+        width: 44px;
+        border-radius: 9px;
+        margin-bottom: 13px;
+      }
+      .ft-name {
+        display: block;
+        font-weight: 800;
+        font-size: 18px;
+        letter-spacing: 3px;
+        color: rgba(255, 255, 255, 0.3);
+        margin-bottom: 13px;
+      }
+      .ft-desc {
+        font-size: 14px;
+        color: rgba(255, 255, 255, 0.3);
+        line-height: 1.8;
+        max-width: 260px;
+        margin-bottom: 22px;
+      }
+      .ft-contacts {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+      }
+      .ft-contacts a {
+        font-size: 13.5px;
+        color: rgba(255, 255, 255, 0.35);
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        transition: color 0.2s;
+      }
+      .ft-contacts a:hover {
+        color: rgba(255, 255, 255, 0.85);
+      }
+      .ft-contacts a i {
+        color: var(--sky);
+        width: 14px;
+        font-size: 12px;
+        flex-shrink: 0;
+      }
+      .ft-col h4 {
+        font-size: 10px;
+        letter-spacing: 2.5px;
+        text-transform: uppercase;
+        color: rgba(255, 255, 255, 0.28);
+        font-weight: 700;
+        margin-bottom: 18px;
+      }
+      .ft-col a {
+        display: block;
+        font-size: 14px;
+        color: rgba(255, 255, 255, 0.4);
+        padding: 6px 0;
+        transition: color 0.2s;
+      }
+      .ft-col a:hover {
+        color: rgba(255, 255, 255, 0.85);
+      }
+      .ft-bottom {
+        padding-top: 26px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        flex-wrap: wrap;
+        gap: 8px;
+        font-size: 12.5px;
+        color: rgba(255, 255, 255, 0.22);
+      }
+
+      /* ============================================================
+         SIDE NAV DOTS
+      ============================================================ */
+      .sidenav {
+        position: fixed;
+        right: 26px;
+        top: 50%;
+        transform: translateY(-50%);
+        z-index: 900;
+        display: flex;
+        flex-direction: column;
+        gap: 16px;
+      }
+      .dot {
+        width: 7px;
+        height: 7px;
+        border-radius: 50%;
+        cursor: pointer;
+        position: relative;
+        background: rgba(12, 30, 53, 0.2);
+        transition:
+          background 0.3s,
+          width 0.3s,
+          height 0.3s,
+          box-shadow 0.3s;
+      }
+      .dot::after {
+        content: attr(data-label);
+        position: absolute;
+        right: 17px;
+        top: 50%;
+        transform: translateY(-50%);
+        white-space: nowrap;
+        font-size: 10px;
+        font-weight: 700;
+        letter-spacing: 1.5px;
+        text-transform: uppercase;
+        color: var(--slate);
+        opacity: 0;
+        pointer-events: none;
+        transition: opacity 0.3s;
+      }
+      .dot:hover::after,
+      .dot.on::after {
+        opacity: 1;
+      }
+      .dot.on {
+        background: var(--blue2);
+        box-shadow: 0 0 0 3px rgba(26, 111, 212, 0.18);
+        width: 9px;
+        height: 9px;
+      }
+      .dot:hover {
+        background: rgba(12, 30, 53, 0.45);
+      }
+      .sidenav.dk .dot {
+        background: rgba(255, 255, 255, 0.28);
+      }
+      .sidenav.dk .dot.on {
+        background: #fff;
+        box-shadow: 0 0 0 3px rgba(255, 255, 255, 0.15);
+      }
+      .sidenav.dk .dot::after {
+        color: rgba(255, 255, 255, 0.55);
+      }
+      .sidenav.dk .dot:hover {
+        background: rgba(255, 255, 255, 0.56);
+      }
+
+      /* ============================================================
+         RESPONSIVE — TABLET 901–1100px
+      ============================================================ */
+      @media (max-width: 1100px) {
+        .wrap,
+        .nav-inner,
+        .hero-body {
+          padding: 0 36px;
+        }
+        .about-grid {
+          grid-template-columns: 1fr;
+          gap: 52px;
+        }
+        .stats-row {
+          grid-template-columns: repeat(2, 1fr);
+        }
+        .st {
+          border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        .st:nth-child(2) {
+          border-right: none;
+        }
+        .st:nth-child(3) {
+          border-bottom: none;
+        }
+        .st:nth-child(4) {
+          border-right: none;
+          border-bottom: none;
+        }
+        .svc-grid {
+          grid-template-columns: repeat(2, 1fr);
+        }
+        .why-grid {
+          grid-template-columns: repeat(2, 1fr);
+        }
+        .wc:nth-child(3n) {
+          border-right: 1.5px solid var(--border);
+        }
+        .wc:nth-child(2n) {
+          border-right: none;
+        }
+        .wc:nth-child(4),
+        .wc:nth-child(5),
+        .wc:nth-child(6) {
+          border-bottom: 1.5px solid var(--border);
+        }
+        .wc:nth-child(5),
+        .wc:nth-child(6) {
+          border-bottom: none;
+        }
+        .spot-grid {
+          grid-template-columns: 1fr;
+          gap: 52px;
+        }
+        .spot-img {
+          aspect-ratio: 16 / 9;
+        }
+        .ft-grid {
+          grid-template-columns: 1fr 1fr;
+          gap: 38px;
+        }
+        .ft-brand {
+          grid-column: 1 / -1;
+        }
+        .ft-desc {
+          max-width: 100%;
+        }
+        .sidenav {
+          display: none;
+        }
+      }
+
+      /* ============================================================
+         RESPONSIVE — MOBILE 569–900px
+      ============================================================ */
+      @media (max-width: 900px) {
+        :root {
+          --NAV-H: 68px;
+        }
+        .wrap,
+        .nav-inner,
+        .hero-body {
+          padding: 0 24px;
+        }
+        .nav-menu {
+          display: none;
+        }
+        .nav-toggle {
+          display: flex;
+        }
+        #hero {
+          padding-top: calc(var(--NAV-H) + 44px);
+          padding-bottom: 80px;
+        }
+        .hbg-photo {
+          display: none;
+        }
+        .hero-h1 {
+          font-size: clamp(40px, 9vw, 58px);
+        }
+        .hero-sub {
+          font-size: 16.5px;
+        }
+        .hero-stats {
+          grid-template-columns: repeat(2, 1fr);
+          max-width: 100%;
+          margin-top: 52px;
+        }
+        .hst:nth-child(2) {
+          border-right: none;
+        }
+        .hst:nth-child(3) {
+          border-top: 1px solid rgba(255, 255, 255, 0.08);
+        }
+        .hst:nth-child(4) {
+          border-top: 1px solid rgba(255, 255, 255, 0.08);
+          border-right: none;
+        }
+        .hero-cue {
+          display: none;
+        }
+        #about,
+        #services,
+        #why,
+        #spotlight {
+          padding: 76px 0;
+        }
+        #clients,
+        #cta {
+          padding: 68px 0;
+        }
+        .about-grid {
+          gap: 40px;
+        }
+        .svc-mini-grid {
+          grid-template-columns: 1fr;
+        }
+        .svc-grid {
+          grid-template-columns: 1fr;
+          gap: 14px;
+        }
+        .svc-card {
+          flex-direction: row;
+          align-items: stretch;
+        }
+        .svc-thumb {
+          width: 130px;
+          height: auto;
+          flex-shrink: 0;
+        }
+        .svc-thumb img {
+          height: 80px;
+        }
+        .svc-body {
+          padding: 18px;
+        }
+        .svc-link {
+          display: none;
+        }
+        .why-grid {
+          grid-template-columns: 1fr;
+        }
+        .wc {
+          border-right: none !important;
+          border-bottom: 1.5px solid var(--border) !important;
+          padding: 30px 26px;
+        }
+        .wc:last-child {
+          border-bottom: none !important;
+        }
+        .wc-num {
+          display: none;
+        }
+        .spot-grid {
+          gap: 40px;
+        }
+        .cta-box {
+          padding: 56px 28px;
+        }
+        .cta-btns {
+          flex-direction: column;
+          align-items: center;
+        }
+        .cta-btn1,
+        .cta-btn2 {
+          width: 100%;
+          max-width: 300px;
+          justify-content: center;
+        }
+        footer {
+          padding: 58px 0 28px;
+        }
+        .ft-grid {
+          grid-template-columns: 1fr;
+          gap: 36px;
+        }
+        .ft-brand {
+          grid-column: auto;
+        }
+        .ft-bottom {
+          flex-direction: column;
+          text-align: center;
+        }
+        .sec-header {
+          margin-bottom: 48px;
+        }
+      }
+
+      /* ============================================================
+         RESPONSIVE — SMALL MOBILE ≤ 568px
+      ============================================================ */
+      @media (max-width: 568px) {
+        :root {
+          --NAV-H: 62px;
+        }
+        .wrap,
+        .nav-inner,
+        .hero-body {
+          padding: 0 18px;
+        }
+        #hero {
+          padding-top: calc(var(--NAV-H) + 36px);
+          padding-bottom: 72px;
+        }
+        .hero-h1 {
+          font-size: clamp(36px, 10vw, 48px);
+          letter-spacing: -1.5px;
+        }
+        .hero-sub {
+          font-size: 15.5px;
+        }
+        .hero-btns {
+          flex-direction: column;
+        }
+        .hbtn-sky,
+        .hbtn-out {
+          width: 100%;
+          justify-content: center;
+        }
+        .hst-n {
+          font-size: 24px;
+        }
+        .hst {
+          padding: 16px 10px;
+        }
+        .svc-card {
+          flex-direction: column;
+        }
+        .svc-thumb {
+          width: 100%;
+          height: 140px;
+        }
+        .svc-thumb img {
+          height: 98px;
+        }
+        .cta-box {
+          padding: 44px 18px;
+        }
+        .cta-h {
+          font-size: clamp(26px, 8vw, 38px);
+        }
+        .stats-row {
+          grid-template-columns: repeat(2, 1fr);
+        }
+        .st {
+          padding: 34px 14px;
+        }
+        .st-n {
+          font-size: 38px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <!-- NAV -->
+    <header class="nav" id="mainNav">
+      <div class="nav-inner">
+        <a href="index.html" class="nav-logo">
+          <img src="images/logo.png" alt="KMEP Logo" />
+          <span class="nav-brand">KMEP</span>
+        </a>
+        <nav class="nav-menu">
+          <a href="index.html">Home</a>
+          <a href="services.html">Services</a>
+          <div class="nav-dd">
+            <a>Company <i class="fas fa-chevron-down chev"></i></a>
+            <div class="dd-panel">
+              <a href="leadership.html">Leadership</a>
+              <a href="team.html">Team</a>
+              <a href="about.html">About Us</a>
+            </div>
+          </div>
+          <a href="contact-us.html" class="nav-cta">Contact Us</a>
+        </nav>
+        <div class="nav-toggle" id="navToggle">
+          <span></span><span></span><span></span>
+        </div>
+      </div>
+      <nav class="nav-drawer" id="navDrawer">
+        <a href="index.html">Home</a>
+        <a href="services.html">Services</a>
+        <a href="about.html">About Us</a>
+        <a href="leadership.html">Leadership</a>
+        <a href="team.html">Team</a>
+        <a href="contact-us.html" class="drawer-cta">Contact Us</a>
+      </nav>
+    </header>
+
+    <!-- SIDE DOTS -->
+    <nav class="sidenav" id="sideNav">
+      <div class="dot on" data-target="hero" data-label="Home"></div>
+      <div class="dot" data-target="about" data-label="About"></div>
+      <div class="dot" data-target="stats" data-label="Stats"></div>
+      <div class="dot" data-target="services" data-label="Services"></div>
+      <div class="dot" data-target="why" data-label="Why Us"></div>
+      <div class="dot" data-target="spotlight" data-label="Partners"></div>
+      <div class="dot" data-target="clients" data-label="Clients"></div>
+    </nav>
+
+    <!-- HERO -->
+    <section id="hero">
+      <div class="hbg-glow"></div>
+      <div class="hbg-grid"></div>
+      <div class="hbg-photo"><img src="images/bg.png" alt="" /></div>
+      <div class="hbg-orb"></div>
+
+      <div class="hero-body">
+        <div class="hero-eyebrow">
+          <span class="hero-pulse"></span>
+          <span class="hero-eyebrow-text"
+            >MEP Engineering Excellence — Since 2009</span
+          >
+        </div>
+        <h1 class="hero-h1">
+          Precision MEP<br />
+          Solutions for<br />
+          <em>Every Scale</em>
+        </h1>
+        <p class="hero-sub">
+          Elevate your projects where HVAC, Mechanical, Electrical and Plumbing
+          expertise converges — delivering integrated infrastructure built to
+          last.
+        </p>
+        <div class="hero-btns">
+          <a href="services.html" class="hbtn-sky">
+            <i class="fas fa-layer-group"></i> Explore Services
+          </a>
+          <a href="contact-us.html" class="hbtn-out">
+            Contact Us <i class="fas fa-arrow-right"></i>
+          </a>
+        </div>
+        <div class="hero-stats">
+          <div class="hst">
+            <span class="hst-n">15+</span>
+            <span class="hst-l">Years</span>
+          </div>
+          <div class="hst">
+            <span class="hst-n">500+</span>
+            <span class="hst-l">Projects</span>
+          </div>
+          <div class="hst">
+            <span class="hst-n">50+</span>
+            <span class="hst-l">Clients</span>
+          </div>
+          <div class="hst">
+            <span class="hst-n">4</span>
+            <span class="hst-l">Cities</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ABOUT -->
+    <section id="about">
+      <div class="wrap">
+        <div class="about-grid">
+          <div class="rv-l">
+            <span class="sec-tag">What We Do</span>
+            <h2 class="display-h about-h">
+              Engineering Every Detail<br />of Your <span>Environment</span>
+            </h2>
+            <p class="about-p">
+              KMEP houses all MEP services under one roof — from technical
+              evaluation and design through construction, commissioning, and
+              24/7 after-sales support. Our integrated model eliminates
+              fragmented vendors and delivers unified accountability across
+              every project stage.
+            </p>
+            <div class="pillar-list">
+              <div class="pillar">
+                <div class="p-ico"><i class="fas fa-layer-group"></i></div>
+                <div>
+                  <p class="p-tag">Integrated</p>
+                  <h3>Single Point of Accountability</h3>
+                  <p>
+                    One team manages your project — from assessment to handover
+                    — ensuring seamless results every time.
+                  </p>
+                </div>
+              </div>
+              <div class="pillar">
+                <div class="p-ico"><i class="fas fa-leaf"></i></div>
+                <div>
+                  <p class="p-tag">Sustainable</p>
+                  <h3>Energy-Efficient by Design</h3>
+                  <p>
+                    Sustainability embedded into every system, helping reduce
+                    operational costs for the long term.
+                  </p>
+                </div>
+              </div>
+              <div class="pillar">
+                <div class="p-ico"><i class="fas fa-headset"></i></div>
+                <div>
+                  <p class="p-tag">Committed</p>
+                  <h3>24/7 After-Sales Support</h3>
+                  <p>
+                    Round-the-clock support ensures your systems perform at peak
+                    efficiency well after handover.
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="about-right rv-r">
+            <div class="about-img">
+              <img src="images/bg.png" alt="KMEP Engineering Projects" />
+            </div>
+            <div class="svc-mini">
+              <h4>Our Core Services</h4>
+              <div class="svc-mini-grid">
+                <div class="svc-mini-row">
+                  <i class="fas fa-check-circle"></i> HVAC Systems
+                </div>
+                <div class="svc-mini-row">
+                  <i class="fas fa-check-circle"></i> Mechanical Engineering
+                </div>
+                <div class="svc-mini-row">
+                  <i class="fas fa-check-circle"></i> Electrical Works
+                </div>
+                <div class="svc-mini-row">
+                  <i class="fas fa-check-circle"></i> Plumbing Solutions
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SERVICES -->
+    <section id="services">
+      <div class="wrap">
+        <div class="sec-header rv">
+          <p class="sec-tag-c">What We Offer</p>
+          <h2 class="display-h" style="font-size: clamp(30px, 4vw, 50px)">
+            Our Core Services
+          </h2>
+          <p class="sec-sub">
+            A complete spectrum of MEP expertise, orchestrated seamlessly under
+            one roof.
+          </p>
+        </div>
+        <div class="svc-grid">
+          <a class="svc-card rv d1" href="services.html">
+            <div class="svc-thumb">
+              <img src="images/hvac.png" alt="HVAC" />
+            </div>
+            <div class="svc-body">
+              <div class="svc-top">
+                <div class="svc-ico"><i class="fas fa-fan"></i></div>
+                <div class="svc-arr"><i class="fas fa-arrow-up-right"></i></div>
+              </div>
+              <div class="svc-name">HVAC</div>
+              <p class="svc-desc">
+                Design, installation and commissioning of heating, ventilation
+                &amp; air conditioning systems for all building types.
+              </p>
+              <div class="svc-link">
+                View Service <i class="fas fa-arrow-right"></i>
+              </div>
+            </div>
+          </a>
+          <a class="svc-card rv d2" href="services.html">
+            <div class="svc-thumb">
+              <img src="images/mechanical.png" alt="Mechanical" />
+            </div>
+            <div class="svc-body">
+              <div class="svc-top">
+                <div class="svc-ico"><i class="fas fa-screwdriver"></i></div>
+                <div class="svc-arr"><i class="fas fa-arrow-up-right"></i></div>
+              </div>
+              <div class="svc-name">Mechanical</div>
+              <p class="svc-desc">
+                Comprehensive mechanical engineering — fire suppression, pumping
+                infrastructure and complete building services.
+              </p>
+              <div class="svc-link">
+                View Service <i class="fas fa-arrow-right"></i>
+              </div>
+            </div>
+          </a>
+          <a class="svc-card rv d3" href="services.html">
+            <div class="svc-thumb">
+              <img src="images/elctrical_.png" alt="Electrical" />
+            </div>
+            <div class="svc-body">
+              <div class="svc-top">
+                <div class="svc-ico"><i class="fas fa-bolt"></i></div>
+                <div class="svc-arr"><i class="fas fa-arrow-up-right"></i></div>
+              </div>
+              <div class="svc-name">Electrical</div>
+              <p class="svc-desc">
+                Complete electrical design and installation — LV distribution,
+                lighting control and power management systems.
+              </p>
+              <div class="svc-link">
+                View Service <i class="fas fa-arrow-right"></i>
+              </div>
+            </div>
+          </a>
+          <a class="svc-card rv d4" href="services.html">
+            <div class="svc-thumb">
+              <img src="images/plumbing.png" alt="Plumbing" />
+            </div>
+            <div class="svc-body">
+              <div class="svc-top">
+                <div class="svc-ico"><i class="fas fa-wrench"></i></div>
+                <div class="svc-arr"><i class="fas fa-arrow-up-right"></i></div>
+              </div>
+              <div class="svc-name">Plumbing</div>
+              <p class="svc-desc">
+                End-to-end plumbing — water supply, drainage and sanitation
+                systems designed for long-term reliability.
+              </p>
+              <div class="svc-link">
+                View Service <i class="fas fa-arrow-right"></i>
+              </div>
+            </div>
+          </a>
+        </div>
+        <p class="svc-note rv">
+          <strong style="color: var(--navy)">Harmony in Every Detail:</strong>
+          From HVAC to Mechanical, Engineering, and Plumbing, our MEP services
+          orchestrate a symphony of expertise, delivering integrated solutions
+          for a thriving future. With a commitment to quality and
+          sustainability, we shape environments that stand the test of time.
+        </p>
+      </div>
+    </section>
+
+    <!-- WHY -->
+    <section id="why">
+      <div class="wrap">
+        <div class="sec-header rv">
+          <p class="sec-tag-c">Why KMEP</p>
+          <h2 class="display-h" style="font-size: clamp(30px, 4vw, 50px)">
+            Built Different
+          </h2>
+          <p class="sec-sub">
+            Six reasons project owners across Tamil Nadu and beyond choose KMEP
+            for their MEP needs.
+          </p>
+        </div>
+        <div class="why-grid">
+          <div class="wc rv d1">
+            <span class="wc-num">01</span>
+            <div class="wc-ico"><i class="fas fa-chart-line"></i></div>
+            <div class="wc-title">Value Engineering</div>
+            <p class="wc-desc">
+              Delivering maximum value without compromising quality. Through
+              meticulous cost analysis and innovative solutions, we ensure
+              optimal efficiency and excellence for your investment.
+            </p>
+          </div>
+          <div class="wc rv d2">
+            <span class="wc-num">02</span>
+            <div class="wc-ico"><i class="fas fa-layer-group"></i></div>
+            <div class="wc-title">Integrated Services</div>
+            <p class="wc-desc">
+              All services under one roof — from engineering to after-sales.
+              This integrated approach ensures a seamless experience, fostering
+              efficiency and unified accountability.
+            </p>
+          </div>
+          <div class="wc rv d3">
+            <span class="wc-num">03</span>
+            <div class="wc-ico"><i class="fas fa-drafting-compass"></i></div>
+            <div class="wc-title">Design &amp; Build Expertise</div>
+            <p class="wc-desc">
+              Cutting-edge design and construction expertise, seamlessly
+              integrated from conceptualization to realization, delivering
+              cohesive projects that exceed expectations.
+            </p>
+          </div>
+          <div class="wc rv d1">
+            <span class="wc-num">04</span>
+            <div class="wc-ico"><i class="fas fa-microscope"></i></div>
+            <div class="wc-title">Technical Evaluation</div>
+            <p class="wc-desc">
+              Technical precision is the hallmark of our approach. Meticulous
+              assessments ensure optimal performance, reliability, and longevity
+              of every system we design and build.
+            </p>
+          </div>
+          <div class="wc rv d2">
+            <span class="wc-num">05</span>
+            <div class="wc-ico"><i class="fas fa-tasks"></i></div>
+            <div class="wc-title">Project Management</div>
+            <p class="wc-desc">
+              Efficient project execution is our forte. We oversee every stage
+              to ensure timelines are met, resources are optimized, and quality
+              is maintained throughout.
+            </p>
+          </div>
+          <div class="wc rv d3">
+            <span class="wc-num">06</span>
+            <div class="wc-ico"><i class="fas fa-leaf"></i></div>
+            <div class="wc-title">Energy Audit &amp; Management</div>
+            <p class="wc-desc">
+              Thorough energy audits identify improvement opportunities and
+              implement strategies to enhance sustainability and significantly
+              reduce operational costs.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SPOTLIGHT -->
+    <section id="spotlight">
+      <div class="wrap">
+        <div class="spot-grid">
+          <div class="spot-visual rv-l">
+            <div class="spot-img">
+              <img src="images/spotlight.png" alt="Our Global Partners" />
+            </div>
+            <div class="spot-badge">
+              <div class="sb-t">
+                <strong>Global Partners</strong>
+                <small>Authorized Representative</small>
+              </div>
+              <div class="sb-ico"><i class="fas fa-handshake"></i></div>
+            </div>
+          </div>
+          <div class="rv-r">
+            <span class="sec-tag">Spotlight</span>
+            <h2 class="display-h spot-h">
+              Backed by World-Class Manufacturers
+            </h2>
+            <p class="spot-p">
+              KMEP proudly serves as an authorized representative for prominent
+              global manufacturers — bringing best-in-class technology and
+              equipment to every project we deliver across India.
+            </p>
+            <div class="chips">
+              <div class="chip">
+                <span class="chip-dot"></span> Dunham Bush (DB-Aire India Pvt.
+                Ltd.)
+              </div>
+              <div class="chip">
+                <span class="chip-dot"></span> LG Electronics India Pvt. Ltd.
+              </div>
+            </div>
+            <a
+              href="contact-us.html"
+              class="hbtn-sky"
+              style="display: inline-flex"
+            >
+              <i class="fas fa-envelope"></i> Get in Touch
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- CLIENTS -->
+    <section id="clients">
+      <div class="wrap clients-header">
+        <div class="sec-header rv">
+          <p class="sec-tag-c" style="color: rgba(255, 255, 255, 0.45)">
+            Our Clients
+          </p>
+          <h2
+            class="display-h"
+            style="font-size: clamp(30px, 4vw, 50px); color: #fff"
+          >
+            Trusted by Industry Leaders
+          </h2>
+          <p class="sec-sub" style="color: rgba(255, 255, 255, 0.45)">
+            From retail chains to healthcare facilities — companies across
+            sectors rely on KMEP.
+          </p>
+        </div>
+      </div>
+      <div class="mq-wrap">
+        <div class="mq-track">
+          <!-- Set 1 -->
+          <img src="images/clients/apostolic.png" alt="Apostolic" />
+          <img src="images/clients/db.png" alt="DB" />
+          <img src="images/clients/felicity-square.png" alt="Felicity Square" />
+          <img src="images/clients/lg.png" alt="LG" />
+          <img src="images/clients/micro-tech.png" alt="Micro Tech" />
+          <img src="images/clients/ola.png" alt="Ola" />
+          <img src="images/clients/rsm-towers.png" alt="RSM Towers" />
+          <img src="images/clients/sarathas.png" alt="Sarathas" />
+          <img src="images/clients/svb.png" alt="SVB" />
+          <img src="images/clients/taneira.png" alt="Taneira" />
+          <img src="images/clients/teal.png" alt="Teal" />
+          <img src="images/clients/titan-eyeplus.jpg" alt="Titan EyePlus" />
+          <img src="images/clients/titan.png" alt="Titan" />
+          <img src="images/clients/client1.png" alt="Client" />
+          <!-- Set 2 — exact duplicate for seamless infinite loop -->
+          <img src="images/clients/apostolic.png" alt="Apostolic" />
+          <img src="images/clients/db.png" alt="DB" />
+          <img src="images/clients/felicity-square.png" alt="Felicity Square" />
+          <img src="images/clients/lg.png" alt="LG" />
+          <img src="images/clients/micro-tech.png" alt="Micro Tech" />
+          <img src="images/clients/ola.png" alt="Ola" />
+          <img src="images/clients/rsm-towers.png" alt="RSM Towers" />
+          <img src="images/clients/sarathas.png" alt="Sarathas" />
+          <img src="images/clients/svb.png" alt="SVB" />
+          <img src="images/clients/taneira.png" alt="Taneira" />
+          <img src="images/clients/teal.png" alt="Teal" />
+          <img src="images/clients/titan-eyeplus.jpg" alt="Titan EyePlus" />
+          <img src="images/clients/titan.png" alt="Titan" />
+          <img src="images/clients/client1.png" alt="Client" />
+        </div>
+      </div>
+    </section>
+
+    <!-- CTA -->
+    <section id="cta">
+      <div class="wrap">
+        <div class="cta-box rv">
+          <p class="cta-tag">Start Your Project</p>
+          <h2 class="display-h cta-h">Ready to Elevate Your Next Project?</h2>
+          <p class="cta-p">
+            Connect with KMEP to explore how integrated MEP expertise can
+            transform your infrastructure.
+          </p>
+          <div class="cta-btns">
+            <a href="contact-us.html" class="cta-btn1">Get in Touch</a>
+            <a href="services.html" class="cta-btn2">View All Services</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer>
+      <div class="wrap">
+        <div class="ft-grid">
+          <div class="ft-brand">
+            <img src="images/logo.png" alt="KMEP" />
+            <span class="ft-name">KMEP</span>
+            <p class="ft-desc">
+              Keerthan MEP Engineers — delivering precision MEP solutions across
+              Tamil Nadu and beyond since 2009.
+            </p>
+            <div class="ft-contacts">
+              <a href="tel:+919710439000"
+                ><i class="fas fa-phone"></i> +91 97104 39000</a
+              >
+              <a href="tel:+919176670447"
+                ><i class="fas fa-phone"></i> +91 91766 70447</a
+              >
+              <a href="mailto:rajesh@kmep.co.in"
+                ><i class="fas fa-envelope"></i> rajesh@kmep.co.in</a
+              >
+              <a
+                href="https://maps.app.goo.gl/yT5Em1M9PeMGubSJ7"
+                target="_blank"
+                rel="noopener"
+              >
+                <i class="fas fa-map-marker-alt"></i> Plot No. 17, Door No. 4,
+                Senthil Nagar, Chennai – 600 062
+              </a>
+            </div>
+          </div>
+          <div class="ft-col">
+            <h4>Services</h4>
+            <a href="services.html">HVAC</a>
+            <a href="services.html">Mechanical</a>
+            <a href="services.html">Electrical</a>
+            <a href="services.html">Plumbing</a>
+          </div>
+          <div class="ft-col">
+            <h4>Company</h4>
+            <a href="about.html">About Us</a>
+            <a href="leadership.html">Leadership</a>
+            <a href="team.html">Team</a>
+            <a href="contact-us.html">Contact Us</a>
+          </div>
+          <div class="ft-col">
+            <h4>Offices</h4>
+            <a href="https://maps.app.goo.gl/ijvwbweYxeWVsLsS6">Chennai</a>
+            <a href="https://maps.app.goo.gl/ijvwbweYxeWVsLsS6">Hosur</a>
+            <a href="https://maps.app.goo.gl/ijvwbweYxeWVsLsS6"
+              >Tiruchirappalli</a
+            >
+            <a href="https://maps.app.goo.gl/ijvwbweYxeWVsLsS6">Bangalore</a>
+          </div>
+        </div>
+        <div class="ft-bottom">
+          <span
+            >© 2026 KMEP — Keerthan MEP Engineers. All rights reserved.</span
+          >
+          <span
+            >Plot No. 17,Thiruppur Kumaran Street, Senthil
+            Nagar,Thirumullaivoyal, Chennai – 600 062, Tamil Nadu, India</span
+          >
+        </div>
+      </div>
+    </footer>
+
+    <script>
+      (function () {
+        if ("scrollRestoration" in history) {
+          history.scrollRestoration = "manual";
+        }
+        window.scrollTo(0, 0);
+
+        var heroSection = document.getElementById("hero");
+        window.addEventListener("DOMContentLoaded", function () {
+          setTimeout(function () {
+            if (heroSection) heroSection.classList.add("hero-animate");
+          }, 10);
+          setTimeout(function () {
+            if (heroSection) heroSection.classList.remove("hero-animate");
+          }, 1600);
+        });
+
+        var nav = document.getElementById("mainNav");
+        function syncNav() {
+          nav.classList.toggle("scrolled", window.scrollY > 60);
+        }
+        window.addEventListener("scroll", syncNav, { passive: true });
+        syncNav();
+
+        var toggle = document.getElementById("navToggle");
+        var drawer = document.getElementById("navDrawer");
+        toggle.addEventListener("click", function () {
+          var open = drawer.classList.toggle("open");
+          toggle.classList.toggle("open", open);
+          document.body.style.overflow = open ? "hidden" : "";
+        });
+        drawer.querySelectorAll("a").forEach(function (a) {
+          a.addEventListener("click", function () {
+            drawer.classList.remove("open");
+            toggle.classList.remove("open");
+            document.body.style.overflow = "";
+          });
+        });
+
+        var sn = document.getElementById("sideNav");
+        var dots = Array.from(sn.querySelectorAll(".dot"));
+        var secIds = dots.map(function (d) {
+          return d.dataset.target;
+        });
+        var darkIds = new Set(["hero", "clients"]);
+
+        dots.forEach(function (dot) {
+          dot.addEventListener("click", function () {
+            var target = document.getElementById(dot.dataset.target);
+            if (target) target.scrollIntoView({ behavior: "smooth" });
+          });
+        });
+
+        function syncDots() {
+          var mid = window.scrollY + window.innerHeight * 0.45;
+          var active = null;
+          secIds.forEach(function (id, i) {
+            var el = document.getElementById(id);
+            if (!el) return;
+            var inside =
+              mid >= el.offsetTop && mid < el.offsetTop + el.offsetHeight;
+            dots[i].classList.toggle("on", inside);
+            if (inside) active = id;
+          });
+          sn.classList.toggle("dk", darkIds.has(active));
+        }
+        window.addEventListener("scroll", syncDots, { passive: true });
+        syncDots();
+
+        var io = new IntersectionObserver(
+          function (entries) {
+            entries.forEach(function (e) {
+              if (e.isIntersecting) {
+                e.target.classList.add("on");
+                io.unobserve(e.target);
+              }
+            });
+          },
+          { threshold: 0.1 },
+        );
+
+        document.querySelectorAll(".rv, .rv-l, .rv-r").forEach(function (el) {
+          io.observe(el);
+        });
+      })();
+    </script>
+  </body>
+</html>
