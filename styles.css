@@ -1,11 +1,4 @@
-/* ============================================================
-   KMEP — style.css
-   Shared styles for all pages. Import once per HTML file.
-   Page-specific layout lives in each HTML file's <style> block.
-============================================================ */
-
-/* ── Reset ─────────────────────────────────────────────── */
-*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+ *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 html { scroll-behavior: smooth; }
 body {
   font-family: "Outfit", sans-serif;
