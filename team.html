@@ -1,242 +1,772 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Team - KMEP</title>
-
-    <!-- Google Fonts -->
+    <title>Our Team — KMEP | Keerthan MEP Engineers</title>
+    <link rel="icon" href="images/logo.png" />
     <link
-      href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&family=Playfair+Display:ital,wght@0,700;0,800;1,700&display=swap"
       rel="stylesheet"
     />
-
-    <!-- Font Awesome -->
     <link
       rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
     />
-    <script src="script.js"></script>
-
+    <link rel="stylesheet" href="style.css" />
+    <script src="script.js" defer></script>
     <style>
-      /* Reset & Base */
-      * {
-        margin: 0;
-        padding: 0;
-        box-sizing: border-box;
-        width: auto;
+      .page-hero {
+        min-height: 56vh;
+        padding-bottom: 88px;
       }
-      body {
-        font-family: "Roboto", sans-serif;
-        line-height: 1.6;
-        color: #fff;
-        background: #f1f5f9;
-        width: auto;
+      @media (max-width: 860px) {
+        .page-hero {
+          padding-bottom: 60px;
+        }
+        .ph-body {
+          padding: 0 24px;
+        }
       }
-      img {
-        max-width: 100%;
-        display: block;
-      }
-      a {
-        text-decoration: none;
-        color: inherit;
-      }
-      #page-wrapper {
-        display: flex;
-        flex-direction: column;
-        min-height: 100vh;
-      }
-      main-header,
-      main-footer {
-        display: block;
+      @media (max-width: 480px) {
+        .ph-body {
+          padding: 0 18px;
+        }
       }
 
-      /* Hero Section */
-      .hero {
-        height: 100vh;
-        background: url("IMAGES/team.png") center/cover no-repeat;
+      #team-section {
+        padding: 108px 0;
+        background: #fff;
+      }
+      .dept-block {
+        margin-bottom: 80px;
+      }
+      .dept-block:last-child {
+        margin-bottom: 0;
+      }
+      .dept-heading {
         display: flex;
-        justify-content: center;
         align-items: center;
+        gap: 16px;
+        margin-bottom: 36px;
+        padding-bottom: 20px;
+        border-bottom: 1.5px solid var(--border);
+      }
+      .dept-title {
+        font-family: "Playfair Display", serif;
+        font-size: 26px;
+        font-weight: 800;
+        color: var(--navy);
+        letter-spacing: -0.5px;
+      }
+      .dept-count {
+        margin-left: auto;
+        font-size: 12px;
+        font-weight: 700;
+        letter-spacing: 1.5px;
+        text-transform: uppercase;
+        color: var(--muted);
+      }
+      .team-grid {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 20px;
+      }
+      .team-card {
+        background: #fff;
+        border-radius: 16px;
+        border: 1.5px solid var(--border);
+        overflow: hidden;
+        text-align: center;
+        transition:
+          border-color 0.3s,
+          transform 0.3s,
+          box-shadow 0.3s;
         position: relative;
-        transition: height 0.3s ease;
       }
-      .hero h1 {
-        color: #ffffff;
-        font-size: 3rem;
-        text-align: center;
-        background: rgba(0, 0, 0, 0.4);
-        padding: 20px 40px;
-        border-radius: 10px;
+      .team-card::after {
+        content: "";
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        height: 3px;
+        background: linear-gradient(90deg, var(--blue), var(--sky));
+        transform: scaleX(0);
+        transform-origin: center;
+        transition: transform 0.4s;
       }
-
-      /* TEAM CONTENT SECTION */
-      .team-section {
-        padding: 80px 20px;
-        background:#f1f5f9;
+      .team-card:hover {
+        border-color: rgba(21, 88, 176, 0.2);
+        transform: translateY(-5px);
+        box-shadow: 0 16px 48px rgba(12, 30, 53, 0.1);
       }
-      .team-section .container {
-        max-width: 1200px;
-        margin: 0 auto;
+      .team-card:hover::after {
+        transform: scaleX(1);
       }
-      .team-section h2 {
-        font-size: 2.8rem;
-        margin-bottom: 40px;
-        color: #0a79e7;
-        text-align: center;
+      .tc-photo {
+        height: 180px;
+        background: linear-gradient(135deg, #dbeafe 0%, #eff6ff 100%);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        overflow: hidden;
       }
-      .team-section p {
-        margin-bottom: 20px;
-        font-size: 1.1rem;
-        color: black; 
+      .tc-avatar {
+        width: 90px;
+        height: 90px;
+        border-radius: 50%;
+        background: linear-gradient(135deg, #bfdbfe, #dbeafe);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-family: "Playfair Display", serif;
+        font-size: 34px;
+        font-weight: 800;
+        color: var(--blue);
+        box-shadow: 0 4px 16px rgba(21, 88, 176, 0.15);
       }
-
-      /* Cards */
-      .cards {
+      .tc-body {
+        padding: 18px 16px 22px;
+      }
+      .tc-dept {
+        font-size: 10px;
+        font-weight: 700;
+        letter-spacing: 2px;
+        text-transform: uppercase;
+        color: var(--sky);
+        margin-bottom: 5px;
+      }
+      .tc-name {
+        font-size: 16px;
+        font-weight: 800;
+        color: var(--navy);
+        margin-bottom: 4px;
+        letter-spacing: -0.2px;
+      }
+      .tc-role {
+        font-size: 12.5px;
+        color: var(--slate);
+        margin-bottom: 12px;
+      }
+      .tc-tags {
         display: flex;
         flex-wrap: wrap;
-        gap: 20px;
-        margin-top: 50px;
+        gap: 5px;
+        justify-content: center;
       }
-      .cards .card {
-        flex: 1 1 45%;
-        background: #111827;
-        border-radius: 10px;
-        padding: 30px;
-        box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
-        transition: transform 0.3s, box-shadow 0.3s;
+      .tc-tag {
+        padding: 4px 9px;
+        border-radius: 5px;
+        background: var(--off2);
+        border: 1px solid var(--border);
+        font-size: 10.5px;
+        font-weight: 700;
+        color: var(--slate);
       }
-      .cards .card:hover {
-        transform: translateY(-10px);
-        box-shadow: 0 12px 25px rgba(0, 0, 0, 0.3);
+      #join {
+        padding: 108px 0;
+        background: var(--off);
       }
-      .cards .card h3 {
-        font-size: 1.5rem;
-        margin-bottom: 15px;
+      .join-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 64px;
+        align-items: center;
+      }
+      .join-h {
+        font-family: "Playfair Display", serif;
+        font-size: clamp(28px, 3.5vw, 44px);
+        font-weight: 800;
+        letter-spacing: -1.5px;
+        color: var(--navy);
+        line-height: 1.1;
+        margin-bottom: 18px;
+      }
+      .join-h span {
+        color: var(--blue2);
+      }
+      .join-p {
+        font-size: 16px;
+        color: var(--slate);
+        line-height: 1.9;
+        margin-bottom: 22px;
+      }
+      .join-perks {
+        display: flex;
+        flex-direction: column;
+        gap: 12px;
+        margin-bottom: 36px;
+      }
+      .perk {
+        display: flex;
+        align-items: flex-start;
+        gap: 13px;
+        font-size: 14.5px;
+        font-weight: 600;
+        color: var(--navy);
+      }
+      .perk-ico {
+        width: 36px;
+        height: 36px;
+        border-radius: 9px;
+        flex-shrink: 0;
+        background: linear-gradient(135deg, #dbeafe, #bfdbfe);
         display: flex;
         align-items: center;
-        color: #0a79e7;
+        justify-content: center;
+        font-size: 14px;
+        color: var(--blue);
       }
-      .cards .card h3 i {
-        margin-right: 10px;
-        color: #0a79e7;
+      .perk-text span {
+        display: block;
+        font-size: 12px;
+        font-weight: 600;
+        color: var(--slate);
+        margin-top: 2px;
       }
-      .cards .card p {
-        color: #ccc;
-        font-size: 1rem;
+      .join-visual {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 16px;
       }
-      /* Mobile Text Clarity Fix */
-      @media (max-width: 900px) {
-        .hero {
-          position: relative;
-          background-image: url("IMAGES/out team mob.jpg");
+      .jv-card {
+        background: #fff;
+        border: 1.5px solid var(--border);
+        border-radius: 16px;
+        padding: 28px 22px;
+        text-align: center;
+        transition:
+          border-color 0.3s,
+          box-shadow 0.3s;
+      }
+      .jv-card:hover {
+        border-color: rgba(21, 88, 176, 0.25);
+        box-shadow: 0 6px 24px rgba(21, 88, 176, 0.09);
+      }
+      .jv-ico {
+        width: 48px;
+        height: 48px;
+        border-radius: 12px;
+        margin: 0 auto 14px;
+        background: linear-gradient(135deg, #dbeafe, #bfdbfe);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 18px;
+        color: var(--blue);
+      }
+      .jv-card h4 {
+        font-size: 14px;
+        font-weight: 800;
+        color: var(--navy);
+        margin-bottom: 6px;
+      }
+      .jv-card p {
+        font-size: 12.5px;
+        color: var(--slate);
+        line-height: 1.65;
+      }
+      @media (max-width: 1100px) {
+        .team-grid {
+          grid-template-columns: repeat(3, 1fr);
         }
-
-        /* Dark overlay only on mobile */
-        .hero::after {
-          content: "";
-          position: absolute;
-          top: 0;
-          left: 0;
-          width: 100%;
-          height: 100%;
-          background: rgba(0, 0, 0, 0.55); /* increase darkness here */
-          z-index: 1;
+      }
+      @media (max-width: 860px) {
+        #team-section,
+        #join {
+          padding: 72px 0;
         }
-
-        .hero h1 {
-          font-size: 2rem;
-          position: relative;
-          z-index: 2;
-          color: #fff; /* stronger white */
-          text-shadow: 0 2px 10px rgba(0, 0, 0, 0.9); /* improves readability */
+        .team-grid {
+          grid-template-columns: repeat(2, 1fr);
+        }
+        .join-grid {
+          grid-template-columns: 1fr;
+        }
+        .join-visual {
+          grid-template-columns: repeat(2, 1fr);
+        }
+      }
+      @media (max-width: 480px) {
+        .team-grid {
+          grid-template-columns: repeat(2, 1fr);
         }
       }
     </style>
   </head>
   <body>
-    <div style="padding-bottom: 100px;">
-      <kmep-header></kmep-header>
+    <kmep-header></kmep-header>
+
+    <section class="page-hero" style="min-height: 56vh">
+      <div class="ph-grid"></div>
+      <div class="ph-glow"></div>
+      <div class="ph-body">
+        <div class="ph-eyebrow">
+          <span class="ph-pulse"></span>The Experts Behind Every Project
+        </div>
+        <h1 class="ph-h1">Our <em>People</em><br />Make the Difference</h1>
+        <p class="ph-sub">
+          A dedicated team of MEP engineers, designers, and project managers
+          committed to delivering precision solutions across every discipline.
+        </p>
+      </div>
+    </section>
+    <section id="team-section">
+      <div class="wrap">
+        <div class="dept-block">
+          <div class="dept-heading rv">
+            <div class="icon-tile"><i class="fas fa-fan"></i></div>
+            <h3 class="dept-title">HVAC Team</h3>
+            <span class="dept-count">4 Members</span>
+          </div>
+          <div class="team-grid">
+            <div class="team-card rv d1">
+              <div class="tc-photo"><div class="tc-avatar">A</div></div>
+              <div class="tc-body">
+                <p class="tc-dept">HVAC</p>
+                <h4 class="tc-name">Arjun Selvam</h4>
+                <p class="tc-role">Senior HVAC Engineer</p>
+                <div class="tc-tags">
+                  <span class="tc-tag">Design</span
+                  ><span class="tc-tag">Commissioning</span>
+                </div>
+              </div>
+            </div>
+            <div class="team-card rv d2">
+              <div class="tc-photo"><div class="tc-avatar">M</div></div>
+              <div class="tc-body">
+                <p class="tc-dept">HVAC</p>
+                <h4 class="tc-name">Muthu Raman</h4>
+                <p class="tc-role">HVAC Design Engineer</p>
+                <div class="tc-tags">
+                  <span class="tc-tag">CAD</span
+                  ><span class="tc-tag">Load Calc</span>
+                </div>
+              </div>
+            </div>
+            <div class="team-card rv d3">
+              <div class="tc-photo"><div class="tc-avatar">V</div></div>
+              <div class="tc-body">
+                <p class="tc-dept">HVAC</p>
+                <h4 class="tc-name">Vijay Kumar</h4>
+                <p class="tc-role">HVAC Site Engineer</p>
+                <div class="tc-tags">
+                  <span class="tc-tag">Installation</span
+                  ><span class="tc-tag">QC</span>
+                </div>
+              </div>
+            </div>
+            <div class="team-card rv d4">
+              <div class="tc-photo"><div class="tc-avatar">L</div></div>
+              <div class="tc-body">
+                <p class="tc-dept">HVAC</p>
+                <h4 class="tc-name">Lavanya Priya</h4>
+                <p class="tc-role">Energy Audit Specialist</p>
+                <div class="tc-tags">
+                  <span class="tc-tag">BMS</span
+                  ><span class="tc-tag">Audit</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="dept-block">
+          <div class="dept-heading rv">
+            <div class="icon-tile green">
+              <i class="fas fa-screwdriver-wrench"></i>
+            </div>
+            <h3 class="dept-title">Mechanical Team</h3>
+            <span class="dept-count">3 Members</span>
+          </div>
+          <div class="team-grid">
+            <div class="team-card rv d1">
+              <div class="tc-photo">
+                <div
+                  class="tc-avatar"
+                  style="
+                    background: linear-gradient(135deg, #d1fae5, #a7f3d0);
+                    color: var(--teal);
+                  "
+                >
+                  K
+                </div>
+              </div>
+              <div class="tc-body">
+                <p class="tc-dept" style="color: var(--teal)">Mechanical</p>
+                <h4 class="tc-name">Karthik Naidu</h4>
+                <p class="tc-role">Senior Mechanical Engineer</p>
+                <div class="tc-tags">
+                  <span class="tc-tag">Fire Systems</span
+                  ><span class="tc-tag">Pumps</span>
+                </div>
+              </div>
+            </div>
+            <div class="team-card rv d2">
+              <div class="tc-photo">
+                <div
+                  class="tc-avatar"
+                  style="
+                    background: linear-gradient(135deg, #d1fae5, #a7f3d0);
+                    color: var(--teal);
+                  "
+                >
+                  S
+                </div>
+              </div>
+              <div class="tc-body">
+                <p class="tc-dept" style="color: var(--teal)">Mechanical</p>
+                <h4 class="tc-name">Saravanan T.</h4>
+                <p class="tc-role">Mechanical Design Engineer</p>
+                <div class="tc-tags">
+                  <span class="tc-tag">Piping</span
+                  ><span class="tc-tag">Layout</span>
+                </div>
+              </div>
+            </div>
+            <div class="team-card rv d3">
+              <div class="tc-photo">
+                <div
+                  class="tc-avatar"
+                  style="
+                    background: linear-gradient(135deg, #d1fae5, #a7f3d0);
+                    color: var(--teal);
+                  "
+                >
+                  D
+                </div>
+              </div>
+              <div class="tc-body">
+                <p class="tc-dept" style="color: var(--teal)">Mechanical</p>
+                <h4 class="tc-name">Dinesh Raj</h4>
+                <p class="tc-role">Site &amp; Commissioning Engineer</p>
+                <div class="tc-tags">
+                  <span class="tc-tag">Commissioning</span
+                  ><span class="tc-tag">Testing</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="dept-block">
+          <div class="dept-heading rv">
+            <div class="icon-tile yellow"><i class="fas fa-bolt"></i></div>
+            <h3 class="dept-title">Electrical Team</h3>
+            <span class="dept-count">4 Members</span>
+          </div>
+          <div class="team-grid">
+            <div class="team-card rv d1">
+              <div class="tc-photo">
+                <div
+                  class="tc-avatar"
+                  style="
+                    background: linear-gradient(135deg, #fef9c3, #fde68a);
+                    color: #ca8a04;
+                  "
+                >
+                  N
+                </div>
+              </div>
+              <div class="tc-body">
+                <p class="tc-dept" style="color: #ca8a04">Electrical</p>
+                <h4 class="tc-name">Naveen Raj</h4>
+                <p class="tc-role">Senior Electrical Engineer</p>
+                <div class="tc-tags">
+                  <span class="tc-tag">LV Design</span
+                  ><span class="tc-tag">Power</span>
+                </div>
+              </div>
+            </div>
+            <div class="team-card rv d2">
+              <div class="tc-photo">
+                <div
+                  class="tc-avatar"
+                  style="
+                    background: linear-gradient(135deg, #fef9c3, #fde68a);
+                    color: #ca8a04;
+                  "
+                >
+                  G
+                </div>
+              </div>
+              <div class="tc-body">
+                <p class="tc-dept" style="color: #ca8a04">Electrical</p>
+                <h4 class="tc-name">Gowri Shankar</h4>
+                <p class="tc-role">Electrical Design Engineer</p>
+                <div class="tc-tags">
+                  <span class="tc-tag">CAD</span
+                  ><span class="tc-tag">Lighting</span>
+                </div>
+              </div>
+            </div>
+            <div class="team-card rv d3">
+              <div class="tc-photo">
+                <div
+                  class="tc-avatar"
+                  style="
+                    background: linear-gradient(135deg, #fef9c3, #fde68a);
+                    color: #ca8a04;
+                  "
+                >
+                  T
+                </div>
+              </div>
+              <div class="tc-body">
+                <p class="tc-dept" style="color: #ca8a04">Electrical</p>
+                <h4 class="tc-name">Thiru Murugan</h4>
+                <p class="tc-role">BMS &amp; Automation Engineer</p>
+                <div class="tc-tags">
+                  <span class="tc-tag">BMS</span
+                  ><span class="tc-tag">Automation</span>
+                </div>
+              </div>
+            </div>
+            <div class="team-card rv d4">
+              <div class="tc-photo">
+                <div
+                  class="tc-avatar"
+                  style="
+                    background: linear-gradient(135deg, #fef9c3, #fde68a);
+                    color: #ca8a04;
+                  "
+                >
+                  A
+                </div>
+              </div>
+              <div class="tc-body">
+                <p class="tc-dept" style="color: #ca8a04">Electrical</p>
+                <h4 class="tc-name">Abirami Devi</h4>
+                <p class="tc-role">Electrical Site Engineer</p>
+                <div class="tc-tags">
+                  <span class="tc-tag">Installation</span
+                  ><span class="tc-tag">Testing</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="dept-block">
+          <div class="dept-heading rv">
+            <div class="icon-tile sky"><i class="fas fa-wrench"></i></div>
+            <h3 class="dept-title">Plumbing Team</h3>
+            <span class="dept-count">3 Members</span>
+          </div>
+          <div class="team-grid">
+            <div class="team-card rv d1">
+              <div class="tc-photo">
+                <div
+                  class="tc-avatar"
+                  style="
+                    background: linear-gradient(135deg, #e0f2fe, #bae6fd);
+                    color: #0284c7;
+                  "
+                >
+                  B
+                </div>
+              </div>
+              <div class="tc-body">
+                <p class="tc-dept" style="color: #0284c7">Plumbing</p>
+                <h4 class="tc-name">Bala Krishnan</h4>
+                <p class="tc-role">Senior Plumbing Engineer</p>
+                <div class="tc-tags">
+                  <span class="tc-tag">Design</span
+                  ><span class="tc-tag">Sanitation</span>
+                </div>
+              </div>
+            </div>
+            <div class="team-card rv d2">
+              <div class="tc-photo">
+                <div
+                  class="tc-avatar"
+                  style="
+                    background: linear-gradient(135deg, #e0f2fe, #bae6fd);
+                    color: #0284c7;
+                  "
+                >
+                  R
+                </div>
+              </div>
+              <div class="tc-body">
+                <p class="tc-dept" style="color: #0284c7">Plumbing</p>
+                <h4 class="tc-name">Ramesh Babu</h4>
+                <p class="tc-role">Plumbing Design Engineer</p>
+                <div class="tc-tags">
+                  <span class="tc-tag">Water Supply</span
+                  ><span class="tc-tag">Drainage</span>
+                </div>
+              </div>
+            </div>
+            <div class="team-card rv d3">
+              <div class="tc-photo">
+                <div
+                  class="tc-avatar"
+                  style="
+                    background: linear-gradient(135deg, #e0f2fe, #bae6fd);
+                    color: #0284c7;
+                  "
+                >
+                  J
+                </div>
+              </div>
+              <div class="tc-body">
+                <p class="tc-dept" style="color: #0284c7">Plumbing</p>
+                <h4 class="tc-name">Janani Sree</h4>
+                <p class="tc-role">Site &amp; QC Engineer</p>
+                <div class="tc-tags">
+                  <span class="tc-tag">QC</span
+                  ><span class="tc-tag">Sustainable</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <div class="stats-band">
+      <div class="wrap">
+        <div class="stats-row">
+          <div class="stat-cell rv d1">
+            <span class="stat-n">14+</span><span class="stat-l">Engineers</span>
+          </div>
+          <div class="stat-cell rv d2">
+            <span class="stat-n">4</span><span class="stat-l">Disciplines</span>
+          </div>
+          <div class="stat-cell rv d3">
+            <span class="stat-n">4</span
+            ><span class="stat-l">City Offices</span>
+          </div>
+          <div class="stat-cell rv d4">
+            <span class="stat-n">24/7</span><span class="stat-l">Support</span>
+          </div>
+        </div>
+      </div>
     </div>
-    <div id="page-wrapper">
-
-      <!-- Hero Section -->
-      <section class="hero" id="hero">
-        <h1>Our Team</h1>
-      </section>
-
-      <!-- Team Content Section -->
-      <section class="team-section">
-        <div class="container">
-          <p>
-            Our team's accomplishments at KMEP reflect the dedication,
-            expertise, and synergy of diverse professionals working with a
-            shared vision.
-          </p>
-
-          <p>
-            <strong>Engineers & Specialists:</strong> Our core team includes
-            highly skilled Mechanical and Electrical Engineers with extensive
-            experience in both field execution and technical design. Their
-            expertise ensures precision, safety, and innovation across all
-            projects.
-          </p>
-
-          <p>
-            <strong>Site Experts & Associates:</strong> Working alongside our
-            team are on-site associates specializing in mechanical and
-            electrical services. Their real-world experience and problem-solving
-            abilities strengthen our project execution capabilities.
-          </p>
-
-          <p>
-            <strong>Technical Collaborators:</strong> We maintain strong
-            partnerships with experts in Energy Conservation, CFD simulation,
-            and analytical modeling, enabling us to deliver optimized,
-            efficient, and cost-effective engineering solutions.
-          </p>
-
-          <h2><i class="fas fa-users"></i> Team Departments</h2>
-
-          <!-- Team Cards -->
-          <div class="cards">
-            <div class="card">
-              <h3><i class="fas fa-tools"></i> Mechanical Team</h3>
+    <section id="join">
+      <div class="wrap">
+        <div class="join-grid">
+          <div class="rv-l">
+            <span class="sec-tag">Careers at KMEP</span>
+            <h2 class="join-h">
+              Join a Team That<br /><span>Builds the Future</span>
+            </h2>
+            <p class="join-p">
+              We're always looking for talented MEP engineers, designers, and
+              project managers who share our commitment to precision,
+              innovation, and client satisfaction.
+            </p>
+            <p class="join-p">
+              At KMEP, you'll work on diverse, high-impact projects across Tamil
+              Nadu and beyond — backed by a culture of learning and long-term
+              growth.
+            </p>
+            <div class="join-perks">
+              <div class="perk">
+                <div class="perk-ico"><i class="fas fa-chart-line"></i></div>
+                <div>
+                  Career Growth<span
+                    >Clear pathways across engineering, design, and management
+                    tracks</span
+                  >
+                </div>
+              </div>
+              <div class="perk">
+                <div class="perk-ico">
+                  <i class="fas fa-map-marker-alt"></i>
+                </div>
+                <div>
+                  Multi-City Exposure<span
+                    >Opportunities across Chennai, Hosur, Tiruchirappalli, and
+                    Bangalore</span
+                  >
+                </div>
+              </div>
+              <div class="perk">
+                <div class="perk-ico"><i class="fas fa-users"></i></div>
+                <div>
+                  Collaborative Culture<span
+                    >Work alongside experienced engineers in an integrated team
+                    environment</span
+                  >
+                </div>
+              </div>
+            </div>
+            <a href="contact-us.html" class="btn-primary"
+              ><i class="fas fa-envelope"></i> Send Your CV</a
+            >
+          </div>
+          <div class="join-visual rv-r">
+            <div class="jv-card">
+              <div class="jv-ico"><i class="fas fa-fan"></i></div>
+              <h4>HVAC Engineers</h4>
               <p>
-                Focused on HVAC design, project execution, fabrication, and
-                support services with precision and reliability.
+                Design, installation, and commissioning roles open across all
+                offices
               </p>
             </div>
-
-            <div class="card">
-              <h3><i class="fas fa-bolt"></i> Electrical Team</h3>
-              <p>
-                Experienced professionals delivering safe, efficient, and
-                compliant electrical system solutions.
-              </p>
+            <div class="jv-card">
+              <div
+                class="jv-ico"
+                style="
+                  background: linear-gradient(135deg, #d1fae5, #a7f3d0);
+                  color: var(--teal);
+                "
+              >
+                <i class="fas fa-screwdriver-wrench"></i>
+              </div>
+              <h4>Mechanical Engineers</h4>
+              <p>Site, design, and project management roles available</p>
             </div>
-
-            <div class="card">
-              <h3><i class="fas fa-user-tie"></i> Associates</h3>
-              <p>
-                Site-level specialists who ensure smooth operational workflow
-                and technical support during project execution.
-              </p>
+            <div class="jv-card">
+              <div
+                class="jv-ico"
+                style="
+                  background: linear-gradient(135deg, #fef9c3, #fde68a);
+                  color: #ca8a04;
+                "
+              >
+                <i class="fas fa-bolt"></i>
+              </div>
+              <h4>Electrical Engineers</h4>
+              <p>LV design, BMS, and field engineering positions</p>
             </div>
-
-            <div class="card">
-              <h3><i class="fas fa-project-diagram"></i> Collaborators</h3>
+            <div class="jv-card">
+              <div
+                class="jv-ico"
+                style="
+                  background: linear-gradient(135deg, #e0f2fe, #bae6fd);
+                  color: #0284c7;
+                "
+              >
+                <i class="fas fa-wrench"></i>
+              </div>
+              <h4>Plumbing Engineers</h4>
               <p>
-                Experts in CFD analysis, energy optimization, and simulation
-                working with us on high-performance solutions.
+                Design and site roles for residential and commercial projects
               </p>
             </div>
           </div>
         </div>
-      </section>
+      </div>
+    </section>
+    <section style="padding: 108px 0; background: #fff">
+      <div class="wrap">
+        <div class="cta-box rv">
+          <p class="cta-tag">Work With Our Team</p>
+          <h2 class="display-h cta-h">Ready to Start Your Next Project?</h2>
+          <p class="cta-p">
+            Connect with KMEP's engineering team to get integrated MEP solutions
+            delivered with precision and accountability.
+          </p>
+          <div class="cta-btns">
+            <a href="contact-us.html" class="cta-btn1"
+              ><i class="fas fa-envelope"></i> Get in Touch</a
+            ><a href="services.html" class="cta-btn2"
+              ><i class="fas fa-layer-group"></i> Explore Services</a
+            >
+          </div>
+        </div>
+      </div>
+    </section>
 
-      <!-- Footer -->
-      <kmep-footer></kmep-footer>
-    </div>
+    <kmep-footer></kmep-footer>
   </body>
 </html>
