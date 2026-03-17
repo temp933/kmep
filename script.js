@@ -1,4 +1,4 @@
-/ class KmepHeader extends HTMLElement {
+class KmepHeader extends HTMLElement {
   connectedCallback() {
     this.innerHTML = `
 <style>
