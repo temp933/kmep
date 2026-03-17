@@ -1,13 +1,4 @@
-/* ============================================================
-   KMEP — script.js
-   Web Components: <kmep-header>  <kmep-footer>
-   + Scroll Reveal / Side-nav / Hero animate utilities
-============================================================ */
-
-/* ============================================================
-   HEADER
-============================================================ */
-class KmepHeader extends HTMLElement {
+/ class KmepHeader extends HTMLElement {
   connectedCallback() {
     this.innerHTML = `
 <style>
