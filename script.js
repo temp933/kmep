@@ -287,7 +287,7 @@ class KmepHeader extends HTMLElement {
 
     <!-- Logo -->
     <a href="index.html" class="kh-logo" aria-label="KMEP Home">
-      <img src="images/logo.png" alt="KMEP Logo" />
+      <img src="IMAGES/logo.png" alt="KMEP Logo" />
       <span class="kh-logo-text">KMEP</span>
     </a>
 
@@ -568,7 +568,7 @@ class KmepFooter extends HTMLElement {
   <div class="kf-top">
     <div class="kf-top-inner">
       <a href="index.html" class="kf-brand" aria-label="KMEP Home">
-        <img src="images/logo.png" alt="KMEP" />
+        <img src="IMAGES/logo.png" alt="KMEP" />
         <span class="kf-brand-name">KMEP</span>
       </a>
       <p class="kf-tagline">
