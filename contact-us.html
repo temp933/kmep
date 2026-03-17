@@ -1,318 +1,810 @@
-<!DOCTYPE html>
-<html>
+<!doctype html>
+<html lang="en">
   <head>
-    <title>Contact Us - KMEP</title>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Contact Us — KMEP | Keerthan MEP Engineers</title>
+    <link rel="icon" href="images/logo.png" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&family=Playfair+Display:ital,wght@0,700;0,800;1,700&display=swap"
+      rel="stylesheet"
+    />
     <link
       rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
     />
-    <script src="script.js"></script>
+    <link rel="stylesheet" href="style.css" />
+    <script src="script.js" defer></script>
 
     <style>
-      /* GLOBAL */
-      body {
-        margin: 0;
-        background: rgba(128, 128, 128, 0.473);
-        color: #ddd;
-        font-family: "Segoe UI", sans-serif;
-        overflow-x: hidden;
+      .page-hero {
+        min-height: 56vh;
+        padding-bottom: 88px;
       }
 
-      h2,
-      h3 {
-        color: #a05cff;
+      #contact-main {
+        padding: 108px 0;
+        background: #fff;
+      }
+      .contact-grid {
+        display: grid;
+        grid-template-columns: 1fr 1.15fr;
+        gap: 88px;
+        align-items: start;
+      }
+      .contact-info {
+        display: flex;
+        flex-direction: column;
+        gap: 16px;
+      }
+
+      .ci-label {
+        display: inline-flex;
+        align-items: center;
+        gap: 9px;
+        font-size: 11.5px;
+        font-weight: 700;
+        letter-spacing: 2.5px;
+        text-transform: uppercase;
+        color: var(--blue);
+        margin-bottom: 8px;
+      }
+      .ci-label::before {
+        content: "";
+        display: block;
+        width: 24px;
+        height: 2px;
+        background: var(--sky);
+        border-radius: 2px;
+        flex-shrink: 0;
+      }
+      .ci-h {
+        font-family: "Playfair Display", serif;
+        font-size: clamp(26px, 3vw, 38px);
+        font-weight: 800;
+        letter-spacing: -1px;
+        color: var(--navy);
+        line-height: 1.15;
+        margin-bottom: 14px;
+      }
+      .ci-h span {
+        color: var(--blue2);
+      }
+      .ci-intro {
+        font-size: 15.5px;
+        color: var(--slate);
+        line-height: 1.85;
+        margin-bottom: 28px;
+      }
+
+      .ci-card {
+        display: flex;
+        gap: 16px;
+        align-items: flex-start;
+        padding: 20px 22px;
+        border-radius: 14px;
+        border: 1.5px solid var(--border);
+        background: #fff;
+        transition:
+          border-color 0.3s,
+          box-shadow 0.3s,
+          background 0.3s;
+      }
+      .ci-card:hover {
+        border-color: rgba(21, 88, 176, 0.25);
+        box-shadow: 0 6px 24px rgba(21, 88, 176, 0.09);
+        background: var(--off);
+      }
+      .ci-ico {
+        width: 44px;
+        height: 44px;
+        border-radius: 11px;
+        flex-shrink: 0;
+        background: linear-gradient(135deg, #dbeafe, #bfdbfe);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 16px;
+        color: var(--blue);
+      }
+      .ci-card-label {
+        font-size: 10px;
+        font-weight: 700;
+        letter-spacing: 2px;
+        text-transform: uppercase;
+        color: var(--muted);
+        margin-bottom: 4px;
+      }
+      .ci-card-val {
+        font-size: 14.5px;
         font-weight: 600;
+        color: var(--navy);
+        line-height: 1.6;
+      }
+      .ci-card-val a {
+        transition: color 0.2s;
+      }
+      .ci-card-val a:hover {
+        color: var(--blue2);
       }
 
-      a {
-        color: #ccc;
+      /* ── WHATSAPP CARD ──────────────────────────────────────── */
+      .wa-card {
         text-decoration: none;
-        transition: 0.3s;
+        border-color: #bbf7d0 !important;
+        background: #f0fdf4 !important;
+        transition:
+          border-color 0.3s,
+          box-shadow 0.3s,
+          transform 0.2s !important;
       }
-
-      a:hover {
-        color: #f11717;
-        text-shadow: 0 0 8px #a05cffaa;
+      .wa-card:hover {
+        border-color: #16a34a !important;
+        box-shadow: 0 6px 24px rgba(22, 163, 74, 0.18) !important;
+        transform: translateY(-2px);
+        background: #dcfce7 !important;
       }
-
-      .container {
-        width: 92%;
-        max-width: 1200px;
-        margin: auto;
-        margin-bottom: 90px;
+      .wa-ico {
+        background: linear-gradient(135deg, #dcfce7, #bbf7d0) !important;
+        color: #16a34a !important;
+        font-size: 20px !important;
       }
-
-      .row {
+      .wa-status {
+        font-size: 12px;
+        font-weight: 600;
+        color: #16a34a;
         display: flex;
-        flex-wrap: wrap;
-        gap: 20px;
+        align-items: center;
+        gap: 5px;
+        margin-top: 4px;
       }
-
-      .col-8 {
-        width: 65%;
+      .wa-status::before {
+        content: "";
+        width: 7px;
+        height: 7px;
+        border-radius: 50%;
+        background: #16a34a;
+        flex-shrink: 0;
+        animation: wapulse 2s ease infinite;
       }
-      .col-4 {
-        width: 30%;
-      }
-
-      @media (max-width: 768px) {
-        .col-8,
-        .col-4 {
-          width: 100%;
+      @keyframes wapulse {
+        0%,
+        100% {
+          opacity: 1;
+          box-shadow: 0 0 0 0 rgba(22, 163, 74, 0.4);
+        }
+        50% {
+          opacity: 0.7;
+          box-shadow: 0 0 0 5px rgba(22, 163, 74, 0);
         }
       }
-
-      /* CARDS */
-      .box {
-        background: #1e22417a;
-        margin-top: 10px;
-        padding: 25px;
-        padding-top: 10px;
-        border-radius: 12px;
-        border: 1px solid #222;
-        box-shadow: 0 0 20px #000;
-        opacity: 0;
-        transform: translateY(30px);
-        transition: 1s ease;
-      }
-
-      .visible {
-        opacity: 1 !important;
-        transform: translateY(0px) !important;
-      }
-
-      /* Spotlight Image */
-      .spotlight img {
-        width: 100%;
-        border-radius: 12px;
-        margin-bottom: 15px;
-        box-shadow: 0 0 20px #000;
-      }
-
-      /* GRAPH SECTION */
-      .graph-box {
-        padding: 20px;
-        background: #1e22417a;
-        border-radius: 10px;
-        margin-top: 20px;
+      .wa-btn {
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+        background: #16a34a;
         color: #fff;
+        font-size: 12px;
+        font-weight: 700;
+        padding: 7px 14px;
+        border-radius: 8px;
+        white-space: nowrap;
+        flex-shrink: 0;
+        align-self: center;
       }
 
-      .graph-title {
-        font-size: 24px;
-        font-weight: bold;
-        margin-bottom: 20px;
-        text-align: center;
+      .offices-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 12px;
+        margin-top: 4px;
       }
-
-      .bar-chart {
+      .office-chip {
         display: flex;
-        justify-content: space-between;
-        gap: 20px;
-      }
-
-      .bar {
-        width: 40px;
-        background: #6a00ff;
-        border-radius: 6px;
-        margin: 0 auto 10px auto;
-        transition: height 1s ease-in-out;
-        height: 0px;
-      }
-
-      .bar-label {
-        text-align: center;
-        color: #bbb;
-      }
-
-      .bar-label img {
-        width: 120px;
-        height: 120px;
-        object-fit: cover;
-        margin-top: 5px;
+        align-items: center;
+        gap: 9px;
+        padding: 12px 16px;
         border-radius: 10px;
-        transition: transform 0.3s ease;
+        background: var(--off2);
+        border: 1.5px solid var(--border);
+        font-size: 14px;
+        font-weight: 700;
+        color: var(--navy);
+        transition:
+          border-color 0.25s,
+          box-shadow 0.25s,
+          color 0.25s;
+        text-decoration: none;
+      }
+      .office-chip:hover {
+        border-color: var(--blue);
+        box-shadow: 0 4px 14px rgba(21, 88, 176, 0.1);
+        color: var(--blue);
+      }
+      .office-chip i {
+        color: var(--sky);
+        font-size: 12px;
+        flex-shrink: 0;
       }
 
-      .bar-label img:hover {
-        transform: scale(1.08);
+      /* ── FORM ───────────────────────────────────────────────── */
+      .form-wrap {
+        background: var(--off2);
+        border: 1.5px solid var(--border);
+        border-radius: 22px;
+        padding: 48px 44px;
+        position: relative;
+        overflow: hidden;
+      }
+      .form-wrap::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        height: 4px;
+        background: linear-gradient(
+          90deg,
+          var(--blue),
+          var(--sky),
+          var(--teal)
+        );
+      }
+      .form-title {
+        font-family: "Playfair Display", serif;
+        font-size: 26px;
+        font-weight: 800;
+        color: var(--navy);
+        letter-spacing: -0.5px;
+        margin-bottom: 6px;
+      }
+      .form-sub {
+        font-size: 14px;
+        color: var(--slate);
+        margin-bottom: 32px;
+      }
+      .form-row {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 16px;
+        margin-bottom: 16px;
+      }
+      .form-group {
+        display: flex;
+        flex-direction: column;
+        gap: 7px;
+        margin-bottom: 16px;
+      }
+      .form-group.half {
+        margin-bottom: 0;
+      }
+      .form-group label {
+        font-size: 12px;
+        font-weight: 700;
+        letter-spacing: 1.5px;
+        text-transform: uppercase;
+        color: var(--slate);
+      }
+      .form-group input,
+      .form-group select,
+      .form-group textarea {
+        width: 100%;
+        padding: 13px 16px;
+        border-radius: 10px;
+        border: 1.5px solid var(--border);
+        background: #fff;
+        font-family: "Outfit", sans-serif;
+        font-size: 14.5px;
+        color: var(--navy);
+        outline: none;
+        transition:
+          border-color 0.25s,
+          box-shadow 0.25s;
+        -webkit-appearance: none;
+      }
+      .form-group input:focus,
+      .form-group select:focus,
+      .form-group textarea:focus {
+        border-color: var(--blue);
+        box-shadow: 0 0 0 3px rgba(21, 88, 176, 0.1);
+      }
+      .form-group textarea {
+        resize: vertical;
+        min-height: 130px;
+      }
+      .form-submit {
+        display: inline-flex;
+        align-items: center;
+        gap: 10px;
+        background: var(--navy);
+        color: #fff;
+        padding: 15px 36px;
+        border-radius: 11px;
+        font-family: "Outfit", sans-serif;
+        font-size: 15px;
+        font-weight: 700;
+        border: none;
+        cursor: pointer;
+        width: 100%;
+        justify-content: center;
+        margin-top: 8px;
+        transition:
+          background 0.2s,
+          transform 0.2s,
+          box-shadow 0.2s;
+      }
+      .form-submit:hover {
+        background: var(--blue2);
+        transform: translateY(-2px);
+        box-shadow: 0 10px 28px rgba(12, 30, 53, 0.18);
       }
 
-      /* MOBILE FIXES FOR GRAPH */
-      @media (max-width: 700px) {
-        /* Stack items in 2×2 grid instead of one long row */
-        .bar-chart {
-          display: grid !important;
-          grid-template-columns: repeat(2, 1fr);
-          gap: 25px;
-          text-align: center;
-        }
+      /* OR divider */
+      .form-or {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        margin: 20px 0 14px;
+      }
+      .form-or span {
+        font-size: 11px;
+        font-weight: 700;
+        letter-spacing: 1.5px;
+        text-transform: uppercase;
+        color: var(--muted);
+        flex-shrink: 0;
+      }
+      .form-or::before,
+      .form-or::after {
+        content: "";
+        flex: 1;
+        height: 1px;
+        background: var(--border);
+      }
 
-        /* Shrink bar width */
-        .bar-chart > div > div[data-height] {
-          width: 28px !important;
-          margin: 0 auto;
-        }
+      /* WhatsApp CTA inside form */
+      .form-wa-cta {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        background: #f0fdf4;
+        border: 1.5px solid #bbf7d0;
+        color: #166534;
+        padding: 14px 20px;
+        border-radius: 11px;
+        font-family: "Outfit", sans-serif;
+        font-size: 14.5px;
+        font-weight: 700;
+        text-decoration: none;
+        justify-content: center;
+        transition:
+          background 0.2s,
+          border-color 0.2s,
+          transform 0.2s;
+      }
+      .form-wa-cta:hover {
+        background: #dcfce7;
+        border-color: #16a34a;
+        transform: translateY(-2px);
+      }
+      .form-wa-cta i {
+        font-size: 18px;
+        color: #16a34a;
+      }
 
-        /* Reduce image size */
-        .bar-label img {
-          width: 150px !important;
-          height: 150px !important;
-        }
+      .form-note {
+        font-size: 12px;
+        color: var(--muted);
+        text-align: center;
+        margin-top: 14px;
+        line-height: 1.6;
+      }
 
-        /* Reduce label font size */
-        .bar-label {
-          display: flex;
-          flex-direction: column;
-          align-items: center;
-          margin-top: 8px;
-          color: #bbb;
-          font-size: 16px;
-        }
+      /* ── MAP ────────────────────────────────────────────────── */
+      #map-section {
+        background: var(--off);
+        padding: 108px 0;
+      }
+      .map-frame {
+        width: 100%;
+        border-radius: 20px;
+        overflow: hidden;
+        box-shadow: var(--sh2);
+        border: 1.5px solid var(--border);
+        height: 460px;
+        position: relative;
+      }
+      .map-frame::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        height: 4px;
+        z-index: 1;
+        background: linear-gradient(
+          90deg,
+          var(--blue),
+          var(--sky),
+          var(--teal)
+        );
+      }
+      .map-frame iframe {
+        width: 100%;
+        height: 100%;
+        border: none;
+        display: block;
+      }
 
-        /* Graph title spacing */
-        .graph-title {
-          font-size: 20px;
-          margin-bottom: 15px;
+      /* ── FLOATING WHATSAPP BUTTON ───────────────────────────── */
+      .wa-float {
+        position: fixed;
+        bottom: 28px;
+        right: 28px;
+        z-index: 990;
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        background: #16a34a;
+        color: #fff;
+        padding: 13px 20px 13px 16px;
+        border-radius: 50px;
+        font-size: 14px;
+        font-weight: 700;
+        text-decoration: none;
+        box-shadow: 0 6px 28px rgba(22, 163, 74, 0.45);
+        transition:
+          transform 0.2s,
+          box-shadow 0.2s;
+      }
+      .wa-float:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 12px 36px rgba(22, 163, 74, 0.55);
+      }
+      .wa-float i {
+        font-size: 22px;
+        flex-shrink: 0;
+      }
+      .wa-float-label {
+        white-space: nowrap;
+      }
+      /* pulse ring */
+      .wa-float::before {
+        content: "";
+        position: absolute;
+        inset: 0;
+        border-radius: inherit;
+        animation: waring 2.8s ease infinite;
+      }
+      @keyframes waring {
+        0% {
+          box-shadow: 0 0 0 0 rgba(22, 163, 74, 0.55);
         }
-
-        /* Graph box padding */
-        .graph-box {
-          padding: 15px;
+        70% {
+          box-shadow: 0 0 0 14px rgba(22, 163, 74, 0);
+        }
+        100% {
+          box-shadow: 0 0 0 0 rgba(22, 163, 74, 0);
         }
       }
 
-      .header,
-kmep-header {
-  width: 100% !important;
-  max-width: 100% !important;
-  box-sizing: border-box;
-}
+      /* ── RESPONSIVE ─────────────────────────────────────────── */
+      @media (max-width: 1100px) {
+        .contact-grid {
+          grid-template-columns: 1fr;
+          gap: 52px;
+        }
+      }
+      @media (max-width: 860px) {
+        .page-hero {
+          padding-bottom: 60px;
+        }
+        #contact-main,
+        #map-section {
+          padding: 72px 0;
+        }
+        .form-wrap {
+          padding: 32px 24px;
+        }
+        .form-row {
+          grid-template-columns: 1fr;
+        }
+        .map-frame {
+          height: 340px;
+        }
+        .wa-float-label {
+          display: none;
+        }
+        .wa-float {
+          padding: 14px;
+          border-radius: 50%;
+        }
+      }
+      @media (max-width: 480px) {
+        .offices-grid {
+          grid-template-columns: 1fr;
+        }
+        .form-wrap {
+          padding: 28px 18px;
+        }
+        .map-frame {
+          height: 280px;
+        }
+        .wa-float {
+          bottom: 20px;
+          right: 20px;
+        }
+      }
     </style>
   </head>
-
   <body>
-    <div id="main-wrapper">
-      <div style="padding-bottom: 100px">
-        <kmep-header
-          style="
-            width: calc(100% - 10px);
-            margin-right: 10px;
-            box-sizing: border-box;
-          "
-        ></kmep-header>
+    <kmep-header></kmep-header>
+
+    <!-- FLOATING WHATSAPP BUTTON -->
+    <a
+      class="wa-float"
+      href="https://wa.me/919710439000?text=Hi%20KMEP%2C%20I%27d%20like%20to%20enquire%20about%20your%20MEP%20services."
+      target="_blank"
+      rel="noopener"
+      aria-label="Chat on WhatsApp"
+    >
+      <i class="fab fa-whatsapp"></i>
+      <span class="wa-float-label">Chat on WhatsApp</span>
+    </a>
+
+    <!-- HERO -->
+    <section class="page-hero" style="min-height: 52vh">
+      <div class="ph-grid"></div>
+      <div class="ph-glow"></div>
+      <div class="ph-body">
+        <div class="ph-eyebrow">
+          <span class="ph-dot"></span> We'd Love to Hear From You
+        </div>
+        <h1 class="ph-h1">Get in Touch<br />with <em>KMEP</em></h1>
+        <p class="ph-sub">
+          Whether it's a new project, a technical query, or after-sales support
+          — our team is ready to respond.
+        </p>
       </div>
+    </section>
 
-      <div class="container">
-        <h2 style="margin-bottom: 25px">Contact Us</h2>
-
-        <div class="row">
-          <!-- LEFT -->
-          <div class="col-8">
-            <div class="box fade">
-              <h3><i class="fas fa-phone"></i> Phone</h3>
-              <p>
-                <strong><a href="tel:+919710439000">+91 97104 39000</a></strong>
-              </p>
-              <p>
-                <strong><a href="tel:+919176670447">+91 91766 70447</a></strong>
+    <!-- CONTACT MAIN -->
+    <section id="contact-main">
+      <div class="wrap">
+        <div class="contact-grid">
+          <!-- LEFT: INFO -->
+          <div class="contact-info rv-l">
+            <div>
+              <span class="ci-label">Contact Details</span>
+              <h2 class="ci-h">Let's Start a<br /><span>Conversation</span></h2>
+              <p class="ci-intro">
+                Reach out through any channel — our team across Chennai, Hosur,
+                Tiruchirappalli, and Bangalore is ready to assist.
               </p>
             </div>
 
-            <div class="box fade">
-              <h3><i class="fas fa-envelope"></i> Email</h3>
-              <p>
-                <strong
-                  ><a href="mailto:rajesh@kmep.co.in"
-                    >rajesh@kmep.co.in</a
-                  ></strong
+            <div class="ci-card">
+              <div class="ci-ico"><i class="fas fa-phone"></i></div>
+              <div>
+                <p class="ci-card-label">Phone</p>
+                <div class="ci-card-val">
+                  <a href="tel:+919710439000">+91 97104 39000</a><br />
+                  <a href="tel:+919176670447">+91 91766 70447</a>
+                </div>
+              </div>
+            </div>
+
+            <div class="ci-card">
+              <div class="ci-ico"><i class="fas fa-envelope"></i></div>
+              <div>
+                <p class="ci-card-label">Email</p>
+                <div class="ci-card-val">
+                  <a href="mailto:rajesh@kmep.co.in">rajesh@kmep.co.in</a>
+                </div>
+              </div>
+            </div>
+
+            <!-- WHATSAPP CARD -->
+            <a
+              class="ci-card wa-card"
+              href="https://wa.me/919710439000?text=Hi%20KMEP%2C%20I%27d%20like%20to%20enquire%20about%20your%20MEP%20services."
+              target="_blank"
+              rel="noopener"
+            >
+              <div class="ci-ico wa-ico"><i class="fab fa-whatsapp"></i></div>
+              <div style="flex: 1">
+                <p class="ci-card-label">WhatsApp</p>
+                <div class="ci-card-val" style="color: var(--navy)">
+                  +91 97104 39000
+                  <div class="wa-status">Available — chat with us now</div>
+                </div>
+              </div>
+              <span class="wa-btn"
+                ><i class="fab fa-whatsapp"></i> Chat Now</span
+              >
+            </a>
+
+            <div class="ci-card">
+              <div class="ci-ico"><i class="fas fa-map-marker-alt"></i></div>
+              <div>
+                <p class="ci-card-label">Registered Office</p>
+                <div class="ci-card-val">
+                  Plot No. 17, Door No. 4,<br />
+                  Thiruppur Kumaran Street,<br />
+                  Senthil Nagar, Thirumullaivoyal,<br />
+                  Chennai – 600 062, Tamil Nadu, India
+                </div>
+              </div>
+            </div>
+
+            <div>
+              <p
+                style="
+                  font-size: 10px;
+                  font-weight: 700;
+                  letter-spacing: 2px;
+                  text-transform: uppercase;
+                  color: var(--muted);
+                  margin-bottom: 12px;
+                "
+              >
+                Our Offices
+              </p>
+              <div class="offices-grid">
+                <a
+                  class="office-chip"
+                  href="https://maps.app.goo.gl/ijvwbweYxeWVsLsS6"
+                  target="_blank"
+                  rel="noopener"
+                  ><i class="fas fa-location-dot"></i> Chennai</a
                 >
-              </p>
-            </div>
-
-            <!-- GRAPH -->
-            <div class="graph-box fade">
-              <div class="graph-title">Branch's</div>
-
-              <div class="bar-chart" id="graph">
-                <div>
-                  <div data-height="70"></div>
-                  <div class="bar-label">
-                    <a
-                      href="https://maps.app.goo.gl/skqbtQh8dWbNBoRF8"
-                      target="_blank"
-                    >
-                      <img src="IMAGES/office.png" />
-                    </a>
-                    Chennai
-                  </div>
-                </div>
-
-                <div>
-                  <div data-height="50"></div>
-                  <div class="bar-label">
-                    <a
-                      href="https://maps.app.goo.gl/skqbtQh8dWbNBoRF8"
-                      target="_blank"
-                    >
-                      <img src="IMAGES/1.jfif" />
-                    </a>
-                    Hosur
-                  </div>
-                </div>
-
-                <div>
-                  <div data-height="40"></div>
-                  <div class="bar-label">
-                    <a
-                      href="https://maps.app.goo.gl/skqbtQh8dWbNBoRF8"
-                      target="_blank"
-                    >
-                      <img src="IMAGES/2.jfif" />
-                    </a>
-                    Trichy
-                  </div>
-                </div>
-
-                <div>
-                  <div data-height="65"></div>
-                  <div class="bar-label">
-                    <a
-                      href="https://maps.app.goo.gl/skqbtQh8dWbNBoRF8"
-                      target="_blank"
-                    >
-                      <img src="IMAGES/3.jfif" />
-                    </a>
-                    Bangalore
-                  </div>
-                </div>
+                <a
+                  class="office-chip"
+                  href="https://maps.app.goo.gl/ijvwbweYxeWVsLsS6"
+                  target="_blank"
+                  rel="noopener"
+                  ><i class="fas fa-location-dot"></i> Hosur</a
+                >
+                <a
+                  class="office-chip"
+                  href="https://maps.app.goo.gl/ijvwbweYxeWVsLsS6"
+                  target="_blank"
+                  rel="noopener"
+                  ><i class="fas fa-location-dot"></i> Tiruchirappalli</a
+                >
+                <a
+                  class="office-chip"
+                  href="https://maps.app.goo.gl/ijvwbweYxeWVsLsS6"
+                  target="_blank"
+                  rel="noopener"
+                  ><i class="fas fa-location-dot"></i> Bangalore</a
+                >
               </div>
             </div>
           </div>
 
-          <!-- RIGHT -->
-          <div class="col-4">
-            <div class="box spotlight fade">
-              <img src="IMAGES/office.png" />
+          <!-- RIGHT: FORM -->
+          <div class="form-wrap rv-r">
+            <h3 class="form-title">Send Us a Message</h3>
+            <p class="form-sub">
+              Fill in your details and we'll get back to you within 24 hours.
+            </p>
 
-              <h3>Registered Office</h3>
+            <form action="#" method="POST" onsubmit="handleSubmit(event)">
+              <div class="form-row">
+                <div class="form-group half">
+                  <label for="fname">First Name</label>
+                  <input
+                    type="text"
+                    id="fname"
+                    name="fname"
+                    placeholder="Rajesh"
+                    required
+                  />
+                </div>
+                <div class="form-group half">
+                  <label for="lname">Last Name</label>
+                  <input
+                    type="text"
+                    id="lname"
+                    name="lname"
+                    placeholder="Kumar"
+                    required
+                  />
+                </div>
+              </div>
+              <div class="form-group">
+                <label for="email">Email Address</label>
+                <input
+                  type="email"
+                  id="email"
+                  name="email"
+                  placeholder="you@company.com"
+                  required
+                />
+              </div>
+              <div class="form-group">
+                <label for="phone">Phone Number</label>
+                <input
+                  type="tel"
+                  id="phone"
+                  name="phone"
+                  placeholder="+91 98765 43210"
+                />
+              </div>
+              <div class="form-group">
+                <label for="service">Service of Interest</label>
+                <select id="service" name="service">
+                  <option value="" disabled selected>Select a service…</option>
+                  <option>HVAC Systems</option>
+                  <option>Mechanical Engineering</option>
+                  <option>Electrical Works</option>
+                  <option>Plumbing Solutions</option>
+                  <option>Energy Audit &amp; Management</option>
+                  <option>After-Sales Support</option>
+                  <option>Other</option>
+                </select>
+              </div>
+              <div class="form-group">
+                <label for="message">Your Message</label>
+                <textarea
+                  id="message"
+                  name="message"
+                  placeholder="Tell us about your project, requirements, or questions…"
+                  required
+                ></textarea>
+              </div>
+
+              <button type="submit" class="form-submit">
+                <i class="fas fa-paper-plane"></i> Send Message
+              </button>
+
+              <div class="form-or"><span>or reach us instantly</span></div>
+
               <a
-                href="https://maps.app.goo.gl/skqbtQh8dWbNBoRF8"
+                class="form-wa-cta"
+                href="https://wa.me/918122687009?text=Hi%20KMEP%2C%20I%27d%20like%20to%20enquire%20about%20your%20MEP%20services."
                 target="_blank"
+                rel="noopener"
               >
-                Plot No. 17, Door No. 4<br />
-                Thiruppur Kumaran Street<br />
-                Senthil Nagar<br />
-                Chennai – 600 062<br />
-                Tamil Nadu, India
+                <i class="fab fa-whatsapp"></i> Continue on WhatsApp
               </a>
-            </div>
+
+              <p class="form-note">
+                We respect your privacy. Your details will never be shared with
+                third parties.
+              </p>
+            </form>
           </div>
         </div>
       </div>
-    </div>
+    </section>
+
+    <!-- MAP -->
+    <section id="map-section">
+      <div class="wrap">
+        <div class="sec-header rv">
+          <p class="sec-tag-c">Find Us</p>
+          <h2 class="display-h" style="font-size: clamp(28px, 3.5vw, 44px)">
+            Our Registered Office
+          </h2>
+          <p class="sec-sub">
+            Plot No. 17, Senthil Nagar, Thirumullaivoyal, Chennai – 600 062
+          </p>
+        </div>
+        <div class="map-frame rv">
+          <iframe
+            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3885.1!2d80.1338!3d13.1227!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMTPCsDA3JzIxLjciTiA4MMKwMDgnMDEuNyJF!5e0!3m2!1sen!2sin!4v1680000000000!5m2!1sen!2sin"
+            allowfullscreen=""
+            loading="lazy"
+            referrerpolicy="no-referrer-when-downgrade"
+            title="KMEP Office Location"
+          >
+          </iframe>
+        </div>
+      </div>
+    </section>
+
+    <kmep-footer></kmep-footer>
   </body>
 </html>
