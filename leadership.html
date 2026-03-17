@@ -1,278 +1,493 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Leadership - KMEP</title>
-
-    <!-- Font Awesome -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Leadership — KMEP | Keerthan MEP Engineers</title>
+    <link rel="icon" href="images/logo.png" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&family=Playfair+Display:ital,wght@0,700;0,800;1,700&display=swap"
+      rel="stylesheet"
+    />
     <link
       rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
     />
-    <script src="script.js"></script>
-
+    <link rel="stylesheet" href="style.css" />
+    <script src="script.js" defer></script>
     <style>
-      * {
-        margin: 0;
-        padding: 0;
-        box-sizing: border-box;
+      .page-hero {
+        min-height: 56vh;
+        padding-bottom: 88px;
+      }
+      @media (max-width: 860px) {
+        .page-hero {
+          padding-bottom: 60px;
+        }
+        .ph-body {
+          padding: 0 24px;
+        }
+      }
+      @media (max-width: 480px) {
+        .ph-body {
+          padding: 0 18px;
+        }
       }
 
-      body {
-        font-family: "Roboto", sans-serif;
-        background: #0c0c0c;
-        color: white;
-        overflow-x: hidden;
-        padding-top: 100px;
+      #leadership {
+        padding: 108px 0;
+        background: #fff;
       }
-
-      /* ===================== HERO IMAGE ===================== */
-      .hero-section {
-        position: relative;
-        width: 100%;
-        height: 100vh;
+      .lf-wrap {
+        display: grid;
+        grid-template-columns: 420px 1fr;
+        border: 1.5px solid var(--border);
+        border-radius: 24px;
         overflow: hidden;
+        box-shadow: var(--sh2);
+        margin-bottom: 48px;
       }
-
-      .hero-section img {
-        width: 100%;
-        height: 100%;
-        object-fit: cover;
-        transition: 0.7s ease-in-out;
-      }
-
-      .hero-section.shrink img {
-        height: 50vh;
-      }
-
-      /* Floating Glass Card */
-      .glass-card {
-        position: absolute;
-        bottom: 50%;
-        left: 50%;
-        transform: translateX(-50%);
-        width: 80%;
-        max-width: 600px;
-        padding: 25px;
-        text-align: center;
-        border-radius: 18px;
-        backdrop-filter: blur(15px);
-        background: rgba(255, 255, 255, 0.06);
-        border: 1px solid rgba(255, 255, 255, 0.3);
-        box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
-        opacity: 1;
-        transition: 0.7s ease-in-out;
-      }
-
-      .hero-section.shrink .glass-card {
-        opacity: 0;
-        transform: translate(-50%, 20px);
-      }
-
-      .glass-card h1 {
-        font-size: 2.2rem;
-        color: #2ebcff;
-      }
-
-      .glass-card p {
-        font-size: 1.1rem;
-        opacity: 0.9;
-      }
-
-      /* ===================== CONTENT SECTION ===================== */
-      .content-section {
-        padding: 60px 25px;
-        max-width: 1100px;
-        margin: auto;
-        opacity: 0;
-        transform: translateY(50px);
-        transition: 1s ease;
-      }
-
-      .content-section.visible {
-        opacity: 1;
-        transform: translateY(0);
-      }
-
-      h2 {
-        text-align: center;
-        font-size: 2.5rem;
-        margin-bottom: 20px;
-        color: #2ebcff;
-      }
-
-      p {
-        margin-bottom: 18px;
-        line-height: 1.7;
-      }
-
-      /* ===================== TEAM CAROUSEL ===================== */
-      .carousel-container {
-        margin-top: 60px;
-        overflow: hidden;
-        position: relative;
-      }
-
-      .carousel-track {
+      .lf-photo {
+        background: linear-gradient(140deg, #dbeafe 0%, #eff6ff 100%);
         display: flex;
-        gap: 20px;
-        animation: scroll 18s linear infinite;
+        align-items: flex-end;
+        justify-content: center;
+        padding: 48px 40px 0;
+        position: relative;
+        overflow: hidden;
+        min-height: 480px;
       }
-
-      @keyframes scroll {
-        0% {
-          transform: translateX(0);
-        }
-        100% {
-          transform: translateX(-50%);
-        }
+      .lf-photo::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        bottom: 0;
+        width: 4px;
+        background: linear-gradient(
+          to bottom,
+          var(--blue),
+          var(--sky),
+          var(--teal)
+        );
       }
-
-      .team-card {
-        width: 280px;
-        min-width: 280px;
-        padding: 20px;
-        background: rgba(255, 255, 255, 0.08);
-        border-radius: 18px;
-        backdrop-filter: blur(12px);
-        border: 1px solid rgba(255, 255, 255, 0.25);
-        text-align: center;
-        transition: 0.1s;
-      }
-
-      .team-card:hover {
-        transform: translateY(-10px);
-        background: rgba(255, 255, 255, 0.15);
-      }
-
-      .team-card img {
-        width: 110px;
-        height: 110px;
+      .lf-avatar {
+        width: 240px;
+        height: 240px;
         border-radius: 50%;
-        margin-bottom: 12px;
-        object-fit: cover;
+        background: linear-gradient(135deg, #bfdbfe, #dbeafe);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-family: "Playfair Display", serif;
+        font-size: 80px;
+        font-weight: 800;
+        color: var(--blue);
+        box-shadow: 0 8px 32px rgba(21, 88, 176, 0.15);
+        margin-bottom: 48px;
       }
-
-      .team-card h4 {
-        font-size: 1.3rem;
-        color: #2ebcff;
+      .lf-content {
+        padding: 56px 60px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        background: #fff;
       }
-
-      .team-card p {
-        font-size: 0.95rem;
-        opacity: 0.8;
+      .lf-role {
+        display: inline-flex;
+        align-items: center;
+        gap: 9px;
+        font-size: 11px;
+        font-weight: 700;
+        letter-spacing: 2.5px;
+        text-transform: uppercase;
+        color: var(--sky);
+        margin-bottom: 16px;
       }
-
-      @media (max-width: 768px) {
-        .hero-section.shrink img {
-          height: 6;
-        }
-        h1 {
-          font-size: 1.8rem;
-        }
-        .carousel-track {
-          animation-duration: 25s;
-        }
+      .lf-name {
+        font-family: "Playfair Display", serif;
+        font-size: clamp(28px, 3vw, 42px);
+        font-weight: 800;
+        letter-spacing: -1px;
+        color: var(--navy);
+        line-height: 1.1;
+        margin-bottom: 20px;
       }
-      kmep-header {
-        position: relative !important;
+      .lf-bio {
+        font-size: 16px;
+        color: var(--slate);
+        line-height: 1.9;
+        margin-bottom: 20px;
+      }
+      .lf-stats {
+        display: flex;
+        gap: 32px;
+        flex-wrap: wrap;
+        margin-bottom: 36px;
+      }
+      .lf-stat strong {
         display: block;
-        width: 100%;
-        z-index: 10;
+        font-family: "Playfair Display", serif;
+        font-size: 28px;
+        font-weight: 800;
+        color: var(--navy);
+        line-height: 1;
+      }
+      .lf-stat span {
+        font-size: 11px;
+        font-weight: 700;
+        letter-spacing: 1.5px;
+        text-transform: uppercase;
+        color: var(--muted);
+        margin-top: 4px;
+        display: block;
+      }
+      .lf-expertise {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 9px;
+      }
+      .exp-tag {
+        display: flex;
+        align-items: center;
+        gap: 7px;
+        padding: 8px 14px;
+        border-radius: 8px;
+        background: var(--off2);
+        border: 1.5px solid var(--border);
+        font-size: 12.5px;
+        font-weight: 700;
+        color: var(--navy);
+      }
+      .exp-tag i {
+        color: var(--teal);
+        font-size: 10px;
+      }
+      .leaders-grid {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 24px;
+      }
+      .lc-photo {
+        height: 220px;
+        background: linear-gradient(135deg, #dbeafe 0%, #eff6ff 100%);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        overflow: hidden;
+      }
+      .lc-avatar {
+        width: 120px;
+        height: 120px;
+        border-radius: 50%;
+        background: linear-gradient(135deg, #bfdbfe, #dbeafe);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-family: "Playfair Display", serif;
+        font-size: 42px;
+        font-weight: 800;
+        color: var(--blue);
+      }
+      .lc-body {
+        padding: 24px 22px 28px;
+      }
+      .lc-role {
+        font-size: 10px;
+        font-weight: 700;
+        letter-spacing: 2px;
+        text-transform: uppercase;
+        color: var(--sky);
+        margin-bottom: 6px;
+      }
+      .lc-name {
+        font-family: "Playfair Display", serif;
+        font-size: 20px;
+        font-weight: 800;
+        color: var(--navy);
+        margin-bottom: 10px;
+        letter-spacing: -0.3px;
+      }
+      .lc-desc {
+        font-size: 13.5px;
+        color: var(--slate);
+        line-height: 1.7;
+        margin-bottom: 16px;
+      }
+      .lc-tags {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 6px;
+        justify-content: center;
+      }
+      .lc-tag {
+        padding: 5px 10px;
+        border-radius: 6px;
+        background: var(--off2);
+        border: 1px solid var(--border);
+        font-size: 11px;
+        font-weight: 700;
+        color: var(--slate);
+      }
+      #ld-values {
+        padding: 108px 0;
+      }
+      .lv-grid {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 20px;
+      }
+      @media (max-width: 1100px) {
+        .lf-wrap {
+          grid-template-columns: 320px 1fr;
+        }
+        .leaders-grid {
+          grid-template-columns: repeat(2, 1fr);
+        }
+        .lv-grid {
+          grid-template-columns: repeat(2, 1fr);
+        }
+      }
+      @media (max-width: 860px) {
+        #leadership,
+        #ld-values {
+          padding: 72px 0;
+        }
+        .lf-wrap {
+          grid-template-columns: 1fr;
+        }
+        .lf-photo {
+          min-height: 300px;
+          padding: 36px 36px 0;
+        }
+        .lf-content {
+          padding: 36px 28px;
+        }
+        .lf-stats {
+          gap: 20px;
+        }
+        .leaders-grid {
+          grid-template-columns: repeat(2, 1fr);
+        }
+        .lv-grid {
+          grid-template-columns: repeat(2, 1fr);
+        }
+      }
+      @media (max-width: 480px) {
+        .leaders-grid {
+          grid-template-columns: 1fr;
+        }
+        .lv-grid {
+          grid-template-columns: 1fr;
+        }
       }
     </style>
   </head>
-
   <body>
-    <div style="padding-bottom: 100px;">
-      <kmep-header></kmep-header>
-    </div>
-    
-    <!-- ======================== HERO SECTION ======================== -->
-    <section class="hero-section" id="hero">
-      <img src="IMAGES/leadership.png" alt="Leadership" />
+    <kmep-header></kmep-header>
 
-      <!-- Floating Glass Card -->
-      <div class="glass-card" id="glassCard">
-        <h1>Leadership</h1>
-        <p>
-          Meet the minds shaping the future of KMEP with technical excellence &
-          vision.
+    <section class="page-hero" style="min-height: 56vh">
+      <div class="ph-grid"></div>
+      <div class="ph-glow"></div>
+      <div class="ph-body">
+        <div class="ph-eyebrow">
+          <span class="ph-pulse"></span>The People Behind KMEP
+        </div>
+        <h1 class="ph-h1">Driven by<br /><em>Visionary Leaders</em></h1>
+        <p class="ph-sub">
+          Meet the experienced professionals who guide KMEP's mission of
+          delivering precision MEP engineering across India.
         </p>
       </div>
     </section>
-
-    <!-- ======================== CONTENT SECTION ======================== -->
-    <section class="content-section" id="content">
-      <h2>Rajesh Subburaj – Business Head</h2>
-
-      <p>
-        With 22+ years of industry experience, Mr. Rajesh brings unmatched
-        mastery in HVAC systems, technical project execution, and
-        customer-focused engineering delivery. Having worked with Voltas and LG
-        Electronics, he has led diverse operations across multiple regions.
-      </p>
-
-      <p>
-        His deep technical insights, combined with strong client engagement
-        capabilities, make him a driving force behind KMEP’s innovative approach
-        and relentless pursuit of quality.
-      </p>
-
-      <p>
-        As an active ISHRAE & ASHRAE member, he consistently contributes to
-        advancements in the HVAC engineering domain.
-      </p>
-
-      <!-- ======================== TEAM CAROUSEL ======================== -->
-      <h2 style="margin-top: 60px">Our Leadership Team</h2>
-
-      <div class="carousel-container">
-        <div class="carousel-track">
-          <!-- Team Member 1 -->
-          <div class="team-card">
-            <img src="IMAGES/smile.jfif" alt="" />
-            <h4>Rajesh Subburaj</h4>
-            <p>Business Head</p>
+    <section id="leadership">
+      <div class="wrap">
+        <div class="sec-header rv">
+          <p class="sec-tag-c">Our Leadership</p>
+          <h2 class="display-h" style="font-size: clamp(30px, 4vw, 50px)">
+            The Minds Shaping KMEP
+          </h2>
+          <p class="sec-sub">
+            Our leadership team brings decades of combined expertise across MEP
+            engineering, project management, and sustainable infrastructure
+            design.
+          </p>
+        </div>
+        <div class="lf-wrap rv">
+          <div class="lf-photo"><div class="lf-avatar">K</div></div>
+          <div class="lf-content">
+            <span class="lf-role"
+              ><i
+                class="fas fa-crown"
+                style="font-size: 10px; color: var(--sky)"
+              ></i>
+              Founder &amp; Managing Director</span
+            >
+            <h2 class="lf-name">Keerthan Rajesh</h2>
+            <p class="lf-bio">
+              With over 15 years of hands-on experience in MEP engineering
+              across Tamil Nadu and beyond, Keerthan Rajesh founded KMEP with a
+              singular vision — to bring all MEP disciplines under one roof and
+              deliver integrated solutions with uncompromised precision.
+            </p>
+            <p class="lf-bio">
+              His philosophy of Value Engineering ensures that every rupee
+              invested by KMEP's clients delivers maximum measurable output — a
+              commitment that has built lasting partnerships across 500+
+              successfully delivered projects.
+            </p>
+            <div class="lf-stats">
+              <div class="lf-stat">
+                <strong>15+</strong><span>Years Exp.</span>
+              </div>
+              <div class="lf-stat">
+                <strong>500+</strong><span>Projects</span>
+              </div>
+              <div class="lf-stat">
+                <strong>4</strong><span>City Offices</span>
+              </div>
+            </div>
+            <div class="lf-expertise">
+              <span class="exp-tag"
+                ><i class="fas fa-check"></i> HVAC &amp; Mechanical</span
+              ><span class="exp-tag"
+                ><i class="fas fa-check"></i> Value Engineering</span
+              ><span class="exp-tag"
+                ><i class="fas fa-check"></i> Project Management</span
+              ><span class="exp-tag"
+                ><i class="fas fa-check"></i> Energy Audit</span
+              ><span class="exp-tag"
+                ><i class="fas fa-check"></i> Business Strategy</span
+              >
+            </div>
           </div>
-
-          <!-- Team Member 2 -->
-          <div class="team-card">
-            <img src="IMAGES/cool.jfif" alt="" />
-            <h4>Keerthan S</h4>
-            <p>Director</p>
+        </div>
+        <div class="leaders-grid">
+          <div class="border-card rv d1">
+            <div class="lc-photo"><div class="lc-avatar">R</div></div>
+            <div class="lc-body">
+              <p class="lc-role">Head of Engineering</p>
+              <h3 class="lc-name">Rajesh Kumar</h3>
+              <p class="lc-desc">
+                Leads the technical engineering division across HVAC and
+                mechanical disciplines, ensuring every system design meets the
+                highest standards of efficiency and compliance.
+              </p>
+              <div class="lc-tags">
+                <span class="lc-tag">HVAC</span
+                ><span class="lc-tag">Mechanical</span
+                ><span class="lc-tag">Design</span>
+              </div>
+            </div>
           </div>
-
-          <!-- Team Member 3 -->
-          <div class="team-card">
-            <img src="IMAGES/smile.jfif" alt="" />
-            <h4>Vinod Kumar</h4>
-            <p>Operations Manager</p>
+          <div class="border-card rv d2">
+            <div class="lc-photo"><div class="lc-avatar">S</div></div>
+            <div class="lc-body">
+              <p class="lc-role">Head of Electrical</p>
+              <h3 class="lc-name">Suresh Venkatesh</h3>
+              <p class="lc-desc">
+                Oversees all electrical engineering operations — from LV
+                distribution design to BMS integration — delivering safe,
+                reliable power solutions for every project type.
+              </p>
+              <div class="lc-tags">
+                <span class="lc-tag">Electrical</span
+                ><span class="lc-tag">BMS</span
+                ><span class="lc-tag">Power Systems</span>
+              </div>
+            </div>
           </div>
-
-          <!-- Team Member 4 -->
-          <div class="team-card">
-            <img src="IMAGES/cool.jfif" alt="" />
-            <h4>Priya R</h4>
-            <p>Project Coordinator</p>
-          </div>
-
-          <!-- Duplicate for smooth looping -->
-          <div class="team-card">
-            <img src="IMAGES/smile.jfif" alt="" />
-            <h4>Rajesh Subburaj</h4>
-            <p>Business Head</p>
-          </div>
-
-          <div class="team-card">
-            <img src="IMAGES/cool.jfif" alt="" />
-            <h4>Keerthan S</h4>
-            <p>Director</p>
+          <div class="border-card rv d3">
+            <div class="lc-photo"><div class="lc-avatar">P</div></div>
+            <div class="lc-body">
+              <p class="lc-role">Operations Manager</p>
+              <h3 class="lc-name">Priya Anand</h3>
+              <p class="lc-desc">
+                Manages project execution, resource allocation, and client
+                coordination across all four KMEP offices — ensuring every
+                project is delivered on time and on budget.
+              </p>
+              <div class="lc-tags">
+                <span class="lc-tag">Operations</span
+                ><span class="lc-tag">Project Mgmt</span
+                ><span class="lc-tag">Client Relations</span>
+              </div>
+            </div>
           </div>
         </div>
       </div>
     </section>
+    <section id="ld-values" class="dark-band">
+      <div class="wrap">
+        <div class="sec-header rv">
+          <p class="sec-tag-c">Leadership Philosophy</p>
+          <h2
+            class="display-h"
+            style="font-size: clamp(28px, 3.5vw, 46px); color: #fff"
+          >
+            How Our Leaders Think
+          </h2>
+          <p class="sec-sub" style="color: rgba(255, 255, 255, 0.45)">
+            The principles our leadership team applies to every project and
+            every client relationship.
+          </p>
+        </div>
+        <div class="lv-grid">
+          <div class="glass-card rv d1">
+            <div class="glass-ico"><i class="fas fa-eye"></i></div>
+            <h4>Long-Term Vision</h4>
+            <p>
+              We design for decades, not just delivery day. Every decision is
+              made with your long-term operational success in mind.
+            </p>
+          </div>
+          <div class="glass-card rv d2">
+            <div class="glass-ico"><i class="fas fa-users"></i></div>
+            <h4>Client-First Culture</h4>
+            <p>
+              The customer is the focal point of all decisions. Satisfaction,
+              loyalty, and advocacy are the metrics we measure ourselves by.
+            </p>
+          </div>
+          <div class="glass-card rv d3">
+            <div class="glass-ico"><i class="fas fa-shield-alt"></i></div>
+            <h4>Accountability</h4>
+            <p>
+              Single point of accountability from assessment to handover — no
+              passing the buck between fragmented vendors.
+            </p>
+          </div>
+          <div class="glass-card rv d4">
+            <div class="glass-ico"><i class="fas fa-lightbulb"></i></div>
+            <h4>Continuous Innovation</h4>
+            <p>
+              Staying at the forefront of MEP technology through global
+              partnerships and ongoing technical investment.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+    <section style="padding: 108px 0; background: var(--off)">
+      <div class="wrap">
+        <div class="cta-box rv">
+          <p class="cta-tag">Work With Our Team</p>
+          <h2 class="display-h cta-h">Ready to Start Your Next Project?</h2>
+          <p class="cta-p">
+            Connect with KMEP's leadership team to discuss how we can deliver
+            integrated MEP solutions for your infrastructure.
+          </p>
+          <div class="cta-btns">
+            <a href="contact-us.html" class="cta-btn1"
+              ><i class="fas fa-envelope"></i> Get in Touch</a
+            ><a href="team.html" class="cta-btn2"
+              ><i class="fas fa-users"></i> Meet the Full Team</a
+            >
+          </div>
+        </div>
+      </div>
+    </section>
+
     <kmep-footer></kmep-footer>
   </body>
 </html>
