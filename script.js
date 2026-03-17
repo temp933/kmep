@@ -1,646 +1,726 @@
-// MOBILE MENU TOGGLE
-function toggleMenu() {
-  const nav = document.querySelector(".nav");
-  const icon = document.querySelector(".menu-icon");
+/* ============================================================
+   KMEP — script.js
+   Web Components: <kmep-header>  <kmep-footer>
+   + Scroll Reveal / Side-nav / Hero animate utilities
+============================================================ */
 
-  nav.classList.toggle("show");
-  icon.classList.toggle("active");
-  icon.textContent = nav.classList.contains("show") ? "✖" : "☰";
-}
-
-// MOBILE DROPDOWN OPEN/CLOSE
-
-function enableDropdownToggle() {
-  document.querySelectorAll(".dropdown > a").forEach((dropLink) => {
-    dropLink.addEventListener("click", function (e) {
-      if (window.innerWidth <= 900) {
-        e.preventDefault();
-
-        const parent = this.parentElement;
-
-        // close all other dropdowns
-        document.querySelectorAll(".dropdown").forEach((d) => {
-          if (d !== parent) d.classList.remove("active");
-        });
-
-        // toggle current dropdown
-        parent.classList.toggle("active");
-      }
-    });
-  });
-}
-
-// CLOSE MENU ON LINK CLICK
-
-function closeMobileMenu() {
-  const nav = document.querySelector(".nav");
-  const icon = document.querySelector(".menu-icon");
-
-  if (window.innerWidth <= 900) {
-    nav.classList.remove("show");
-    icon.classList.remove("active");
-    icon.textContent = "☰";
-
-    // close all open dropdowns
-    document
-      .querySelectorAll(".dropdown")
-      .forEach((d) => d.classList.remove("active"));
-  }
-}
-
-function enableCloseMenuOnLinks() {
-  document.querySelectorAll(".nav > a, .dropdown-content a").forEach((link) => {
-    link.addEventListener("click", closeMobileMenu);
-  });
-}
-
-// ----------------------
-// INITIALIZE AFTER HEADER LOAD
-// ----------------------
-document.addEventListener("DOMContentLoaded", () => {
-  // Wait for header to fully load
-  setTimeout(() => {
-    enableDropdownToggle();
-    enableCloseMenuOnLinks();
-  }, 300);
-});
-
+/* ============================================================
+   HEADER
+============================================================ */
 class KmepHeader extends HTMLElement {
   connectedCallback() {
     this.innerHTML = `
-
 <style>
- body {
-    margin: 0;
-    font-family: "Segoe UI", Arial, sans-serif;
-    background: #0d1b2a;
+  /* ── Scoped reset ───────────────────────────────────── */
+  kmep-header *, kmep-header *::before, kmep-header *::after {
+    box-sizing: border-box; margin: 0; padding: 0;
   }
 
-  .header {
-    width: 100%;
-    padding: 20px 60px;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    // background: linear-gradient(120deg, rgba(255,255,255,0.20), rgba(255,255,255,0.05));
-    background:#000;
-    backdrop-filter: blur(20px);
-    -webkit-backdrop-filter: blur(20px);
-    border-bottom: 1px solid rgba(255, 255, 255, 0.15);
-    position: fixed;
-    top: 0;
-    z-index: 9999;
-    transition: 0.3s ease;
+  /* ── Tokens ─────────────────────────────────────────── */
+  :root {
+    --kh-navy:   #0c1e35;
+    --kh-blue:   #1558b0;
+    --kh-blue2:  #1a6fd4;
+    --kh-sky:    #0ea5e9;
+    --kh-teal:   #0d9488;
+    --kh-off:    #f7f9fc;
+    --kh-off2:   #eef2f7;
+    --kh-slate:  #5a6a7e;
+    --kh-muted:  #94a3b8;
+    --kh-border: #dde4ed;
+    --kh-h:      76px;
   }
 
-  .header:hover {
-    // background: linear-gradient(120deg, rgba(255,255,255,0.28), rgba(255,255,255,0.10));
-    background:#000;
+  /* ── Bar ─────────────────────────────────────────────── */
+  .kh-bar {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 1000;
+    height: var(--kh-h);
+    background: transparent;
+    transition: background .35s ease, box-shadow .35s ease;
   }
-
-  .header-left {
-    display: flex;
-    align-items: center;
-    gap: 16px;
-  }
-
-  .brand-name {
-    font-size: 35px;
-    font-weight: 700;
-    letter-spacing: 2px;
-    font-family: 'Courier New', Courier, monospace;
-    background: linear-gradient(90deg, #c471f5, #6a9bff, #c471f5);
-    background-size: 200%;
-    -webkit-background-clip: text;
-    color: transparent;
-    animation: shineText 3s linear infinite;
-  }
-
-  @keyframes shineText {
-    0% { background-position: 0%; }
-    100% { background-position: 200%; }
-  }
-
-  .logo img {
-    width: 55px;
-    height: auto;
-    border-radius: 6px;
-  }
-
-  .nav {
-    display: flex;
-    gap: 40px;
-  }
-
-  .nav a {
-    text-decoration: none;
-    color: #ffffff;
-    font-weight: 600;
-    letter-spacing: 1px;
-    font-size: 20px;
-    font-family: 'Courier New', Courier, monospace;
-    position: relative;
-    transition: 0.3s;
-  }
-
-  .nav a:hover {
-    color: #9ad0ff;
-    text-shadow: 0 0 8px rgba(154,208,255,0.75);
-  }
-
-  .nav a::after {
-    content: "";
-    position: absolute;
-    left: 0;
-    bottom: -6px;
-    width: 0%;
-    height: 2px;
-    background: #9ad0ff;
-    transition: 0.3s ease;
-  }
-
-  .nav a:hover::after {
-    width: 100%;
-    box-shadow: 0 0 10px #9ad0ff;
-  }
-
-  .dropdown {
-    position: relative;
-  }
-
-  .dropdown-content {
-    display: none;
-    position: absolute;
-    top: 20px;
-    left: -90%;
-    min-width: 160px;
-    padding: 18px;
-    border-radius: 14px;
-    background: rgba(0, 0, 0, 0.75);
+  .kh-bar.scrolled {
+    background: rgba(255,255,255,0.97);
     backdrop-filter: blur(22px);
-    box-shadow: 0 8px 28px rgba(0,0,0,0.35);
-    opacity: 0;
-    transform: translateY(10px);
-    transition: 0.3s ease;
+    -webkit-backdrop-filter: blur(22px);
+    box-shadow: 0 1px 0 var(--kh-border), 0 4px 28px rgba(12,30,53,0.08);
   }
 
-  .dropdown:hover .dropdown-content {
-    display: block;
-    opacity: 1;
-    transform: translateY(0);
+  /* ── Inner ───────────────────────────────────────────── */
+  .kh-inner {
+    max-width: 1240px; margin: 0 auto; padding: 0 48px;
+    height: 100%; display: flex; align-items: center; gap: 4px;
   }
 
-  .dropdown.active .dropdown-content {
-    display: block;
-    opacity: 1;
-    transform: translateY(0);
+  /* ── Logo ────────────────────────────────────────────── */
+  .kh-logo {
+    display: flex; align-items: center; gap: 10px;
+    text-decoration: none; flex-shrink: 0; margin-right: 12px;
+  }
+  .kh-logo img {
+    width: 40px; height: 40px; border-radius: 8px; object-fit: contain;
+  }
+  .kh-logo-text {
+    font-family: "Outfit", sans-serif;
+    font-weight: 800; font-size: 20px; letter-spacing: 3px;
+    background: linear-gradient(90deg, #fff 0%, #93c5fd 100%);
+    -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+    white-space: nowrap; line-height: 1;
+  }
+  .kh-bar.scrolled .kh-logo-text {
+    background: linear-gradient(90deg, var(--kh-navy) 0%, var(--kh-blue2) 100%);
+    -webkit-background-clip: text; -webkit-text-fill-color: transparent;
   }
 
-  .dropdown-content a {
-    display: block;
-    padding: 10px 0;
-    color: #ffffff;
-    text-decoration: none;
-    font-weight: 600;
-    font-size: 20px;
-    transition: 0.2s;
+  /* ── Desktop nav ─────────────────────────────────────── */
+  .kh-nav {
+    display: flex; align-items: stretch; gap: 2px; flex: 1;
+    height: 100%;
   }
 
-  .dropdown-content a:hover {
-    color: #9ad0ff;
-    text-shadow: 0 0 6px #9ad0ff;
+  /* Plain link */
+  .kh-link {
+    display: flex; align-items: center; gap: 5px;
+    padding: 0 14px; border-radius: 0;
+    font-family: "Outfit", sans-serif;
+    font-size: 15px; font-weight: 600;
+    color: rgba(255,255,255,0.82);
+    text-decoration: none; white-space: nowrap;
+    transition: color .2s; cursor: pointer;
+    border: none; background: none; height: 100%;
+    position: relative;
+  }
+  .kh-link::after {
+    content: ""; position: absolute; bottom: 0; left: 14px; right: 14px; height: 2px;
+    background: var(--kh-sky); border-radius: 2px 2px 0 0;
+    transform: scaleX(0); transition: transform .25s;
+  }
+  .kh-link:hover::after { transform: scaleX(1); }
+  .kh-link:hover { color: #fff; }
+  .kh-bar.scrolled .kh-link { color: var(--kh-slate); }
+  .kh-bar.scrolled .kh-link:hover { color: var(--kh-navy); }
+
+  .kh-chev {
+    font-size: 9px; opacity: .5; flex-shrink: 0;
+    transition: transform .25s, opacity .25s;
   }
 
-  .menu-icon {
-    display: none;
-    font-size: 30px;
-    color: #ffffff;
-    cursor: pointer;
-    transition: 0.25s ease;
+  /* ── Dropdown wrapper ────────────────────────────────── */
+  .kh-dd { position: relative; display: flex; align-items: stretch; height: 100%; }
+  .kh-dd:hover > .kh-link .kh-chev { transform: rotate(180deg); opacity: 1; }
+
+  /* ── Mega panel ──────────────────────────────────────── */
+  .kh-panel {
+    position: absolute;
+    top: calc(100% + 2px); left: 50%;
+    transform: translateX(-50%) translateY(8px);
+    min-width: 480px; background: #fff;
+    border-radius: 14px; border: 1px solid var(--kh-border);
+    box-shadow: 0 20px 64px rgba(12,30,53,0.13);
+    padding: 20px 20px 16px;
+    display: grid; grid-template-columns: 1fr 1fr; gap: 4px;
+    opacity: 0; visibility: hidden; pointer-events: none;
+    transition: opacity .2s ease, transform .2s ease, visibility .2s;
+    z-index: 200;
+  }
+  .kh-dd:hover .kh-panel {
+    opacity: 1; visibility: visible; pointer-events: auto;
+    transform: translateX(-50%) translateY(0);
+  }
+  /* Caret */
+  .kh-panel::before {
+    content: ""; position: absolute;
+    top: -7px; left: 50%; transform: translateX(-50%);
+    border-left: 8px solid transparent;
+    border-right: 8px solid transparent;
+    border-bottom: 7px solid var(--kh-border);
+  }
+  .kh-panel::after {
+    content: ""; position: absolute;
+    top: -6px; left: 50%; transform: translateX(-50%);
+    border-left: 7px solid transparent;
+    border-right: 7px solid transparent;
+    border-bottom: 6px solid #fff;
   }
 
-  .menu-icon.active {
-    transform: rotate(90deg);
+  /* Section label */
+  .kh-panel-label {
+    grid-column: 1 / -1;
+    font-family: "Outfit", sans-serif;
+    font-size: 10px; font-weight: 700; letter-spacing: 2px;
+    text-transform: uppercase; color: var(--kh-muted);
+    padding: 0 12px 8px; border-bottom: 1px solid var(--kh-border);
+    margin-bottom: 8px;
   }
 
-  @media (max-width: 900px) {
-    .header {
-      padding: 16px 30px;
-    }
+  /* Panel item */
+  .kh-pitem {
+    display: flex; align-items: flex-start; gap: 13px;
+    padding: 12px 12px; border-radius: 10px;
+    text-decoration: none; cursor: pointer;
+    transition: background .18s;
+  }
+  .kh-pitem:hover { background: var(--kh-off2); }
+  .kh-pitem-ico {
+    width: 38px; height: 38px; border-radius: 9px; flex-shrink: 0;
+    background: linear-gradient(135deg, #dbeafe, #bfdbfe);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 14px; color: var(--kh-blue);
+    transition: background .2s, color .2s;
+  }
+  .kh-pitem:hover .kh-pitem-ico {
+    background: linear-gradient(135deg, var(--kh-blue), var(--kh-blue2));
+    color: #fff;
+  }
+  .kh-pitem-title {
+    font-family: "Outfit", sans-serif;
+    font-size: 13.5px; font-weight: 700; color: var(--kh-navy);
+    margin-bottom: 2px; line-height: 1.3;
+  }
+  .kh-pitem-sub {
+    font-family: "Outfit", sans-serif;
+    font-size: 12px; color: var(--kh-muted); line-height: 1.45;
+  }
 
-    .nav {
-      display: none;
-      position: absolute;
-      top: 80px;
-      right: 20px;
-      backdrop-filter: blur(22px);
-      padding: 20px;
-      border-radius: 14px;
-      flex-direction: column;
-      gap: 20px;
-      box-shadow: 0 10px 28px rgba(0,0,0,0.35);
-    }
+  /* ── Right CTA ───────────────────────────────────────── */
+  .kh-right {
+    display: flex; align-items: center; gap: 8px;
+    margin-left: auto; flex-shrink: 0;
+  }
+  .kh-cta {
+    display: inline-flex; align-items: center; gap: 8px;
+    background: var(--kh-sky); color: #fff;
+    padding: 10px 22px; border-radius: 9px;
+    font-family: "Outfit", sans-serif;
+    font-size: 14px; font-weight: 700;
+    text-decoration: none; white-space: nowrap;
+    border: none; cursor: pointer;
+    transition: background .2s, transform .2s, box-shadow .2s;
+  }
+  .kh-cta:hover {
+    background: #0284c7; transform: translateY(-1px);
+    box-shadow: 0 6px 20px rgba(14,165,233,0.38);
+  }
 
-    .nav.show {
-      display: flex;
-      background:rgba(12, 11, 11, 0.75);
-    }
+  /* ── Hamburger ───────────────────────────────────────── */
+  .kh-ham {
+    display: none; flex-direction: column; align-items: center; justify-content: center;
+    width: 40px; height: 40px; border-radius: 8px;
+    gap: 5px; cursor: pointer; margin-left: auto;
+    background: transparent; border: none; padding: 0; flex-shrink: 0;
+  }
+  .kh-ham span {
+    display: block; width: 22px; height: 2px;
+    background: #fff; border-radius: 2px; transition: all .3s;
+  }
+  .kh-bar.scrolled .kh-ham span { background: var(--kh-navy); }
+  .kh-ham.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+  .kh-ham.open span:nth-child(2) { opacity: 0; transform: scaleX(0); }
+  .kh-ham.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
 
-    .menu-icon {
-      display: block;
-    }
+  /* ── Mobile drawer ───────────────────────────────────── */
+  .kh-drawer {
+    display: none; position: fixed;
+    top: var(--kh-h); left: 0; right: 0; bottom: 0;
+    background: #fff; z-index: 999;
+    padding: 0 0 48px;
+    flex-direction: column; overflow-y: auto;
+    border-top: 1px solid var(--kh-border);
+  }
+  .kh-drawer.open { display: flex; }
 
-    .dropdown-content{
-      width: auto;
-      left: -100%;
-      top: 10%;
-      background:rgba(12, 11, 11, 0.75);
-      font-weight:600;
-      font-size: 20px;
-    }
+  .kh-dr-link {
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 16px 24px; border-bottom: 1px solid var(--kh-border);
+    font-family: "Outfit", sans-serif;
+    font-size: 16px; font-weight: 600; color: var(--kh-navy);
+    text-decoration: none; cursor: pointer;
+    transition: color .2s, background .2s;
+    background: none; border-left: none; border-right: none; border-top: none; width: 100%;
+  }
+  .kh-dr-link:hover { color: var(--kh-blue); background: var(--kh-off2); }
+  .kh-dr-link .kh-chev { color: var(--kh-muted); font-size: 11px; transition: transform .25s; }
+
+  /* Accordion sub */
+  .kh-dr-sub {
+    display: none; flex-direction: column;
+    background: var(--kh-off2);
+    border-bottom: 1px solid var(--kh-border);
+  }
+  .kh-dr-sub.open { display: flex; }
+  .kh-dr-sub a {
+    padding: 13px 24px 13px 40px;
+    font-family: "Outfit", sans-serif;
+    font-size: 14px; font-weight: 600; color: var(--kh-slate);
+    text-decoration: none; transition: color .2s, background .2s;
+    display: flex; align-items: center; gap: 10px;
+    border-bottom: 1px solid var(--kh-border);
+  }
+  .kh-dr-sub a:last-child { border-bottom: none; }
+  .kh-dr-sub a i { color: var(--kh-sky); font-size: 12px; width: 14px; flex-shrink: 0; }
+  .kh-dr-sub a:hover { color: var(--kh-blue); background: #fff; }
+
+  /* Drawer CTA */
+  .kh-dr-cta {
+    padding: 24px;
+  }
+  .kh-dr-cta a {
+    display: flex; align-items: center; justify-content: center; gap: 9px;
+    background: var(--kh-navy); color: #fff;
+    padding: 15px 24px; border-radius: 10px;
+    font-family: "Outfit", sans-serif;
+    font-size: 15px; font-weight: 700; text-decoration: none;
+    transition: background .2s;
+  }
+  .kh-dr-cta a:hover { background: var(--kh-blue2); }
+
+  /* ── Breakpoints ─────────────────────────────────────── */
+  @media (max-width: 1080px) {
+    .kh-inner { padding: 0 32px; }
+  }
+  @media (max-width: 860px) {
+    :root { --kh-h: 66px; }
+    .kh-inner { padding: 0 24px; }
+    .kh-nav   { display: none; }
+    .kh-right { display: none; }
+    .kh-ham   { display: flex; }
+  }
+  @media (max-width: 480px) {
+    :root { --kh-h: 60px; }
+    .kh-inner { padding: 0 18px; }
   }
 </style>
 
-<header class="header">
-  <div class="header-left">
-    <div class="logo">
-      <a href="about.html">
-        <img src="IMAGES/logo.png" alt="Logo" />
+<!-- BAR -->
+<header class="kh-bar" id="khBar" role="banner">
+  <div class="kh-inner">
+
+    <!-- Logo -->
+    <a href="index.html" class="kh-logo" aria-label="KMEP Home">
+      <img src="images/logo.png" alt="KMEP Logo" />
+      <span class="kh-logo-text">KMEP</span>
+    </a>
+
+    <!-- Desktop nav -->
+    <nav class="kh-nav" role="navigation" aria-label="Main navigation">
+      <a href="index.html" class="kh-link">Home</a>
+      <a href="services.html" class="kh-link">Services</a>
+
+      <!-- Company dropdown -->
+      <div class="kh-dd" id="ddCompany">
+        <button class="kh-link" aria-haspopup="true" aria-expanded="false" aria-controls="panelCompany">
+          Company&ensp;<i class="fas fa-chevron-down kh-chev" aria-hidden="true"></i>
+        </button>
+        <div class="kh-panel" id="panelCompany" role="menu">
+          <span class="kh-panel-label">Company</span>
+
+          <a href="about.html" class="kh-pitem" role="menuitem">
+            <div class="kh-pitem-ico" aria-hidden="true"><i class="fas fa-building"></i></div>
+            <div>
+              <div class="kh-pitem-title">About Us</div>
+              <div class="kh-pitem-sub">Our story, mission &amp; values</div>
+            </div>
+          </a>
+
+          <a href="leadership.html" class="kh-pitem" role="menuitem">
+            <div class="kh-pitem-ico" aria-hidden="true"><i class="fas fa-user-tie"></i></div>
+            <div>
+              <div class="kh-pitem-title">Leadership</div>
+              <div class="kh-pitem-sub">The vision behind KMEP</div>
+            </div>
+          </a>
+
+          <a href="team.html" class="kh-pitem" role="menuitem">
+            <div class="kh-pitem-ico" aria-hidden="true"><i class="fas fa-users"></i></div>
+            <div>
+              <div class="kh-pitem-title">Our Team</div>
+              <div class="kh-pitem-sub">Engineers behind every project</div>
+            </div>
+          </a>
+
+          <a href="contact-us.html" class="kh-pitem" role="menuitem">
+            <div class="kh-pitem-ico" aria-hidden="true"><i class="fas fa-envelope"></i></div>
+            <div>
+              <div class="kh-pitem-title">Contact Us</div>
+              <div class="kh-pitem-sub">Chennai · Hosur · Trichy · Bangalore</div>
+            </div>
+          </a>
+        </div>
+      </div>
+    </nav>
+
+    <!-- Right CTA -->
+    <div class="kh-right">
+      <a href="contact-us.html" class="kh-cta">
+        <i class="fas fa-paper-plane" aria-hidden="true"></i> Get in Touch
       </a>
     </div>
 
-    <div class="brand-name">KMEP</div>
+    <!-- Hamburger -->
+    <button class="kh-ham" id="khHam" aria-label="Open navigation menu" aria-expanded="false" aria-controls="khDrawer">
+      <span></span><span></span><span></span>
+    </button>
+
+  </div>
+</header>
+
+<!-- Mobile drawer -->
+<nav class="kh-drawer" id="khDrawer" role="navigation" aria-label="Mobile navigation" aria-hidden="true">
+
+  <a href="index.html" class="kh-dr-link">Home</a>
+  <a href="services.html" class="kh-dr-link">Services</a>
+
+  <!-- Company accordion -->
+  <button class="kh-dr-link" id="drBtnCompany" aria-expanded="false" aria-controls="drSubCompany">
+    Company <i class="fas fa-chevron-down kh-chev" aria-hidden="true"></i>
+  </button>
+  <div class="kh-dr-sub" id="drSubCompany" aria-hidden="true">
+    <a href="about.html"><i class="fas fa-building" aria-hidden="true"></i> About Us</a>
+    <a href="leadership.html"><i class="fas fa-user-tie" aria-hidden="true"></i> Leadership</a>
+    <a href="team.html"><i class="fas fa-users" aria-hidden="true"></i> Our Team</a>
+    <a href="contact-us.html"><i class="fas fa-envelope" aria-hidden="true"></i> Contact Us</a>
   </div>
 
-  <nav class="nav">
-    <a href="index.html">HOME</a>
-    <a href="services.html">SERVICES</a>
+  <div class="kh-dr-cta">
+    <a href="contact-us.html">
+      <i class="fas fa-paper-plane" aria-hidden="true"></i> Get in Touch
+    </a>
+  </div>
 
-    <div class="dropdown">
-      <a href="#">COMPANY</a>
-      <div class="dropdown-content">
-        <a href="leadership.html">Leadership</a>
-        <a href="team.html">Team</a>
-        <a href="about.html">About Us</a>
-      </div>
-    </div>
-
-    <a href="contact-us.html">CONTACT US</a>
-  </nav>
-
-  <div class="menu-icon">☰</div>
-</header>
+</nav>
     `;
 
-    // RUN THE JS *AFTER* HTML IS INSERTED
-    this.initScripts();
+    this._init();
   }
 
-  initScripts() {
-    const nav = this.querySelector(".nav");
-    const icon = this.querySelector(".menu-icon");
+  _init() {
+    const bar = this.querySelector("#khBar");
+    const ham = this.querySelector("#khHam");
+    const drawer = this.querySelector("#khDrawer");
+    const drBtn = this.querySelector("#drBtnCompany");
+    const drSub = this.querySelector("#drSubCompany");
 
-    // MOBILE MENU TOGGLE
-    icon.addEventListener("click", () => {
-      nav.classList.toggle("show");
-      icon.classList.toggle("active");
-      icon.textContent = nav.classList.contains("show") ? "✖" : "☰";
+    /* Scroll → .scrolled */
+    const onScroll = () =>
+      bar.classList.toggle("scrolled", window.scrollY > 10);
+    window.addEventListener("scroll", onScroll, { passive: true });
+    onScroll();
+
+    /* Hamburger */
+    ham.addEventListener("click", () => {
+      const open = ham.classList.toggle("open");
+      ham.setAttribute("aria-expanded", open);
+      drawer.classList.toggle("open", open);
+      drawer.setAttribute("aria-hidden", !open);
+      document.body.style.overflow = open ? "hidden" : "";
     });
 
-    // MOBILE DROPDOWN
-    const dropdown = this.querySelector(".dropdown");
-    const dropdownLink = dropdown.querySelector("a");
+    /* Company accordion */
+    drBtn.addEventListener("click", () => {
+      const open = drSub.classList.toggle("open");
+      drBtn.setAttribute("aria-expanded", open);
+      drSub.setAttribute("aria-hidden", !open);
+      drBtn.querySelector(".kh-chev").style.transform = open
+        ? "rotate(180deg)"
+        : "rotate(0)";
+    });
 
-    dropdownLink.addEventListener("click", (e) => {
-      if (window.innerWidth <= 900) {
-        e.preventDefault();
-        dropdown.classList.toggle("active");
+    /* Close on nav link click */
+    drawer.querySelectorAll("a").forEach((a) =>
+      a.addEventListener("click", () => {
+        ham.classList.remove("open");
+        ham.setAttribute("aria-expanded", false);
+        drawer.classList.remove("open");
+        drawer.setAttribute("aria-hidden", true);
+        document.body.style.overflow = "";
+      }),
+    );
+
+    /* Close on Escape */
+    document.addEventListener("keydown", (e) => {
+      if (e.key === "Escape" && drawer.classList.contains("open")) {
+        ham.classList.remove("open");
+        ham.setAttribute("aria-expanded", false);
+        drawer.classList.remove("open");
+        drawer.setAttribute("aria-hidden", true);
+        document.body.style.overflow = "";
       }
     });
   }
 }
-
 customElements.define("kmep-header", KmepHeader);
 
-class Footer extends HTMLElement {
+/* ============================================================
+   FOOTER
+============================================================ */
+class KmepFooter extends HTMLElement {
   connectedCallback() {
     this.innerHTML = `
-<!-- ======= FOOTER WITH GRAPHICS & HOVER EFFECT ======= -->
-<footer style="
-  position: relative;
-  background: linear-gradient(180deg, #111, #000);
-  color: #ddd;
-  padding: 80px 20px 40px;
-  overflow: hidden;
-  width: 100%;
-  display: block;
-  margin: 0;
-">
+<style>
+  kmep-footer *, kmep-footer *::before, kmep-footer *::after {
+    box-sizing: border-box; margin: 0; padding: 0;
+  }
 
-  <style>
-    html, body {
-      margin: 0;
-      padding: 0;
-    }
+  .kf-root {
+    background: #0c1e35;
+    font-family: "Outfit", sans-serif;
+    color: rgba(255,255,255,0.38);
+    border-top: 1px solid rgba(255,255,255,0.06);
+  }
 
-    footer {
-      width: 100%;
-      margin: 0;
-      padding: 0;
-      display: block;
-      box-sizing: border-box;
-    }
+  /* ── Top band ────────────────────────────────────────── */
+  .kf-top {
+    border-bottom: 1px solid rgba(255,255,255,0.07);
+    padding: 44px 0;
+  }
+  .kf-top-inner {
+    max-width: 1240px; margin: 0 auto; padding: 0 48px;
+    display: flex; align-items: center; justify-content: space-between;
+    gap: 28px; flex-wrap: wrap;
+  }
+  .kf-brand {
+    display: flex; align-items: center; gap: 12px; text-decoration: none; flex-shrink: 0;
+  }
+  .kf-brand img {
+    width: 40px; height: 40px; border-radius: 8px; object-fit: contain;
+  }
+  .kf-brand-name {
+    font-weight: 800; font-size: 19px; letter-spacing: 3px;
+    color: rgba(255,255,255,0.85); line-height: 1;
+  }
+  .kf-tagline {
+    font-size: 14px; color: rgba(255,255,255,0.35);
+    line-height: 1.75; max-width: 400px; flex: 1; min-width: 220px;
+  }
+  .kf-top-cta {
+    display: inline-flex; align-items: center; gap: 8px;
+    background: #0ea5e9; color: #fff;
+    padding: 11px 26px; border-radius: 9px;
+    font-size: 14px; font-weight: 700; text-decoration: none; white-space: nowrap;
+    flex-shrink: 0;
+    transition: background .2s, transform .2s, box-shadow .2s;
+  }
+  .kf-top-cta:hover {
+    background: #0284c7; transform: translateY(-1px);
+    box-shadow: 0 6px 20px rgba(14,165,233,0.35);
+  }
 
-    footer a {
-      color: #ccc;
-      text-decoration: none;
-      font-family: 'Times New Roman', Times, serif;
-      transition: color 0.3s ease;
-    }
+  /* ── Columns ─────────────────────────────────────────── */
+  .kf-cols {
+    max-width: 1240px; margin: 0 auto; padding: 52px 48px;
+    display: grid;
+    grid-template-columns: 2fr 1fr 1fr 1fr;
+    gap: 52px;
+    border-bottom: 1px solid rgba(255,255,255,0.07);
+  }
 
-    footer a:hover {
-      color: red;
-      transform: scale(1.15);
-      display: inline-block;
-      transition: 0.25s ease;
-    }
-  </style>
+  .kf-about-desc {
+    font-size: 13px; color: rgba(255,255,255,0.3); line-height: 1.85;
+    margin-bottom: 26px; max-width: 280px;
+  }
+  .kf-contacts { display: flex; flex-direction: column; gap: 11px; }
+  .kf-contacts a {
+    font-size: 13px; color: rgba(255,255,255,0.35);
+    display: flex; align-items: flex-start; gap: 10px;
+    text-decoration: none; transition: color .2s; line-height: 1.55;
+  }
+  .kf-contacts a:hover { color: rgba(255,255,255,0.9); }
+  .kf-contacts a i {
+    color: #0ea5e9; font-size: 11px; width: 14px;
+    flex-shrink: 0; margin-top: 3px;
+  }
 
-  <!-- Background graphics -->
-  <div style="
-    position: absolute;
-    top: -50px; left: -50px;
-    width: 200px; height: 200px;
-    background: radial-gradient(circle at center, #a05cff33, transparent);
-    border-radius: 50%;
-    z-index: 0;
-  "></div>
+  .kf-col-head {
+    display: block; font-size: 10px; font-weight: 700;
+    letter-spacing: 2.5px; text-transform: uppercase;
+    color: rgba(255,255,255,0.5); margin-bottom: 18px;
+  }
+  .kf-col a {
+    display: block; font-size: 13px; color: rgba(255,255,255,0.38);
+    padding: 5px 0; text-decoration: none; transition: color .2s;
+  }
+  .kf-col a:hover { color: rgba(255,255,255,0.9); }
 
-  <div style="
-    position: absolute;
-    bottom: -60px; right: -60px;
-    width: 250px; height: 250px;
-    background: radial-gradient(circle at center, #ff6ec733, transparent);
-    border-radius: 50%;
-    z-index: 0;
-  "></div>
+  /* ── Bottom ──────────────────────────────────────────── */
+  .kf-bottom {
+    max-width: 1240px; margin: 0 auto; padding: 20px 48px;
+    display: flex; justify-content: space-between; align-items: center;
+    flex-wrap: wrap; gap: 8px;
+  }
+  .kf-copy    { font-size: 11.5px; color: rgba(255,255,255,0.2); }
+  .kf-address { font-size: 11px;   color: rgba(255,255,255,0.18); text-align: right; }
 
-  <div style="
-    position: relative;
-    z-index: 1;
-    max-width: 1200px;
-    margin: auto;
-    display: flex;
-    flex-wrap: wrap;
-    gap: 30px;
-  ">
+  /* ── Responsive ──────────────────────────────────────── */
+  @media (max-width: 1080px) {
+    .kf-top-inner, .kf-cols, .kf-bottom { padding-left: 32px; padding-right: 32px; }
+    .kf-cols { grid-template-columns: 1fr 1fr; gap: 36px; }
+    .kf-cols > div:first-child { grid-column: 1 / -1; }
+    .kf-about-desc { max-width: 100%; }
+    .kf-contacts { flex-direction: row; flex-wrap: wrap; column-gap: 24px; }
+  }
+  @media (max-width: 680px) {
+    .kf-top-inner, .kf-cols, .kf-bottom { padding-left: 24px; padding-right: 24px; }
+    .kf-top-inner { flex-direction: column; align-items: flex-start; }
+    .kf-top-cta   { width: 100%; justify-content: center; }
+    .kf-bottom    { flex-direction: column; align-items: flex-start; }
+    .kf-address   { text-align: left; }
+    .kf-contacts  { flex-direction: column; }
+  }
+  @media (max-width: 440px) {
+    .kf-top-inner, .kf-cols, .kf-bottom { padding-left: 18px; padding-right: 18px; }
+    .kf-cols { grid-template-columns: 1fr; }
+  }
+</style>
 
-    <div style="flex: 1 1 220px; min-width: 200px;">
-      <h2 style="color: #a05cff; font-size: 22px; margin-bottom: 20px;">Get in touch</h2>
-      <dl>
-        <dt style="font-size: 18px; font-weight: 600; margin-bottom: 8px; color: #fff;">📞 Phone</dt>
-        <dd style="margin-bottom: 15px; line-height: 1.7;">
-          <a href="tel:+919710439000">+91 97104 39000</a><br>
-          <a href="tel:+919176670447">+91 91766 70447</a>
-        </dd>
+<footer class="kf-root" role="contentinfo">
 
-        <dt style="font-size: 18px; font-weight: 600; margin-bottom: 8px; color: #fff;">📧 Email</dt>
-        <dd style="margin-bottom: 15px; line-height: 1.7;">
-          <a href="mailto:rajesh@kmep.co.in">rajesh@kmep.co.in</a>
-        </dd>
-      </dl>
+  <!-- Top band -->
+  <div class="kf-top">
+    <div class="kf-top-inner">
+      <a href="index.html" class="kf-brand" aria-label="KMEP Home">
+        <img src="images/logo.png" alt="KMEP" />
+        <span class="kf-brand-name">KMEP</span>
+      </a>
+      <p class="kf-tagline">
+        Keerthan MEP Engineers — precision HVAC, Mechanical, Electrical &amp; Plumbing
+        solutions across Tamil Nadu and beyond since 2009.
+      </p>
+      <a href="contact-us.html" class="kf-top-cta">
+        <i class="fas fa-paper-plane" aria-hidden="true"></i> Start a Project
+      </a>
     </div>
+  </div>
 
-    <div style="flex: 1 1 220px; min-width: 200px;">
-      <h2 style="color: #a05cff; font-size: 22px; margin-bottom: 20px;">Registered Office</h2>
-      <div style="display: flex; gap: 10px; line-height: 1.7;">
-        <span>📍</span>
+  <!-- Main columns -->
+  <div class="kf-cols">
+
+    <div>
+      <p class="kf-about-desc">
+        Integrated MEP engineering under one roof — from design and installation
+        through commissioning and 24/7 after-sales support. Authorized representative
+        for Dunham Bush (DB-Aire India Pvt. Ltd.) and LG Electronics India Pvt. Ltd.
+      </p>
+      <div class="kf-contacts">
+        <a href="tel:+919710439000">
+          <i class="fas fa-phone" aria-hidden="true"></i> +91 97104 39000
+        </a>
+        <a href="tel:+919176670447">
+          <i class="fas fa-phone" aria-hidden="true"></i> +91 91766 70447
+        </a>
+        <a href="mailto:rajesh@kmep.co.in">
+          <i class="fas fa-envelope" aria-hidden="true"></i> rajesh@kmep.co.in
+        </a>
         <a href="https://maps.app.goo.gl/yT5Em1M9PeMGubSJ7" target="_blank" rel="noopener">
-          Plot No. 17, Door No. 4,<br>
-          Thiruppur Kumaran Street,<br>
-          Senthil Nagar, Chennai – 600 062,<br>
-          Tamil Nadu, India
+          <i class="fas fa-map-marker-alt" aria-hidden="true"></i>
+          Plot No. 17, Door No. 4,<br />Senthil Nagar, Chennai – 600 062
         </a>
       </div>
     </div>
 
-    <div style="flex: 1 1 220px; min-width: 200px;">
-      <h2 style="color: #a05cff; font-size: 22px; margin-bottom: 20px;">Branches</h2>
-      <div style="line-height: 1.7;">
-        <a href="https://maps.app.goo.gl/yT5Em1M9PeMGubSJ7" target="_blank">Chennai</a><br>
-        <a href="https://maps.app.goo.gl/yT5Em1M9PeMGubSJ7" target="_blank">Hosur</a><br>
-        <a href="https://maps.app.goo.gl/yT5Em1M9PeMGubSJ7" target="_blank">Tiruchirappalli</a><br>
-        <a href="https://maps.app.goo.gl/yT5Em1M9PeMGubSJ7" target="_blank">Bangalore</a>
-      </div>
+    <div class="kf-col">
+      <span class="kf-col-head">Services</span>
+      <a href="services.html">HVAC Systems</a>
+      <a href="services.html">Mechanical Engineering</a>
+      <a href="services.html">Electrical Works</a>
+      <a href="services.html">Plumbing Solutions</a>
+      <a href="services.html">Energy Audit &amp; Management</a>
+    </div>
+
+    <div class="kf-col">
+      <span class="kf-col-head">Company</span>
+      <a href="about.html">About Us</a>
+      <a href="leadership.html">Leadership</a>
+      <a href="team.html">Our Team</a>
+      <a href="contact-us.html">Contact Us</a>
+    </div>
+
+    <div class="kf-col">
+      <span class="kf-col-head">Offices</span>
+      <a href="https://maps.app.goo.gl/ijvwbweYxeWVsLsS6" target="_blank" rel="noopener">Chennai</a>
+      <a href="https://maps.app.goo.gl/ijvwbweYxeWVsLsS6" target="_blank" rel="noopener">Hosur</a>
+      <a href="https://maps.app.goo.gl/ijvwbweYxeWVsLsS6" target="_blank" rel="noopener">Tiruchirappalli</a>
+      <a href="https://maps.app.goo.gl/ijvwbweYxeWVsLsS6" target="_blank" rel="noopener">Bangalore</a>
     </div>
 
   </div>
 
-  <div style="
-    position: relative;
-    z-index: 1;
-    text-align: center;
-    border-top: 1px solid #333;
-    padding-top: 20px;
-    margin-top: 40px;
-    color: #777;
-    font-size: 14px;
-  ">
-    © KMEP — All Rights Reserved
+  <!-- Bottom bar -->
+  <div class="kf-bottom">
+    <span class="kf-copy">© 2026 KMEP — Keerthan MEP Engineers. All rights reserved.</span>
+    <span class="kf-address">
+      Plot No. 17, Thiruppur Kumaran Street, Senthil Nagar, Thirumullaivoyal,
+      Chennai – 600 062, Tamil Nadu, India
+    </span>
   </div>
 
 </footer>
     `;
   }
 }
+customElements.define("kmep-footer", KmepFooter);
 
-customElements.define("kmep-footer", Footer);
-
-/* Fade-in on Scroll */
-function revealOnScroll() {
-  const faders = document.querySelectorAll(".fade");
-  faders.forEach((el) => {
-    const top = el.getBoundingClientRect().top;
-    if (top < window.innerHeight - 80) {
-      el.classList.add("visible");
-    }
-  });
-}
-
-window.addEventListener("scroll", revealOnScroll);
-document.addEventListener("DOMContentLoaded", revealOnScroll);
-
-/* Graph Animation */
-document.addEventListener("DOMContentLoaded", () => {
-  setTimeout(() => {
-    document.querySelectorAll(".bar").forEach((b) => {
-      let h = b.getAttribute("data-height");
-      b.style.height = h + "%";
-    });
-  }, 400);
-});
-
-/* Floating Particles */
-document.addEventListener("DOMContentLoaded", () => {
-  for (let i = 0; i < 20; i++) {
-    let p = document.createElement("div");
-    p.classList.add("particle");
-    p.style.left = Math.random() * 100 + "vw";
-    p.style.animationDuration = 5 + Math.random() * 10 + "s";
-    document.body.appendChild(p);
-  }
-});
-
-/* Hero Resize on Scroll */
-document.addEventListener("DOMContentLoaded", () => {
-  const hero = document.getElementById("hero");
-
-  if (!hero) return; // safety check
-
-  window.addEventListener("scroll", () => {
-    const scrollY = window.scrollY;
-
-    if (scrollY < window.innerHeight) {
-      hero.style.height = `${100 - scrollY / 10}vh`; // Smooth shrink
-    } else {
-      hero.style.height = "90vh"; // Minimum height
-    }
-  });
-});
-
-/* Hero Shrink + Content Reveal on Scroll */
-document.addEventListener("DOMContentLoaded", () => {
-  const hero = document.getElementById("hero");
-  const content = document.getElementById("content");
-
-  if (!hero || !content) return; // safety check
-
-  window.addEventListener("scroll", () => {
-    if (window.scrollY > 100) {
-      hero.classList.add("shrink");
-      content.classList.add("visible");
-    } else {
-      hero.classList.remove("shrink");
-      content.classList.remove("visible");
-    }
-  });
-});
-
-/* Hero Height Shrink on Scroll */
-document.addEventListener("DOMContentLoaded", () => {
-  const hero = document.getElementById("hero");
-
-  if (!hero) return; // safety check
-
-  window.addEventListener("scroll", () => {
-    const scrollY = window.scrollY;
-
-    if (scrollY < window.innerHeight) {
-      hero.style.height = `${100 - scrollY / 10}vh`; // shrink effect
-    } else {
-      hero.style.height = "90vh"; // minimum height
-    }
-  });
-});
-
-const words = document.querySelectorAll(".word");
-
-words.forEach((word, wIndex) => {
-  const color = word.dataset.color;
-  const letters = [...word.textContent];
-  word.textContent = "";
-
-  letters.forEach((ch, i) => {
-    const span = document.createElement("span");
-    span.textContent = ch;
-    span.style.color = color;
-    word.appendChild(span);
-
-    setTimeout(() => {
-      span.style.opacity = "1";
-      span.style.top = "-40px";
-
-      setTimeout(() => {
-        span.style.top = "0px";
-      }, 300);
-    }, i * 120 + wIndex * 1000);
-  });
-});
-
-document.addEventListener("DOMContentLoaded", () => {
-  const links = document.querySelectorAll(".nav-link");
-  const OFFSET = 100; // adjust if needed (header / spacing)
-
-  /* CLICK → SMOOTH SCROLL WITH OFFSET */
-  links.forEach((link) => {
-    link.addEventListener("click", (e) => {
-      e.preventDefault();
-
-      const targetId = link.getAttribute("href");
-      const target = document.querySelector(targetId);
-      if (!target) return;
-
-      const elementPosition = target.getBoundingClientRect().top;
-      const offsetPosition = elementPosition + window.pageYOffset - OFFSET;
-
-      window.scrollTo({
-        top: offsetPosition,
-        behavior: "smooth",
+/* ============================================================
+   SCROLL REVEAL  (.rv / .rv-l / .rv-r)
+============================================================ */
+(function initScrollReveal() {
+  const els = document.querySelectorAll(".rv, .rv-l, .rv-r");
+  if (!els.length) return;
+  const io = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((e) => {
+        if (e.isIntersecting) {
+          e.target.classList.add("on");
+          io.unobserve(e.target);
+        }
       });
+    },
+    { threshold: 0.1 },
+  );
+  els.forEach((el) => io.observe(el));
+})();
+
+/* ============================================================
+   SIDE-NAV DOTS  (#sideNav)
+============================================================ */
+document.addEventListener("DOMContentLoaded", () => {
+  const sideNav = document.getElementById("sideNav");
+  if (!sideNav) return;
+
+  const dots = sideNav.querySelectorAll(".dot");
+  const darkSections = ["hero", "stats", "clients"];
+
+  dots.forEach((dot) => {
+    dot.addEventListener("click", () => {
+      const target = document.getElementById(dot.dataset.target);
+      if (target) target.scrollIntoView({ behavior: "smooth" });
     });
   });
 
-  /* SCROLL → ACTIVE MENU HIGHLIGHT */
   window.addEventListener("scroll", () => {
-    const scrollPos = window.scrollY + OFFSET + 10;
-
-    links.forEach((link) => {
-      const section = document.querySelector(link.hash);
-      if (!section) return;
-
-      if (
-        scrollPos >= section.offsetTop &&
-        scrollPos < section.offsetTop + section.offsetHeight
-      ) {
-        links.forEach((l) => l.classList.remove("active"));
-        link.classList.add("active");
-      }
+    const mid = window.scrollY + window.innerHeight / 2;
+    dots.forEach((dot) => {
+      const s = document.getElementById(dot.dataset.target);
+      if (!s) return;
+      dot.classList.toggle(
+        "on",
+        mid >= s.offsetTop && mid < s.offsetTop + s.offsetHeight,
+      );
     });
+    const onDark = darkSections.some((id) => {
+      const s = document.getElementById(id);
+      if (!s) return false;
+      const mid2 = window.scrollY + window.innerHeight / 2;
+      return mid2 >= s.offsetTop && mid2 < s.offsetTop + s.offsetHeight;
+    });
+    sideNav.classList.toggle("dk", onDark);
   });
 });
 
+/* ============================================================
+   HERO ANIMATE  (#hero — index.html only)
+============================================================ */
 document.addEventListener("DOMContentLoaded", () => {
-  const items = document.querySelectorAll(".tran-nav li");
-  const OFFSET = 100;
-
-  /* Click → scroll */
-  items.forEach((item) => {
-    item.addEventListener("click", () => {
-      const target = document.querySelector(item.dataset.target);
-      if (!target) return;
-
-      const top =
-        target.getBoundingClientRect().top + window.pageYOffset - OFFSET;
-
-      window.scrollTo({ top, behavior: "smooth" });
-    });
-  });
-
-  /* Scroll → active highlight */
-  window.addEventListener("scroll", () => {
-    const scrollPos = window.scrollY + OFFSET + 10;
-
-    items.forEach((item) => {
-      const section = document.querySelector(item.dataset.target);
-      if (!section) return;
-
-      if (
-        scrollPos >= section.offsetTop &&
-        scrollPos < section.offsetTop + section.offsetHeight
-      ) {
-        items.forEach((i) => i.classList.remove("active"));
-        item.classList.add("active");
-      }
-    });
-  });
+  const hero = document.getElementById("hero");
+  if (!hero) return;
+  hero.classList.add("hero-animate");
+  setTimeout(() => hero.classList.remove("hero-animate"), 1800);
 });
