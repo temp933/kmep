@@ -1,306 +1,753 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Services - KMEP</title>
-
-    <!-- Google Fonts -->
+    <title>Services — KMEP | Keerthan MEP Engineers</title>
+    <link rel="icon" href="images/logo.png" />
     <link
-      href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&family=Playfair+Display:ital,wght@0,700;0,800;1,700&display=swap"
       rel="stylesheet"
     />
-
-    <!-- Font Awesome -->
     <link
       rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
     />
-    <script src="script.js"></script>
-
+    <link rel="stylesheet" href="style.css" />
+    <script src="script.js" defer></script>
     <style>
-      /* Reset & Base */
-      * {
-        margin: 0;
-        padding: 0;
-        box-sizing: border-box;
-        width: auto;
+      .page-hero {
+        min-height: 56vh;
+        padding-bottom: 88px;
       }
-      body {
-        font-family: "Roboto", sans-serif;
-        line-height: 1.6;
-        color: #fff;
-        background: rgba(128, 128, 128, 0.473);
-        width: auto;
+      @media (max-width: 860px) {
+        .page-hero {
+          padding-bottom: 60px;
+        }
+        .ph-body {
+          padding: 0 24px;
+        }
       }
-      img {
-        max-width: 100%;
-        display: block;
-      }
-      a {
-        text-decoration: none;
-        color: inherit;
-      }
-      #page-wrapper {
-        display: flex;
-        flex-direction: column;
-        min-height: 100vh;
-      }
-      main-header,
-      main-footer {
-        display: block;
+      @media (max-width: 480px) {
+        .ph-body {
+          padding: 0 18px;
+        }
       }
 
-      /* Hero Section */
-      .hero {
-        height: 100vh;
-        background: url("IMAGES/service.jpg") center/cover no-repeat;
+      .intro-strip {
+        background: var(--off2);
+        border-bottom: 1.5px solid var(--border);
+        padding: 36px 0;
+      }
+      .intro-inner {
         display: flex;
-        justify-content: center;
         align-items: center;
-        position: relative;
-        transition: height 0.3s ease;
-        /* padding-top: 100px; */
+        gap: 52px;
+        flex-wrap: wrap;
       }
-      .hero h1 {
-        color: #ffffff;
-        font-size: 3rem;
-        text-align: center;
-        background: rgba(0, 0, 0, 0.4);
-        padding: 20px 40px;
-        border-radius: 10px;
+      .intro-text {
+        flex: 1;
+        min-width: 260px;
+        font-size: 16px;
+        color: var(--slate);
+        line-height: 1.85;
       }
-
-      /* SERVICES CONTENT SECTION */
-      .team-section {
-        padding: 80px 20px;
-        background: #0b1220;
+      .intro-text strong {
+        color: var(--navy);
       }
-      .team-section .container {
-        max-width: 1200px;
-        margin: 0 auto;
-      }
-      .team-section h2 {
-        font-size: 2.8rem;
-        margin-bottom: 40px;
-        color: #0a79e7;
-        text-align: center;
-      }
-      .team-section p {
-        margin-bottom: 20px;
-        font-size: 1.1rem;
-        color: #ccc;
-      }
-
-      /* Cards */
-      .cards {
+      .intro-badges {
         display: flex;
         flex-wrap: wrap;
-        gap: 20px;
-        margin-top: 50px;
+        gap: 10px;
+        flex-shrink: 0;
       }
-      .cards .card {
-        flex: 1 1 45%;
-        background: rgba(255, 255, 255, 0.05);
-        border-radius: 10px;
-        padding: 30px;
-        box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
-        transition: transform 0.3s, box-shadow 0.3s;
-      }
-      .cards .card:hover {
-        transform: translateY(-10px);
-        box-shadow: 0 12px 25px rgba(0, 0, 0, 0.3);
-      }
-      .cards .card h3 {
-        font-size: 1.5rem;
-        margin-bottom: 15px;
+      .ibadge {
         display: flex;
         align-items: center;
-        color: #0a79e7;
+        gap: 8px;
+        padding: 9px 16px;
+        border-radius: 9px;
+        background: #fff;
+        border: 1.5px solid var(--border);
+        font-size: 13px;
+        font-weight: 700;
+        color: var(--navy);
       }
-      .cards .card h3 i {
-        margin-right: 10px;
-        color: #0a79e7;
+      .ibadge i {
+        color: var(--teal);
+        font-size: 12px;
       }
-      .cards .card p {
-        color: #ccc;
-        font-size: 1rem;
+      #services {
+        padding: 108px 0;
+        background: #fff;
       }
-      .card-img {
-        width: 100%;
-        height: 180px;
-        object-fit: cover;
-        border-radius: 10px;
-        margin-bottom: 20px;
-        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+      .svc-list {
+        display: flex;
+        flex-direction: column;
       }
-
-      /* Mobile Text Clarity Fix */
-      @media (max-width: 900px) {
-        .hero {
-          position: relative;
+      .svc-row {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        min-height: 480px;
+        border-bottom: 1.5px solid var(--border);
+        overflow: hidden;
+      }
+      .svc-row:first-child {
+        border-top: 1.5px solid var(--border);
+      }
+      .svc-row.reverse .svc-visual {
+        order: 2;
+      }
+      .svc-row.reverse .svc-content {
+        order: 1;
+      }
+      .svc-visual {
+        position: relative;
+        background: linear-gradient(135deg, #dbeafe 0%, #eff6ff 100%);
+        overflow: hidden;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 48px;
+      }
+      .svc-visual::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        bottom: 0;
+        width: 4px;
+        background: linear-gradient(
+          to bottom,
+          var(--blue),
+          var(--sky),
+          var(--teal)
+        );
+        z-index: 2;
+      }
+      .svc-row.reverse .svc-visual::before {
+        left: auto;
+        right: 0;
+      }
+      .svc-visual img {
+        max-width: 85%;
+        max-height: 320px;
+        object-fit: contain;
+        position: relative;
+        z-index: 1;
+        transition: transform 0.5s;
+        filter: drop-shadow(0 20px 40px rgba(12, 30, 53, 0.12));
+      }
+      .svc-row:hover .svc-visual img {
+        transform: scale(1.05) translateY(-4px);
+      }
+      .svc-num {
+        position: absolute;
+        bottom: -16px;
+        right: 20px;
+        font-family: "Playfair Display", serif;
+        font-size: 120px;
+        font-weight: 800;
+        color: rgba(21, 88, 176, 0.06);
+        line-height: 1;
+        pointer-events: none;
+        user-select: none;
+      }
+      .svc-content {
+        padding: 64px 56px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        background: #fff;
+        position: relative;
+      }
+      .svc-content::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        height: 3px;
+        background: linear-gradient(90deg, var(--blue), var(--sky));
+        transform: scaleX(0);
+        transform-origin: left;
+        transition: transform 0.5s;
+      }
+      .svc-row:hover .svc-content::before {
+        transform: scaleX(1);
+      }
+      .svc-ico-wrap {
+        display: flex;
+        align-items: center;
+        gap: 16px;
+        margin-bottom: 24px;
+      }
+      .svc-ico {
+        width: 54px;
+        height: 54px;
+        border-radius: 14px;
+        flex-shrink: 0;
+        background: linear-gradient(135deg, #dbeafe, #bfdbfe);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 22px;
+        color: var(--blue);
+      }
+      .svc-label {
+        font-size: 10px;
+        font-weight: 700;
+        letter-spacing: 2.5px;
+        text-transform: uppercase;
+        color: var(--muted);
+      }
+      .svc-name {
+        font-family: "Playfair Display", serif;
+        font-size: clamp(28px, 3vw, 40px);
+        font-weight: 800;
+        color: var(--navy);
+        letter-spacing: -1px;
+        margin-bottom: 16px;
+        line-height: 1.1;
+      }
+      .svc-desc {
+        font-size: 16px;
+        color: var(--slate);
+        line-height: 1.85;
+        margin-bottom: 32px;
+        max-width: 420px;
+      }
+      .feat-list {
+        display: flex;
+        flex-direction: column;
+        gap: 11px;
+        margin-bottom: 36px;
+      }
+      .feat-item {
+        display: flex;
+        align-items: flex-start;
+        gap: 13px;
+        font-size: 14.5px;
+        color: var(--navy);
+        font-weight: 600;
+      }
+      .feat-item::before {
+        content: "";
+        display: block;
+        width: 20px;
+        height: 20px;
+        border-radius: 50%;
+        flex-shrink: 0;
+        margin-top: 1px;
+        background: linear-gradient(135deg, #dbeafe, #bfdbfe)
+          url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='%231558b0'%3E%3Cpath d='M13.3 4.3a1 1 0 0 1 0 1.4l-6 6a1 1 0 0 1-1.4 0l-3-3a1 1 0 1 1 1.4-1.4L6.6 9.6l5.3-5.3a1 1 0 0 1 1.4 0z'/%3E%3C/svg%3E")
+          center/11px no-repeat;
+        border: 1.5px solid rgba(21, 88, 176, 0.2);
+      }
+      #process {
+        padding: 108px 0;
+        background: var(--off);
+      }
+      .proc-track {
+        display: grid;
+        grid-template-columns: repeat(5, 1fr);
+        position: relative;
+      }
+      .proc-track::before {
+        content: "";
+        position: absolute;
+        top: 36px;
+        left: 10%;
+        right: 10%;
+        height: 2px;
+        background: linear-gradient(
+          90deg,
+          var(--sky),
+          var(--blue),
+          var(--teal)
+        );
+        border-radius: 2px;
+      }
+      .proc-step {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+        padding: 0 16px;
+        position: relative;
+        z-index: 1;
+      }
+      .proc-circle {
+        width: 72px;
+        height: 72px;
+        border-radius: 50%;
+        background: #fff;
+        border: 2px solid var(--border);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 22px;
+        color: var(--blue);
+        margin-bottom: 22px;
+        box-shadow: var(--sh);
+        transition:
+          border-color 0.3s,
+          box-shadow 0.3s,
+          background 0.3s,
+          color 0.3s;
+        position: relative;
+      }
+      .proc-step:hover .proc-circle {
+        border-color: var(--blue);
+        background: var(--blue);
+        color: #fff;
+        box-shadow: 0 8px 28px rgba(21, 88, 176, 0.25);
+      }
+      .proc-n {
+        position: absolute;
+        top: -8px;
+        right: -8px;
+        width: 22px;
+        height: 22px;
+        border-radius: 50%;
+        background: var(--sky);
+        color: #fff;
+        font-size: 9px;
+        font-weight: 800;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+      .proc-title {
+        font-size: 14px;
+        font-weight: 800;
+        color: var(--navy);
+        margin-bottom: 8px;
+        line-height: 1.3;
+      }
+      .proc-desc {
+        font-size: 12.5px;
+        color: var(--slate);
+        line-height: 1.65;
+      }
+      #why-mini {
+        padding: 108px 0;
+      }
+      .wm-grid {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 24px;
+      }
+      @media (max-width: 1100px) {
+        .svc-row {
+          grid-template-columns: 1fr;
+          min-height: auto;
         }
-
-        .hero::after {
-          content: "";
-          position: absolute;
-          top: 0;
-          left: 0;
-          width: 100%;
-          height: 100%;
-          background: rgba(0, 0, 0, 0.55);
-          z-index: 1;
+        .svc-visual {
+          min-height: 280px;
         }
-
-        .hero h1 {
-          font-size: 2rem;
-          position: relative;
-          z-index: 2;
-          color: #fff;
-          text-shadow: 0 2px 10px rgba(0, 0, 0, 0.9);
+        .svc-content {
+          padding: 44px 36px;
+        }
+        .proc-track {
+          grid-template-columns: repeat(3, 1fr);
+          gap: 32px;
+        }
+        .proc-track::before {
+          display: none;
+        }
+        .wm-grid {
+          grid-template-columns: repeat(2, 1fr);
+        }
+      }
+      @media (max-width: 860px) {
+        #services,
+        #process,
+        #why-mini {
+          padding: 72px 0;
+        }
+        .svc-content {
+          padding: 36px 24px;
+        }
+        .proc-track {
+          grid-template-columns: repeat(2, 1fr);
+          gap: 28px;
+        }
+        .wm-grid {
+          grid-template-columns: 1fr;
+          gap: 16px;
+        }
+        .intro-inner {
+          gap: 28px;
+        }
+      }
+      @media (max-width: 480px) {
+        .svc-visual {
+          min-height: 220px;
+          padding: 32px;
+        }
+        .svc-content {
+          padding: 28px 20px;
+        }
+        .proc-track {
+          grid-template-columns: 1fr;
+          gap: 20px;
+        }
+        .intro-badges {
+          display: none;
         }
       }
     </style>
   </head>
-
   <body>
-    <div style="padding-bottom: 100px">
-      <kmep-header></kmep-header>
-    </div>
-    <div id="page-wrapper">
-      <!-- Hero Section -->
-      <section class="hero" id="hero">
-        <h1>Our Services</h1>
-      </section>
+    <kmep-header></kmep-header>
 
-      <!-- Services Content Section -->
-      <section class="team-section">
-        <div class="container">
-          <p>
-            Keerthan MEP Engineers offers engineering solutions for a wide
-            spectrum of industries including HVAC, mechanical, electrical,
-            plumbing, BMS, energy conservation, energy audits, and indoor air
-            quality.
+    <section class="page-hero">
+      <div class="ph-grid"></div>
+      <div class="ph-glow"></div>
+      <div class="ph-body">
+        <div class="ph-eyebrow">
+          <span class="ph-pulse"></span>MEP Engineering — Full Spectrum
+          Solutions
+        </div>
+        <h1 class="ph-h1">
+          Built to Perform.<br /><em>Engineered to Last.</em>
+        </h1>
+        <p class="ph-sub">
+          Keerthan MEP Engineers offers engineering solutions for a wide
+          spectrum of industries — HVAC, mechanical, electrical, plumbing, BMS,
+          energy conservation, energy audits, and indoor air quality.
+        </p>
+      </div>
+    </section>
+    <div class="intro-strip">
+      <div class="wrap">
+        <div class="intro-inner">
+          <p class="intro-text">
+            <strong>Keerthan MEP Engineers</strong> offers engineering solutions
+            for a wide spectrum of industries in areas such as heating,
+            ventilation and air conditioning, refrigeration, electro-mechanical
+            projects, building management systems, energy conservation, energy
+            audits, and indoor air quality. Our team focuses on delivering
+            precise, efficient, and cost-effective engineering services using
+            modern technology and practical field expertise.
           </p>
-
-          <p>
-            Our team focuses on delivering precise, efficient, and
-            cost-effective engineering services using modern technology and
-            practical field expertise for all types of projects.
-          </p>
-
-          <h2><i class="fas fa-cogs"></i> Service Categories</h2>
-
-          <!-- Service Cards -->
-          <div class="cards">
-            <!-- HVAC -->
-            <div class="card">
-              <img
-                src="IMAGES/HVAC_.webp"
-                alt="HVAC Service"
-                class="card-img"
-              />
-              <h3><i class="fas fa-fan"></i> HVAC</h3>
-              <p>
-                Creating the perfect indoor environment with expert heating,
-                ventilation, and air-conditioning solutions.
-              </p>
-              <p>
-                <i class="fas fa-check-circle"></i> HVAC System Design and
-                Installation
-              </p>
-              <p>
-                <i class="fas fa-check-circle"></i> Ventilation & Indoor Air
-                Quality
-              </p>
-              <p>
-                <i class="fas fa-check-circle"></i> Energy-efficient Cooling &
-                Heating Systems
-              </p>
+          <div class="intro-badges">
+            <div class="ibadge">
+              <i class="fas fa-check-circle"></i> ISO Compliant
             </div>
-
-            <!-- Mechanical -->
-            <div class="card">
-              <img
-                src="IMAGES/mechanical.png"
-                alt="Mechanical Service"
-                class="card-img"
-              />
-              <h3><i class="fas fa-tools"></i> Mechanical</h3>
-              <p>
-                End-to-end mechanical system design, optimization, and
-                maintenance for industrial and commercial needs.
-              </p>
-              <p>
-                <i class="fas fa-check-circle"></i> Mechanical System Layout &
-                Planning
-              </p>
-              <p>
-                <i class="fas fa-check-circle"></i> Energy-efficient Mechanical
-                Solutions
-              </p>
-              <p>
-                <i class="fas fa-check-circle"></i> System Upgrades & Retrofits
-              </p>
+            <div class="ibadge">
+              <i class="fas fa-leaf"></i> Energy Certified
             </div>
-
-            <!-- Electrical -->
-            <div class="card">
-              <img
-                src="IMAGES/elctrical_.png"
-                alt="Electrical Service"
-                class="card-img"
-              />
-              <h3><i class="fas fa-bolt"></i> Electrical</h3>
-              <p>
-                Safe, efficient, and optimized electrical engineering services
-                for diverse project requirements.
-              </p>
-              <p>
-                <i class="fas fa-check-circle"></i> Electrical Design & Layout
-              </p>
-              <p>
-                <i class="fas fa-check-circle"></i> Power Distribution Systems
-              </p>
-              <p>
-                <i class="fas fa-check-circle"></i> Lighting Design &
-                Installation
-              </p>
-              <p>
-                <i class="fas fa-check-circle"></i> Energy-efficient Lighting
-                Systems
-              </p>
+            <div class="ibadge">
+              <i class="fas fa-headset"></i> 24/7 After-Sales
             </div>
-
-            <!-- Plumbing -->
-            <div class="card">
-              <img
-                src="IMAGES/plumbing.png"
-                alt="Plumbing Service"
-                class="card-img"
-              />
-              <h3><i class="fas fa-wrench"></i> Plumbing</h3>
-              <p>
-                Sustainable and reliable plumbing design and implementation for
-                residential and industrial projects.
-              </p>
-              <p>
-                <i class="fas fa-check-circle"></i> Plumbing Layout & Design
-              </p>
-              <p>
-                <i class="fas fa-check-circle"></i> Water Supply & Distribution
-              </p>
-              <p>
-                <i class="fas fa-check-circle"></i> Sustainable Plumbing
-                Solutions
-              </p>
+            <div class="ibadge">
+              <i class="fas fa-map-marker-alt"></i> 4 Cities
             </div>
           </div>
         </div>
-      </section>
-
-      <!-- Footer -->
-      <kmep-footer></kmep-footer>
+      </div>
     </div>
+    <section id="services">
+      <div class="svc-list">
+        <div class="svc-row rv">
+          <div class="svc-visual">
+            <span class="svc-num">01</span
+            ><img src="images/hvac.png" alt="HVAC" />
+          </div>
+          <div class="svc-content" style="padding-left: 72px">
+            <div class="svc-ico-wrap">
+              <div class="svc-ico"><i class="fas fa-fan"></i></div>
+              <span class="svc-label">Service 01</span>
+            </div>
+            <h2 class="svc-name">HVAC Systems</h2>
+            <p class="svc-desc">
+              Create the perfect indoor environment with our HVAC services. We
+              specialize in designing, installing, and optimizing heating,
+              ventilation, and air conditioning systems.
+            </p>
+            <ul class="feat-list">
+              <li class="feat-item">HVAC System Design and Installation</li>
+              <li class="feat-item">
+                Ventilation Solutions for Indoor Air Quality
+              </li>
+              <li class="feat-item">
+                Energy-Efficient Heating and Cooling Systems
+              </li>
+              <li class="feat-item">HVAC System Upgrades and Retrofits</li>
+              <li class="feat-item">Commissioning &amp; Performance Testing</li>
+            </ul>
+            <a href="contact-us.html" class="btn-primary"
+              >Enquire About HVAC <i class="fas fa-arrow-right"></i
+            ></a>
+          </div>
+        </div>
+        <div class="svc-row reverse rv">
+          <div
+            class="svc-visual"
+            style="
+              background: linear-gradient(135deg, #d1fae5 0%, #ecfdf5 100%);
+            "
+          >
+            <span class="svc-num">02</span
+            ><img src="images/mechanical.png" alt="Mechanical" />
+          </div>
+          <div class="svc-content" style="padding-right: 72px">
+            <div class="svc-ico-wrap">
+              <div class="svc-ico icon-tile green">
+                <i class="fas fa-screwdriver-wrench"></i>
+              </div>
+              <span class="svc-label">Service 02</span>
+            </div>
+            <h2 class="svc-name">Mechanical Engineering</h2>
+            <p class="svc-desc">
+              Our mechanical services ensure the efficiency and reliability of
+              your systems. From project inception to completion, we provide
+              expert solutions tailored to your mechanical requirements.
+            </p>
+            <ul class="feat-list">
+              <li class="feat-item">Mechanical System Design and Layout</li>
+              <li class="feat-item">Energy-Efficient Mechanical Solutions</li>
+              <li class="feat-item">
+                Mechanical System Upgrades and Retrofits
+              </li>
+              <li class="feat-item">
+                Fire Suppression &amp; Detection Systems
+              </li>
+              <li class="feat-item">Pumping &amp; Pipe Infrastructure</li>
+            </ul>
+            <a href="contact-us.html" class="btn-primary"
+              >Enquire About Mechanical <i class="fas fa-arrow-right"></i
+            ></a>
+          </div>
+        </div>
+        <div class="svc-row rv">
+          <div
+            class="svc-visual"
+            style="
+              background: linear-gradient(135deg, #fef9c3 0%, #fefce8 100%);
+            "
+          >
+            <span class="svc-num">03</span
+            ><img src="images/elctrical_.png" alt="Electrical" />
+          </div>
+          <div class="svc-content" style="padding-left: 72px">
+            <div class="svc-ico-wrap">
+              <div class="svc-ico icon-tile yellow">
+                <i class="fas fa-bolt"></i>
+              </div>
+              <span class="svc-label">Service 03</span>
+            </div>
+            <h2 class="svc-name">Electrical Works</h2>
+            <p class="svc-desc">
+              Power your projects with our electrical expertise. From system
+              design to installation and maintenance, we deliver electrical
+              solutions that prioritize safety, reliability, and efficiency.
+            </p>
+            <ul class="feat-list">
+              <li class="feat-item">Electrical System Design and Layout</li>
+              <li class="feat-item">Power Distribution Systems</li>
+              <li class="feat-item">Lighting Design and Installation</li>
+              <li class="feat-item">Energy-Efficient Lighting Solutions</li>
+              <li class="feat-item">BMS &amp; Automation Integration</li>
+            </ul>
+            <a href="contact-us.html" class="btn-primary"
+              >Enquire About Electrical <i class="fas fa-arrow-right"></i
+            ></a>
+          </div>
+        </div>
+        <div class="svc-row reverse rv">
+          <div
+            class="svc-visual"
+            style="
+              background: linear-gradient(135deg, #e0f2fe 0%, #f0f9ff 100%);
+            "
+          >
+            <span class="svc-num">04</span
+            ><img src="images/plumbing.png" alt="Plumbing" />
+          </div>
+          <div class="svc-content" style="padding-right: 72px">
+            <div class="svc-ico-wrap">
+              <div class="svc-ico icon-tile sky">
+                <i class="fas fa-wrench"></i>
+              </div>
+              <span class="svc-label">Service 04</span>
+            </div>
+            <h2 class="svc-name">Plumbing Solutions</h2>
+            <p class="svc-desc">
+              Experience reliable and sustainable plumbing solutions for your
+              projects. Our services cover design, installation, and maintenance
+              for both residential and commercial spaces.
+            </p>
+            <ul class="feat-list">
+              <li class="feat-item">Plumbing System Design and Layout</li>
+              <li class="feat-item">Water Supply and Distribution Systems</li>
+              <li class="feat-item">Drainage &amp; Sanitation Systems</li>
+              <li class="feat-item">Sustainable Plumbing Solutions</li>
+              <li class="feat-item">Leak Detection &amp; Remediation</li>
+            </ul>
+            <a href="contact-us.html" class="btn-primary"
+              >Enquire About Plumbing <i class="fas fa-arrow-right"></i
+            ></a>
+          </div>
+        </div>
+      </div>
+    </section>
+    <section id="process">
+      <div class="wrap">
+        <div class="sec-header rv">
+          <span class="sec-tag">How We Work</span>
+          <h2 class="display-h" style="font-size: clamp(30px, 4vw, 50px)">
+            Our Delivery Process
+          </h2>
+          <p class="sec-sub">
+            A disciplined, five-stage approach that keeps every project on time,
+            on spec, and on budget.
+          </p>
+        </div>
+        <div class="proc-track">
+          <div class="proc-step rv d1">
+            <div class="proc-circle">
+              <i class="fas fa-clipboard-list"></i><span class="proc-n">1</span>
+            </div>
+            <div class="proc-title">Technical Assessment</div>
+            <p class="proc-desc">
+              Site survey, load analysis, and requirements scoping before any
+              design begins.
+            </p>
+          </div>
+          <div class="proc-step rv d2">
+            <div class="proc-circle">
+              <i class="fas fa-drafting-compass"></i
+              ><span class="proc-n">2</span>
+            </div>
+            <div class="proc-title">Design &amp; Engineering</div>
+            <p class="proc-desc">
+              Detailed MEP drawings, value engineering, and regulatory
+              compliance review.
+            </p>
+          </div>
+          <div class="proc-step rv d3">
+            <div class="proc-circle">
+              <i class="fas fa-hard-hat"></i><span class="proc-n">3</span>
+            </div>
+            <div class="proc-title">Installation</div>
+            <p class="proc-desc">
+              Precision installation by certified engineers with real-time QC
+              checks.
+            </p>
+          </div>
+          <div class="proc-step rv d4">
+            <div class="proc-circle">
+              <i class="fas fa-vials"></i><span class="proc-n">4</span>
+            </div>
+            <div class="proc-title">Commissioning</div>
+            <p class="proc-desc">
+              Full system testing, performance validation, and handover
+              documentation.
+            </p>
+          </div>
+          <div class="proc-step rv" style="transition-delay: 0.48s">
+            <div class="proc-circle">
+              <i class="fas fa-headset"></i><span class="proc-n">5</span>
+            </div>
+            <div class="proc-title">After-Sales Support</div>
+            <p class="proc-desc">
+              24/7 support, scheduled maintenance, and energy audits
+              post-handover.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+    <section id="why-mini" class="dark-band" style="padding: 108px 0">
+      <div class="wrap">
+        <div class="sec-header rv">
+          <span class="sec-tag">Why KMEP</span>
+          <h2
+            class="display-h"
+            style="font-size: clamp(30px, 4vw, 50px); color: #fff"
+          >
+            The KMEP Difference
+          </h2>
+          <p class="sec-sub" style="color: rgba(255, 255, 255, 0.45)">
+            Six pillars that set us apart from fragmented MEP vendors across
+            Tamil Nadu and beyond.
+          </p>
+        </div>
+        <div class="wm-grid">
+          <div class="glass-card rv d1">
+            <div class="glass-ico"><i class="fas fa-chart-line"></i></div>
+            <h4>Value Engineering</h4>
+            <p>
+              Maximum output per rupee invested — through meticulous cost
+              analysis and smart material choices.
+            </p>
+          </div>
+          <div class="glass-card rv d2">
+            <div class="glass-ico"><i class="fas fa-layer-group"></i></div>
+            <h4>Integrated Under One Roof</h4>
+            <p>
+              All four MEP disciplines managed by a single team — no vendor
+              gaps, no accountability gaps.
+            </p>
+          </div>
+          <div class="glass-card rv d3">
+            <div class="glass-ico"><i class="fas fa-drafting-compass"></i></div>
+            <h4>Design &amp; Build Expertise</h4>
+            <p>
+              From concept sketch to final commissioning — our design and
+              construction arms work in lockstep.
+            </p>
+          </div>
+          <div class="glass-card rv d1">
+            <div class="glass-ico"><i class="fas fa-microscope"></i></div>
+            <h4>Technical Precision</h4>
+            <p>
+              Meticulous assessments ensure every system is optimized for
+              performance, reliability, and longevity.
+            </p>
+          </div>
+          <div class="glass-card rv d2">
+            <div class="glass-ico"><i class="fas fa-tasks"></i></div>
+            <h4>Proven Project Management</h4>
+            <p>
+              On-time delivery with optimized resources and quality maintained
+              at every stage of execution.
+            </p>
+          </div>
+          <div class="glass-card rv d3">
+            <div class="glass-ico"><i class="fas fa-leaf"></i></div>
+            <h4>Energy Audit &amp; Management</h4>
+            <p>
+              Thorough energy audits identify savings opportunities and cut
+              long-term operational costs.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+    <section style="padding: 108px 0; background: var(--off)">
+      <div class="wrap">
+        <div class="cta-box rv">
+          <p class="cta-tag">Start Your Project</p>
+          <h2 class="display-h cta-h">Ready to Elevate Your Next Project?</h2>
+          <p class="cta-p">
+            Connect with KMEP to explore how integrated MEP expertise can
+            transform your infrastructure.
+          </p>
+          <div class="cta-btns">
+            <a href="contact-us.html" class="cta-btn1"
+              ><i class="fas fa-envelope"></i> Get in Touch</a
+            ><a href="index.html" class="cta-btn2"
+              ><i class="fas fa-home"></i> Back to Home</a
+            >
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <kmep-footer></kmep-footer>
   </body>
 </html>
