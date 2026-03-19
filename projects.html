@@ -1,0 +1,1484 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Projects — KMEP | Keerthan MEP Engineers</title>
+    <link rel="icon" href="images/logo.png" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&family=Playfair+Display:ital,wght@0,700;0,800;1,700&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
+    <link rel="stylesheet" href="style.css" />
+    <script src="script.js" defer></script>
+
+    <style>
+      /* ══════════════════════════════════════════
+         PAGE HERO — matches index.html hero style
+      ══════════════════════════════════════════ */
+      #proj-hero {
+        position: relative;
+        display: flex;
+        align-items: flex-end;
+        min-height: 52vh;
+        padding-top: calc(var(--NAV-H) + 72px);
+        padding-bottom: 80px;
+        background: linear-gradient(
+          140deg,
+          #091828 0%,
+          #0d2744 45%,
+          #0a3060 75%,
+          #091e38 100%
+        );
+        overflow: hidden;
+      }
+
+      /* Grid lines — same as index hero */
+      .hbg-grid {
+        position: absolute;
+        inset: 0;
+        z-index: 0;
+        pointer-events: none;
+        background-image:
+          linear-gradient(rgba(255, 255, 255, 0.028) 1px, transparent 1px),
+          linear-gradient(
+            90deg,
+            rgba(255, 255, 255, 0.028) 1px,
+            transparent 1px
+          );
+        background-size: 80px 80px;
+      }
+
+      /* Glow orbs */
+      .hbg-glow {
+        position: absolute;
+        inset: 0;
+        z-index: 0;
+        pointer-events: none;
+        background:
+          radial-gradient(
+            ellipse 65% 55% at 80% 50%,
+            rgba(14, 165, 233, 0.2) 0%,
+            transparent 60%
+          ),
+          radial-gradient(
+            ellipse 38% 48% at 5% 85%,
+            rgba(13, 148, 136, 0.13) 0%,
+            transparent 55%
+          );
+      }
+
+      .proj-hero-body {
+        position: relative;
+        z-index: 1;
+        width: 100%;
+        max-width: 1180px;
+        margin: 0 auto;
+        padding: 0 52px;
+      }
+
+      .proj-hero-eyebrow {
+        display: inline-flex;
+        align-items: center;
+        gap: 11px;
+        background: rgba(255, 255, 255, 0.07);
+        border: 1px solid rgba(255, 255, 255, 0.14);
+        border-radius: 100px;
+        padding: 8px 20px;
+        margin-bottom: 28px;
+      }
+      .proj-hero-pulse {
+        width: 8px;
+        height: 8px;
+        border-radius: 50%;
+        background: var(--sky);
+        flex-shrink: 0;
+        animation: blinkanim 2.4s ease infinite;
+      }
+      @keyframes blinkanim {
+        0%,
+        100% {
+          opacity: 1;
+          box-shadow: 0 0 0 0 rgba(14, 165, 233, 0.5);
+        }
+        50% {
+          opacity: 0.4;
+          box-shadow: 0 0 0 6px rgba(14, 165, 233, 0);
+        }
+      }
+      .proj-hero-eyebrow-text {
+        font-size: 12px;
+        font-weight: 700;
+        letter-spacing: 2.5px;
+        text-transform: uppercase;
+        color: rgba(255, 255, 255, 0.72);
+      }
+
+      .proj-hero-h1 {
+        font-family: "Playfair Display", serif;
+        font-size: clamp(40px, 5.5vw, 76px);
+        font-weight: 800;
+        line-height: 1.06;
+        letter-spacing: -2px;
+        color: #fff;
+        max-width: 700px;
+        margin-bottom: 22px;
+      }
+      .proj-hero-h1 em {
+        font-style: normal;
+        background: linear-gradient(90deg, #38bdf8, #93c5fd);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+      }
+
+      .proj-hero-sub {
+        font-size: 17px;
+        color: rgba(255, 255, 255, 0.55);
+        max-width: 500px;
+        line-height: 1.85;
+        margin-bottom: 28px;
+      }
+
+      /* Hero stat strip — same glass panel as index */
+      .proj-hero-stats {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        max-width: 580px;
+        background: rgba(255, 255, 255, 0.07);
+        border: 1px solid rgba(255, 255, 255, 0.12);
+        border-radius: 16px;
+        overflow: hidden;
+      }
+      .phs {
+        padding: 20px 16px;
+        text-align: center;
+        border-right: 1px solid rgba(255, 255, 255, 0.08);
+      }
+      .phs:last-child {
+        border-right: none;
+      }
+      .phs-n {
+        display: block;
+        font-family: "Playfair Display", serif;
+        font-size: 28px;
+        font-weight: 800;
+        color: #fff;
+        line-height: 1;
+      }
+      .phs-l {
+        display: block;
+        font-size: 10px;
+        font-weight: 700;
+        letter-spacing: 1.5px;
+        text-transform: uppercase;
+        color: rgba(255, 255, 255, 0.42);
+        margin-top: 5px;
+      }
+
+      /* Scroll cue */
+      .hero-cue {
+        position: absolute;
+        bottom: 24px;
+        left: 50%;
+        transform: translateX(-50%);
+        z-index: 2;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 7px;
+        pointer-events: none;
+      }
+      .hcue-line {
+        width: 1px;
+        height: 34px;
+        background: linear-gradient(
+          to bottom,
+          transparent,
+          rgba(14, 165, 233, 0.65)
+        );
+        animation: cline 2s ease infinite;
+      }
+      .hcue-txt {
+        font-size: 9px;
+        letter-spacing: 3px;
+        text-transform: uppercase;
+        color: rgba(255, 255, 255, 0.28);
+        font-weight: 700;
+      }
+      @keyframes cline {
+        0%,
+        100% {
+          opacity: 0.3;
+          transform: scaleY(0.5);
+          transform-origin: top;
+        }
+        50% {
+          opacity: 1;
+          transform: scaleY(1);
+        }
+      }
+
+      /* ══════════════════════════════════════════
+         PROJECTS SECTION
+      ══════════════════════════════════════════ */
+      #projects {
+        padding: 72px 0 40px;
+        background: #fff;
+      }
+
+      .projects-wrap {
+        max-width: 1180px;
+        margin: 0 auto;
+        padding: 0 52px;
+        display: flex;
+        flex-direction: column;
+        gap: 0;
+      }
+
+      /* Each project entry */
+      .proj-entry {
+        display: flex;
+        flex-direction: column;
+        margin-bottom: 36px;
+      }
+
+      /* ── Main card ── */
+      .proj-card {
+        display: grid;
+        grid-template-columns: 210px 1fr;
+        border-radius: 20px 20px 0 0;
+        overflow: hidden;
+        border: 1.5px solid var(--border);
+        border-bottom: none;
+        background: #fff;
+        box-shadow: var(--sh);
+        transition: box-shadow 0.3s;
+      }
+      .proj-card:hover {
+        box-shadow: var(--sh2);
+      }
+      .proj-entry.even .proj-card {
+        grid-template-columns: 1fr 210px;
+      }
+
+      /* ── Logo panel ── */
+      .proj-logo-panel {
+        background: linear-gradient(150deg, var(--navy) 0%, #1b3a5e 100%);
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        gap: 12px;
+        padding: 32px 20px;
+        position: relative;
+        overflow: hidden;
+        min-height: 240px;
+      }
+      .proj-logo-panel::before {
+        content: "";
+        position: absolute;
+        inset: 0;
+        background: radial-gradient(
+          circle at 50% 40%,
+          rgba(14, 165, 233, 0.15) 0%,
+          transparent 68%
+        );
+      }
+      .proj-logo-bg {
+        width: 92px;
+        height: 92px;
+        border-radius: 20px;
+        background: rgba(255, 255, 255, 0.06);
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 2.2rem;
+        color: rgba(255, 255, 255, 0.55);
+        position: relative;
+        z-index: 1;
+        transition:
+          background 0.3s,
+          color 0.3s;
+      }
+      .proj-card:hover .proj-logo-bg {
+        background: rgba(14, 165, 233, 0.15);
+        color: var(--sky);
+      }
+      .proj-client-name {
+        font-size: 13px;
+        font-weight: 700;
+        color: rgba(255, 255, 255, 0.78);
+        text-align: center;
+        line-height: 1.45;
+        position: relative;
+        z-index: 1;
+      }
+      .proj-client-loc {
+        font-size: 11px;
+        color: rgba(255, 255, 255, 0.35);
+        display: flex;
+        align-items: center;
+        gap: 5px;
+        position: relative;
+        z-index: 1;
+      }
+      .proj-client-loc i {
+        color: var(--sky);
+        font-size: 9px;
+      }
+
+      /* Even: logo on right */
+      .proj-entry.even .proj-logo-panel {
+        order: 2;
+      }
+      .proj-entry.even .proj-info-panel {
+        order: 1;
+      }
+
+      /* ── Info panel ── */
+      .proj-info-panel {
+        padding: 28px 36px;
+        display: flex;
+        flex-direction: column;
+        gap: 16px;
+        border-left: 1.5px solid var(--border);
+      }
+      .proj-entry.even .proj-info-panel {
+        border-left: none;
+        border-right: 1.5px solid var(--border);
+      }
+
+      .proj-info-head {
+        display: flex;
+        align-items: flex-start;
+        justify-content: space-between;
+        gap: 14px;
+      }
+
+      .proj-cat-badge {
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+        padding: 5px 13px;
+        border-radius: 7px;
+        font-size: 10px;
+        font-weight: 700;
+        letter-spacing: 1.5px;
+        text-transform: uppercase;
+        flex-shrink: 0;
+      }
+      .badge-hvac {
+        background: rgba(14, 165, 233, 0.1);
+        color: var(--sky);
+      }
+      .badge-elec {
+        background: rgba(245, 158, 11, 0.1);
+        color: #d97706;
+      }
+      .badge-plumb {
+        background: rgba(13, 148, 136, 0.1);
+        color: var(--teal);
+      }
+      .badge-mech {
+        background: rgba(139, 92, 246, 0.1);
+        color: #7c3aed;
+      }
+      .badge-turnkey {
+        background: rgba(239, 68, 68, 0.1);
+        color: #dc2626;
+      }
+
+      .proj-title {
+        font-family: "Playfair Display", serif;
+        font-size: 19px;
+        font-weight: 800;
+        color: var(--navy);
+        line-height: 1.35;
+        margin-top: 10px;
+        letter-spacing: -0.5px;
+      }
+      .proj-year {
+        font-size: 12px;
+        font-weight: 700;
+        color: var(--muted);
+        flex-shrink: 0;
+        padding-top: 3px;
+        letter-spacing: 1px;
+      }
+
+      /* ── Requirements / Delivered columns ── */
+      .proj-reqdel {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 16px;
+      }
+      .rd-box {
+        background: var(--off);
+        border-radius: 13px;
+        padding: 14px 16px;
+        border: 1.5px solid var(--border);
+        transition: border-color 0.3s;
+      }
+      .rd-box:hover {
+        border-color: rgba(21, 88, 176, 0.25);
+      }
+      .rd-box.done:hover {
+        border-color: rgba(13, 148, 136, 0.3);
+      }
+
+      .rd-label {
+        font-size: 9.5px;
+        font-weight: 700;
+        letter-spacing: 2px;
+        text-transform: uppercase;
+        color: var(--muted);
+        margin-bottom: 12px;
+        display: flex;
+        align-items: center;
+        gap: 7px;
+      }
+      .rd-label i {
+        color: var(--blue);
+      }
+      .rd-box.done .rd-label i {
+        color: var(--teal);
+      }
+
+      .rd-list {
+        list-style: none;
+        display: flex;
+        flex-direction: column;
+        gap: 5px;
+      }
+      .rd-list li {
+        font-size: 12.5px;
+        color: var(--slate);
+        line-height: 1.5;
+        display: flex;
+        align-items: flex-start;
+        gap: 9px;
+      }
+      .rd-list li::before {
+        content: "";
+        flex-shrink: 0;
+        width: 5px;
+        height: 5px;
+        border-radius: 50%;
+        background: var(--blue);
+        margin-top: 7px;
+      }
+      .rd-box.done .rd-list li::before {
+        background: var(--teal);
+      }
+
+      /* ── Satisfaction bar ── */
+      .proj-satisfaction {
+        display: flex;
+        align-items: center;
+        gap: 18px;
+        background: var(--off);
+        border: 1.5px solid var(--border);
+        border-radius: 14px;
+        padding: 14px 18px;
+        transition:
+          border-color 0.3s,
+          box-shadow 0.3s;
+      }
+      .proj-satisfaction:hover {
+        border-color: rgba(21, 88, 176, 0.22);
+        box-shadow: 0 6px 24px rgba(12, 30, 53, 0.08);
+      }
+
+      .sat-score-wrap {
+        flex-shrink: 0;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 2px;
+      }
+      .sat-stars {
+        display: flex;
+        gap: 3px;
+        margin-bottom: 5px;
+      }
+      .sat-stars i {
+        color: #f59e0b;
+        font-size: 12px;
+      }
+
+      .sat-score {
+        font-family: "Playfair Display", serif;
+        font-size: 2rem;
+        font-weight: 800;
+        color: var(--navy);
+        line-height: 1;
+      }
+      .sat-score span {
+        font-size: 0.9rem;
+        color: var(--muted);
+        font-weight: 500;
+      }
+      .sat-label {
+        font-size: 9px;
+        letter-spacing: 1.5px;
+        text-transform: uppercase;
+        color: var(--muted);
+        font-weight: 700;
+      }
+      .sat-divider {
+        width: 1px;
+        background: var(--border);
+        align-self: stretch;
+        flex-shrink: 0;
+      }
+      .sat-review {
+        flex: 1;
+        font-size: 13px;
+        color: var(--slate);
+        line-height: 1.7;
+        font-style: italic;
+      }
+      .sat-reviewer {
+        font-size: 11.5px;
+        font-weight: 700;
+        color: var(--navy);
+        margin-top: 7px;
+        font-style: normal;
+      }
+
+      /* ══════════════════════════════════════════
+         FILM ROLLER
+      ══════════════════════════════════════════ */
+      .film-roller-wrap {
+        background: var(--navy);
+        border: 1.5px solid rgba(255, 255, 255, 0.06);
+        border-top: none;
+        border-radius: 0 0 20px 20px;
+        padding: 12px 0;
+        overflow: hidden;
+        position: relative;
+        box-shadow: 0 8px 32px rgba(12, 30, 53, 0.14);
+      }
+      /* Sprocket holes */
+      .film-roller-wrap::before,
+      .film-roller-wrap::after {
+        content: "";
+        position: absolute;
+        left: 0;
+        right: 0;
+        height: 6px;
+        background: repeating-linear-gradient(
+          90deg,
+          transparent 0px,
+          transparent 9px,
+          rgba(255, 255, 255, 0.1) 9px,
+          rgba(255, 255, 255, 0.1) 18px
+        );
+        pointer-events: none;
+        z-index: 2;
+      }
+      .film-roller-wrap::before {
+        top: 4px;
+      }
+      .film-roller-wrap::after {
+        bottom: 4px;
+      }
+
+      .film-track {
+        display: flex;
+        gap: 10px;
+        align-items: center;
+        padding: 8px 20px;
+        will-change: transform;
+        user-select: none;
+      }
+
+      .film-img {
+        width: 80px;
+        height: 80px;
+        flex-shrink: 0;
+        border-radius: 9px;
+        overflow: hidden;
+        border: 2px solid rgba(255, 255, 255, 0.07);
+        cursor: pointer;
+        transition:
+          border-color 0.2s,
+          transform 0.2s,
+          box-shadow 0.2s;
+        position: relative;
+      }
+      .film-img:hover {
+        border-color: var(--sky);
+        transform: scale(1.1);
+        box-shadow: 0 4px 20px rgba(14, 165, 233, 0.5);
+        z-index: 5;
+      }
+      .film-img-ph {
+        width: 100%;
+        height: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background: linear-gradient(135deg, #1a3254, #132840);
+        font-size: 1.5rem;
+        color: rgba(255, 255, 255, 0.25);
+        transition:
+          color 0.2s,
+          background 0.2s;
+      }
+      .film-img:hover .film-img-ph {
+        background: linear-gradient(135deg, #1e3f6e, #1a3254);
+        color: rgba(14, 165, 233, 0.7);
+      }
+
+      /* ── Connector between entries ── */
+      .proj-connector {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        position: relative;
+        height: 36px;
+        margin: 0 0 6px;
+      }
+      .proj-connector::before {
+        content: "";
+        position: absolute;
+        left: 50%;
+        top: 0;
+        bottom: 0;
+        width: 1px;
+        background: linear-gradient(to bottom, var(--border), transparent);
+        transform: translateX(-50%);
+      }
+      .proj-connector-dot {
+        width: 34px;
+        height: 34px;
+        border-radius: 50%;
+        background: #fff;
+        border: 1.5px solid var(--border);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 11px;
+        color: var(--muted);
+        position: relative;
+        z-index: 1;
+        box-shadow: var(--sh);
+        transition:
+          border-color 0.3s,
+          color 0.3s;
+      }
+      .proj-connector-dot:hover {
+        border-color: var(--sky);
+        color: var(--sky);
+      }
+
+      /* ══════════════════════════════════════════
+         LIGHTBOX
+      ══════════════════════════════════════════ */
+      .lightbox {
+        display: none;
+        position: fixed;
+        inset: 0;
+        background: rgba(4, 12, 24, 0.94);
+        backdrop-filter: blur(20px);
+        z-index: 9999;
+        align-items: center;
+        justify-content: center;
+      }
+      .lightbox.open {
+        display: flex;
+      }
+
+      .lb-inner {
+        position: relative;
+        max-width: 900px;
+        width: 94vw;
+        background: #091828;
+        border-radius: 20px;
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        overflow: hidden;
+        box-shadow: 0 48px 100px rgba(0, 0, 0, 0.7);
+        animation: lbIn 0.28s ease;
+      }
+      @keyframes lbIn {
+        from {
+          opacity: 0;
+          transform: scale(0.94) translateY(14px);
+        }
+        to {
+          opacity: 1;
+          transform: scale(1) translateY(0);
+        }
+      }
+
+      .lb-img-wrap {
+        width: 100%;
+        aspect-ratio: 16/9;
+        background: #060f1c;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        position: relative;
+        overflow: hidden;
+      }
+      .lb-img-ph {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 14px;
+        color: rgba(255, 255, 255, 0.3);
+      }
+      .lb-img-ph i {
+        font-size: 3.5rem;
+        color: rgba(14, 165, 233, 0.45);
+      }
+      .lb-img-ph span {
+        font-size: 14px;
+      }
+
+      .lb-footer {
+        padding: 16px 24px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 12px;
+        border-top: 1px solid rgba(255, 255, 255, 0.06);
+      }
+      .lb-caption {
+        font-size: 13px;
+        color: rgba(255, 255, 255, 0.5);
+        flex: 1;
+      }
+      .lb-counter {
+        font-size: 12px;
+        color: rgba(255, 255, 255, 0.28);
+        flex-shrink: 0;
+      }
+      .lb-nav {
+        display: flex;
+        gap: 8px;
+      }
+      .lb-nav button,
+      .lb-close {
+        width: 36px;
+        height: 36px;
+        border-radius: 50%;
+        background: rgba(255, 255, 255, 0.07);
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        color: #fff;
+        font-size: 12px;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        transition:
+          background 0.2s,
+          transform 0.2s,
+          border-color 0.2s;
+      }
+      .lb-nav button:hover {
+        background: var(--sky);
+        border-color: var(--sky);
+      }
+      .lb-close {
+        position: absolute;
+        top: 13px;
+        right: 13px;
+      }
+      .lb-close:hover {
+        background: #ef4444;
+        border-color: #ef4444;
+        transform: rotate(90deg);
+      }
+
+      /* ══════════════════════════════════════════
+         RESPONSIVE
+      ══════════════════════════════════════════ */
+      @media (max-width: 1100px) {
+        .projects-wrap {
+          padding: 0 36px;
+        }
+        .proj-info-panel {
+          padding: 22px 26px;
+        }
+      }
+      @media (max-width: 900px) {
+        .proj-card,
+        .proj-entry.even .proj-card {
+          grid-template-columns: 1fr;
+        }
+        .proj-logo-panel {
+          order: 1 !important;
+          min-height: 110px;
+          flex-direction: row;
+          padding: 18px 22px;
+          gap: 16px;
+        }
+        .proj-info-panel {
+          order: 2 !important;
+          border-left: none !important;
+          border-right: none !important;
+          border-top: 1.5px solid var(--border);
+        }
+        .proj-reqdel {
+          grid-template-columns: 1fr;
+        }
+        .proj-hero-stats {
+          grid-template-columns: repeat(2, 1fr);
+        }
+        .phs:nth-child(2) {
+          border-right: none;
+        }
+        .phs:nth-child(3) {
+          border-top: 1px solid rgba(255, 255, 255, 0.08);
+        }
+        .phs:nth-child(4) {
+          border-top: 1px solid rgba(255, 255, 255, 0.08);
+          border-right: none;
+        }
+        .hero-cue {
+          display: none;
+        }
+        .proj-entry {
+          margin-bottom: 24px;
+        }
+        .proj-connector {
+          height: 28px;
+        }
+      }
+      @media (max-width: 860px) {
+        #proj-hero {
+          padding-top: calc(var(--NAV-H) + 44px);
+          padding-bottom: 60px;
+        }
+        .proj-hero-body {
+          padding: 0 24px;
+        }
+        .projects-wrap {
+          padding: 0 24px;
+        }
+      }
+      @media (max-width: 680px) {
+        .proj-info-panel {
+          padding: 18px 16px;
+        }
+        .proj-satisfaction {
+          flex-direction: column;
+          align-items: flex-start;
+        }
+        .sat-divider {
+          width: 100%;
+          height: 1px;
+        }
+        .proj-hero-h1 {
+          font-size: clamp(34px, 9vw, 50px);
+          letter-spacing: -1.5px;
+        }
+        .proj-entry {
+          margin-bottom: 18px;
+        }
+      }
+      @media (max-width: 480px) {
+        .proj-hero-body {
+          padding: 0 18px;
+        }
+        .projects-wrap {
+          padding: 0 18px;
+        }
+        .proj-info-panel {
+          padding: 16px 14px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <kmep-header></kmep-header>
+
+    <!-- ══════════════════════ HERO ══════════════════════ -->
+    <section id="proj-hero">
+      <div class="hbg-grid"></div>
+      <div class="hbg-glow"></div>
+      <div class="proj-hero-body">
+        <div class="proj-hero-eyebrow">
+          <span class="proj-hero-pulse"></span>
+          <span class="proj-hero-eyebrow-text">Our Portfolio — Since 2009</span>
+        </div>
+        <h1 class="proj-hero-h1">
+          Projects That<br /><em>Define Our Craft</em>
+        </h1>
+        <p class="proj-hero-sub">
+          Every installation tells a story — the client's vision, our
+          engineering, and the satisfaction that follows.
+        </p>
+        <div class="proj-hero-stats">
+          <div class="phs">
+            <span class="phs-n">500+</span>
+            <span class="phs-l">Projects</span>
+          </div>
+          <div class="phs">
+            <span class="phs-n">15+</span>
+            <span class="phs-l">Years</span>
+          </div>
+          <div class="phs">
+            <span class="phs-n">50+</span>
+            <span class="phs-l">Clients</span>
+          </div>
+          <div class="phs">
+            <span class="phs-n">4</span>
+            <span class="phs-l">Cities</span>
+          </div>
+        </div>
+      </div>
+      <div class="hero-cue">
+        <div class="hcue-line"></div>
+        <span class="hcue-txt">Scroll</span>
+      </div>
+    </section>
+
+    <!-- ══════════════════════ PROJECTS ══════════════════════ -->
+    <section id="projects">
+      <div class="wrap">
+        <div class="sec-header rv" style="margin-bottom: 44px">
+          <p class="sec-tag-c">What We've Built</p>
+          <h2 class="display-h" style="font-size: clamp(28px, 4vw, 46px)">
+            Our Signature Projects
+          </h2>
+          <p class="sec-sub">
+            A curated look at our most impactful deliveries — real requirements,
+            real results, real satisfaction.
+          </p>
+        </div>
+      </div>
+
+      <div class="projects-wrap">
+        <!-- ══ PROJECT 1 — ODD (logo left) ══ -->
+        <div class="proj-entry odd rv" data-project="0">
+          <div class="proj-card">
+            <div class="proj-logo-panel">
+              <div class="proj-logo-bg"><i class="fas fa-laptop-code"></i></div>
+              <div class="proj-client-name">
+                Infosys BPM Ltd.<br />Chennai Campus
+              </div>
+              <div class="proj-client-loc">
+                <i class="fas fa-map-marker-alt"></i>&nbsp;Chennai, TN
+              </div>
+            </div>
+            <div class="proj-info-panel">
+              <div class="proj-info-head">
+                <div>
+                  <span class="proj-cat-badge badge-hvac"
+                    ><i class="fas fa-fan"></i> HVAC</span
+                  >
+                  <div class="proj-title">
+                    Central VRF Air Conditioning — IT Campus
+                  </div>
+                </div>
+                <div class="proj-year">2024</div>
+              </div>
+              <div class="proj-reqdel">
+                <div class="rd-box req">
+                  <div class="rd-label">
+                    <i class="fas fa-clipboard-list"></i> Client Requirements
+                  </div>
+                  <ul class="rd-list">
+                    <li>VRF system for 1.2 lakh sq ft campus</li>
+                    <li>BMS integration with existing SCADA</li>
+                    <li>Energy efficiency below 0.9 kW/TR</li>
+                    <li>Noise level under 45 dB in work zones</li>
+                    <li>Commissioning within 90 days</li>
+                  </ul>
+                </div>
+                <div class="rd-box done">
+                  <div class="rd-label">
+                    <i class="fas fa-check-circle"></i> What We Delivered
+                  </div>
+                  <ul class="rd-list">
+                    <li>Dunham Bush VRF, 4 floors, 80 IDUs</li>
+                    <li>Full BMS/SCADA with live dashboard</li>
+                    <li>Achieved 0.84 kW/TR — 6% above target</li>
+                    <li>Sound-attenuated ducting, 42 dB avg</li>
+                    <li>Delivered in 78 days — 12 days early</li>
+                  </ul>
+                </div>
+              </div>
+              <div class="proj-satisfaction">
+                <div class="sat-score-wrap">
+                  <div class="sat-stars">
+                    <i class="fas fa-star"></i><i class="fas fa-star"></i
+                    ><i class="fas fa-star"></i><i class="fas fa-star"></i
+                    ><i class="fas fa-star"></i>
+                  </div>
+                  <div class="sat-score">9.8<span>/10</span></div>
+                  <div class="sat-label">Satisfaction</div>
+                </div>
+                <div class="sat-divider"></div>
+                <div>
+                  <div class="sat-review">
+                    "KMEP delivered ahead of schedule with zero punch-list
+                    items. The energy savings alone paid back 30% of project
+                    cost in year one. Exceptional engineering discipline."
+                  </div>
+                  <div class="sat-reviewer">
+                    — Facilities Head, Infosys BPM Chennai
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="film-roller-wrap">
+            <div class="film-track" data-project="0" data-dir="ltr"></div>
+          </div>
+        </div>
+
+        <div class="proj-connector">
+          <div class="proj-connector-dot">
+            <i class="fas fa-arrows-alt-h"></i>
+          </div>
+        </div>
+
+        <!-- ══ PROJECT 2 — EVEN (logo right) ══ -->
+        <div class="proj-entry even rv d1" data-project="1">
+          <div class="proj-card">
+            <div class="proj-info-panel">
+              <div class="proj-info-head">
+                <div>
+                  <span class="proj-cat-badge badge-elec"
+                    ><i class="fas fa-bolt"></i> Electrical</span
+                  >
+                  <div class="proj-title">
+                    HT/LT Installation — Auto-components Plant
+                  </div>
+                </div>
+                <div class="proj-year">2024</div>
+              </div>
+              <div class="proj-reqdel">
+                <div class="rd-box req">
+                  <div class="rd-label">
+                    <i class="fas fa-clipboard-list"></i> Client Requirements
+                  </div>
+                  <ul class="rd-list">
+                    <li>2 MW HT/LT infrastructure from scratch</li>
+                    <li>Zero-downtime phased energisation plan</li>
+                    <li>Full TNEB compliance and EB approval</li>
+                    <li>Dedicated UPS circuit for CNC machines</li>
+                    <li>Lightning protection across 8-acre plant</li>
+                  </ul>
+                </div>
+                <div class="rd-box done">
+                  <div class="rd-label">
+                    <i class="fas fa-check-circle"></i> What We Delivered
+                  </div>
+                  <ul class="rd-list">
+                    <li>11 kV HT panel, LT MCC, 6 DBs</li>
+                    <li>Phased energisation — 0 production stops</li>
+                    <li>TNEB approval secured in 45 days</li>
+                    <li>200 kVA online UPS, 30-min backup</li>
+                    <li>Franklin rod protection, 98 m radius</li>
+                  </ul>
+                </div>
+              </div>
+              <div class="proj-satisfaction">
+                <div class="sat-score-wrap">
+                  <div class="sat-stars">
+                    <i class="fas fa-star"></i><i class="fas fa-star"></i
+                    ><i class="fas fa-star"></i><i class="fas fa-star"></i
+                    ><i class="fas fa-star-half-alt"></i>
+                  </div>
+                  <div class="sat-score">9.5<span>/10</span></div>
+                  <div class="sat-label">Satisfaction</div>
+                </div>
+                <div class="sat-divider"></div>
+                <div>
+                  <div class="sat-review">
+                    "The phased energisation was flawlessly executed. Our
+                    production line never stopped once. KMEP's electrical team
+                    clearly understands industrial environments deeply."
+                  </div>
+                  <div class="sat-reviewer">
+                    — Plant Manager, Mahindra Tier-1 Supplier, Hosur
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="proj-logo-panel">
+              <div class="proj-logo-bg"><i class="fas fa-industry"></i></div>
+              <div class="proj-client-name">
+                Mahindra Tier-1<br />Auto Supplier
+              </div>
+              <div class="proj-client-loc">
+                <i class="fas fa-map-marker-alt"></i>&nbsp;Hosur, TN
+              </div>
+            </div>
+          </div>
+          <div class="film-roller-wrap">
+            <div class="film-track" data-project="1" data-dir="rtl"></div>
+          </div>
+        </div>
+
+        <div class="proj-connector">
+          <div class="proj-connector-dot">
+            <i class="fas fa-arrows-alt-h"></i>
+          </div>
+        </div>
+
+        <!-- ══ PROJECT 3 — ODD (logo left) ══ -->
+        <div class="proj-entry odd rv d2" data-project="2">
+          <div class="proj-card">
+            <div class="proj-logo-panel">
+              <div class="proj-logo-bg"><i class="fas fa-capsules"></i></div>
+              <div class="proj-client-name">
+                Aurobindo Pharma<br />Trichy Unit
+              </div>
+              <div class="proj-client-loc">
+                <i class="fas fa-map-marker-alt"></i>&nbsp;Tiruchirappalli, TN
+              </div>
+            </div>
+            <div class="proj-info-panel">
+              <div class="proj-info-head">
+                <div>
+                  <span class="proj-cat-badge badge-turnkey"
+                    ><i class="fas fa-key"></i> Turnkey MEP</span
+                  >
+                  <div class="proj-title">
+                    GMP Clean Room MEP — Pharmaceutical Facility
+                  </div>
+                </div>
+                <div class="proj-year">2023</div>
+              </div>
+              <div class="proj-reqdel">
+                <div class="rd-box req">
+                  <div class="rd-label">
+                    <i class="fas fa-clipboard-list"></i> Client Requirements
+                  </div>
+                  <ul class="rd-list">
+                    <li>ISO 7 &amp; ISO 8 clean room HVAC</li>
+                    <li>HEPA H14 filtration ≥99.995% efficiency</li>
+                    <li>USFDA 21 CFR Part 11 validation</li>
+                    <li>Pharmaceutical-grade WFI/PW plumbing</li>
+                    <li>Full MEP turnkey within 5 months</li>
+                  </ul>
+                </div>
+                <div class="rd-box done">
+                  <div class="rd-label">
+                    <i class="fas fa-check-circle"></i> What We Delivered
+                  </div>
+                  <ul class="rd-list">
+                    <li>AHU with HEPA, pressurisation cascade</li>
+                    <li>DOP-tested H14 filter banks — validated</li>
+                    <li>21 CFR BMS with full audit trail</li>
+                    <li>316L SS WFI loop, TOC &lt;500 ppb</li>
+                    <li>Completed in 4 months 18 days</li>
+                  </ul>
+                </div>
+              </div>
+              <div class="proj-satisfaction">
+                <div class="sat-score-wrap">
+                  <div class="sat-stars">
+                    <i class="fas fa-star"></i><i class="fas fa-star"></i
+                    ><i class="fas fa-star"></i><i class="fas fa-star"></i
+                    ><i class="fas fa-star"></i>
+                  </div>
+                  <div class="sat-score">10<span>/10</span></div>
+                  <div class="sat-label">Satisfaction</div>
+                </div>
+                <div class="sat-divider"></div>
+                <div>
+                  <div class="sat-review">
+                    "First-pass USFDA validation — zero observations. KMEP
+                    understood our regulatory requirements better than our
+                    internal team expected. Truly remarkable execution."
+                  </div>
+                  <div class="sat-reviewer">
+                    — VP Engineering, Aurobindo Pharma Trichy
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="film-roller-wrap">
+            <div class="film-track" data-project="2" data-dir="ltr"></div>
+          </div>
+        </div>
+
+        <div class="proj-connector">
+          <div class="proj-connector-dot">
+            <i class="fas fa-arrows-alt-h"></i>
+          </div>
+        </div>
+
+        <!-- ══ PROJECT 4 — EVEN (logo right) ══ -->
+        <div class="proj-entry even rv d3" data-project="3">
+          <div class="proj-card">
+            <div class="proj-info-panel">
+              <div class="proj-info-head">
+                <div>
+                  <span class="proj-cat-badge badge-plumb"
+                    ><i class="fas fa-faucet"></i> Plumbing</span
+                  >
+                  <div class="proj-title">
+                    STP / WTP &amp; Firefighting — Residential Township
+                  </div>
+                </div>
+                <div class="proj-year">2022</div>
+              </div>
+              <div class="proj-reqdel">
+                <div class="rd-box req">
+                  <div class="rd-label">
+                    <i class="fas fa-clipboard-list"></i> Client Requirements
+                  </div>
+                  <ul class="rd-list">
+                    <li>300 KLD STP for 500-unit township</li>
+                    <li>Recycled water for flushing &amp; landscaping</li>
+                    <li>TNPCB consent to operate</li>
+                    <li>Hydrant, sprinkler &amp; wet riser system</li>
+                    <li>Gravity-fed scheme — no booster pumping</li>
+                  </ul>
+                </div>
+                <div class="rd-box done">
+                  <div class="rd-label">
+                    <i class="fas fa-check-circle"></i> What We Delivered
+                  </div>
+                  <ul class="rd-list">
+                    <li>MBBR-based 300 KLD STP, BOD &lt;10 mg/L</li>
+                    <li>Tertiary treated water reuse — 60% saving</li>
+                    <li>TNPCB CTO first submission — zero violations</li>
+                    <li>4-zone firefighting, 45-min reserve tank</li>
+                    <li>Gravity feed from 20 m OHT — zero pumps</li>
+                  </ul>
+                </div>
+              </div>
+              <div class="proj-satisfaction">
+                <div class="sat-score-wrap">
+                  <div class="sat-stars">
+                    <i class="fas fa-star"></i><i class="fas fa-star"></i
+                    ><i class="fas fa-star"></i><i class="fas fa-star"></i
+                    ><i class="fas fa-star"></i>
+                  </div>
+                  <div class="sat-score">9.7<span>/10</span></div>
+                  <div class="sat-label">Satisfaction</div>
+                </div>
+                <div class="sat-divider"></div>
+                <div>
+                  <div class="sat-review">
+                    "TNPCB clearance on first submission — unheard of in our
+                    experience. The gravity-fed design eliminated recurring pump
+                    maintenance costs. KMEP truly thinks long-term."
+                  </div>
+                  <div class="sat-reviewer">
+                    — Project Director, Casagrand Builder, Chennai
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="proj-logo-panel">
+              <div class="proj-logo-bg"><i class="fas fa-building"></i></div>
+              <div class="proj-client-name">
+                Casagrand Builder<br />Pvt. Ltd.
+              </div>
+              <div class="proj-client-loc">
+                <i class="fas fa-map-marker-alt"></i>&nbsp;Chennai, TN
+              </div>
+            </div>
+          </div>
+          <div class="film-roller-wrap">
+            <div class="film-track" data-project="3" data-dir="rtl"></div>
+          </div>
+        </div>
+      </div>
+      <!-- /projects-wrap -->
+    </section>
+
+    <!-- ══════════════════════ CTA ══════════════════════ -->
+    <section id="cta" style="padding: 108px 0; background: var(--off)">
+      <div class="wrap">
+        <div class="cta-box rv">
+          <p class="cta-tag">Start Your Project</p>
+          <h2 class="display-h cta-h">Ready to Elevate Your Next Project?</h2>
+          <p class="cta-p">
+            Connect with KMEP to explore how integrated MEP expertise can
+            transform your infrastructure.
+          </p>
+          <div class="cta-btns">
+            <a href="contact-us.html" class="cta-btn1">Get in Touch</a>
+            <a href="services.html" class="cta-btn2">View All Services</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <kmep-footer></kmep-footer>
+
+    <!-- ══════════════════════ LIGHTBOX ══════════════════════ -->
+    <div class="lightbox" id="lightbox" role="dialog" aria-modal="true">
+      <div class="lb-inner">
+        <button class="lb-close" id="lbClose" aria-label="Close">
+          <i class="fas fa-times"></i>
+        </button>
+        <div class="lb-img-wrap" id="lbImgWrap"></div>
+        <div class="lb-footer">
+          <div class="lb-caption" id="lbCaption"></div>
+          <div class="lb-counter" id="lbCounter"></div>
+          <div class="lb-nav">
+            <button id="lbPrev" aria-label="Previous">
+              <i class="fas fa-chevron-left"></i>
+            </button>
+            <button id="lbNext" aria-label="Next">
+              <i class="fas fa-chevron-right"></i>
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      /* ── Image data (swap icon placeholders with real <img> paths in production) ── */
+      const PROJ_IMGS = [
+        [
+          /* 0 — Infosys HVAC */
+          { icon: "fa-snowflake", cap: "VRF Outdoor Units Installation" },
+          { icon: "fa-wind", cap: "Indoor Unit Array — Floor 3" },
+          { icon: "fa-network-wired", cap: "BMS Control Panel Closeup" },
+          { icon: "fa-tools", cap: "Duct Fabrication in Workshop" },
+          { icon: "fa-thermometer-half", cap: "Thermal Insulation Works" },
+          { icon: "fa-chart-line", cap: "Energy Monitoring Dashboard" },
+          { icon: "fa-hard-hat", cap: "Site Team During Commissioning" },
+          { icon: "fa-certificate", cap: "Completion Certificate Handover" },
+        ],
+        [
+          /* 1 — HT/LT Plant */
+          { icon: "fa-bolt", cap: "11 kV HT Panel Erection" },
+          { icon: "fa-plug", cap: "LT Distribution Board Wiring" },
+          { icon: "fa-grip-lines", cap: "Cable Tray — Production Bay" },
+          { icon: "fa-shield-alt", cap: "Earthing Grid Installation" },
+          { icon: "fa-battery-full", cap: "UPS Room — CNC Machine Feed" },
+          { icon: "fa-cloud-bolt", cap: "Lightning Protection Mast" },
+          { icon: "fa-gauge", cap: "Power Analyser & Metering" },
+          { icon: "fa-handshake", cap: "TNEB Inspection & Energisation" },
+        ],
+        [
+          /* 2 — Pharma Clean Room */
+          { icon: "fa-flask", cap: "AHU Installation — Clean Room" },
+          { icon: "fa-filter", cap: "HEPA Filter Bank Assembly" },
+          {
+            icon: "fa-temperature-high",
+            cap: "Pressurisation Validation Test",
+          },
+          { icon: "fa-droplet", cap: "WFI Loop Pressure Testing" },
+          { icon: "fa-computer", cap: "21 CFR BMS Audit Trail Screen" },
+          { icon: "fa-user-shield", cap: "DOP Particle Count Validation" },
+          { icon: "fa-vial", cap: "Swab Testing Post Commissioning" },
+          { icon: "fa-award", cap: "USFDA First-Pass Approval" },
+        ],
+        [
+          /* 3 — Township STP */
+          { icon: "fa-water", cap: "MBBR Reactor Tank Erection" },
+          { icon: "fa-recycle", cap: "Tertiary Treatment Unit" },
+          { icon: "fa-droplet", cap: "Overhead Tank & Distribution" },
+          { icon: "fa-fire-extinguisher", cap: "Hydrant Network Layout" },
+          { icon: "fa-leaf", cap: "Landscaping Reuse Irrigation Line" },
+          { icon: "fa-clipboard-check", cap: "TNPCB Inspection Documentation" },
+          {
+            icon: "fa-ruler-combined",
+            cap: "Site Survey — Foundation Marking",
+          },
+          { icon: "fa-trophy", cap: "Project Handover Ceremony" },
+        ],
+      ];
+
+      /* ── Build film rollers ── */
+      const THUMB_W = 80,
+        GAP = 10;
+      document.querySelectorAll(".film-track").forEach((track) => {
+        const pIdx = +track.dataset.project;
+        const imgs = PROJ_IMGS[pIdx] || [];
+        const dir = track.dataset.dir;
+        const all = [...imgs, ...imgs, ...imgs];
+
+        all.forEach((img, i) => {
+          const el = document.createElement("div");
+          el.className = "film-img";
+          el.innerHTML = `<div class="film-img-ph"><i class="fas ${img.icon}"></i></div>`;
+          el.addEventListener("click", () =>
+            openLightbox(pIdx, i % imgs.length),
+          );
+          track.appendChild(el);
+        });
+
+        const setW = imgs.length * (THUMB_W + GAP);
+        track.style.width = all.length * (THUMB_W + GAP) + "px";
+
+        let pos = dir === "rtl" ? -setW : 0;
+        let paused = false;
+
+        function tick() {
+          if (!paused) {
+            if (dir === "ltr") {
+              pos -= 0.55;
+              if (pos <= -setW) pos += setW;
+            } else {
+              pos += 0.55;
+              if (pos >= 0) pos -= setW;
+            }
+            track.style.transform = `translateX(${pos}px)`;
+          }
+          requestAnimationFrame(tick);
+        }
+
+        const wrap = track.closest(".film-roller-wrap");
+        wrap.addEventListener("mouseenter", () => (paused = true));
+        wrap.addEventListener("mouseleave", () => (paused = false));
+        requestAnimationFrame(tick);
+      });
+
+      /* ── Lightbox ── */
+      const lb = document.getElementById("lightbox");
+      let curP = 0,
+        curI = 0;
+
+      function openLightbox(p, i) {
+        curP = p;
+        curI = i;
+        renderLB();
+        lb.classList.add("open");
+        document.body.style.overflow = "hidden";
+      }
+      function renderLB() {
+        const img = PROJ_IMGS[curP][curI];
+        document.getElementById("lbImgWrap").innerHTML =
+          `<div class="lb-img-ph"><i class="fas ${img.icon}"></i><span>${img.cap}</span></div>`;
+        document.getElementById("lbCaption").textContent = img.cap;
+        document.getElementById("lbCounter").textContent =
+          `${curI + 1} / ${PROJ_IMGS[curP].length}`;
+      }
+      function closeLB() {
+        lb.classList.remove("open");
+        document.body.style.overflow = "";
+      }
+
+      document.getElementById("lbClose").addEventListener("click", closeLB);
+      document.getElementById("lbPrev").addEventListener("click", () => {
+        curI = (curI - 1 + PROJ_IMGS[curP].length) % PROJ_IMGS[curP].length;
+        renderLB();
+      });
+      document.getElementById("lbNext").addEventListener("click", () => {
+        curI = (curI + 1) % PROJ_IMGS[curP].length;
+        renderLB();
+      });
+      lb.addEventListener("click", (e) => {
+        if (e.target === lb) closeLB();
+      });
+      document.addEventListener("keydown", (e) => {
+        if (!lb.classList.contains("open")) return;
+        if (e.key === "Escape") closeLB();
+        if (e.key === "ArrowLeft") document.getElementById("lbPrev").click();
+        if (e.key === "ArrowRight") document.getElementById("lbNext").click();
+      });
+    </script>
+  </body>
+</html>
