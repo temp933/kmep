@@ -328,6 +328,14 @@ class KmepHeader extends HTMLElement {
             </div>
           </a>
 
+          <a href="projects.html" class="kh-pitem" role="menuitem">
+            <div class="kh-pitem-ico" aria-hidden="true"><i class="fas fa-hard-hat"></i></div>
+            <div>
+              <div class="kh-pitem-title">Projects</div>
+              <div class="kh-pitem-sub">Our portfolio &amp; completed works</div>
+            </div>
+          </a>
+
           <a href="contact-us.html" class="kh-pitem" role="menuitem">
             <div class="kh-pitem-ico" aria-hidden="true"><i class="fas fa-envelope"></i></div>
             <div>
@@ -368,6 +376,7 @@ class KmepHeader extends HTMLElement {
     <a href="about.html"><i class="fas fa-building" aria-hidden="true"></i> About Us</a>
     <a href="leadership.html"><i class="fas fa-user-tie" aria-hidden="true"></i> Leadership</a>
     <a href="team.html"><i class="fas fa-users" aria-hidden="true"></i> Our Team</a>
+    <a href="projects.html"><i class="fas fa-hard-hat" aria-hidden="true"></i> Projects</a>
     <a href="contact-us.html"><i class="fas fa-envelope" aria-hidden="true"></i> Contact Us</a>
   </div>
 
@@ -621,6 +630,7 @@ class KmepFooter extends HTMLElement {
       <a href="about.html">About Us</a>
       <a href="leadership.html">Leadership</a>
       <a href="team.html">Our Team</a>
+      <a href="projects.html">Projects</a>
       <a href="contact-us.html">Contact Us</a>
     </div>
 
