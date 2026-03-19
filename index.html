@@ -900,6 +900,8 @@
       .sidenav.dk .dot:hover {
         background: rgba(255, 255, 255, 0.56);
       }
+
+      /* ── RESPONSIVE ── */
       @media (max-width: 1100px) {
         .about-grid {
           grid-template-columns: 1fr;
@@ -937,9 +939,10 @@
           display: none;
         }
       }
+
       @media (max-width: 860px) {
         #hero {
-          padding-top: calc(var(--NAV-H)+44px);
+          padding-top: calc(var(--NAV-H) + 44px);
           padding-bottom: 80px;
         }
         .hbg-photo {
@@ -1019,37 +1022,101 @@
           padding: 0 24px;
         }
       }
+
+      /* ── KEY FIX: iPhone SE / 375px ── */
       @media (max-width: 480px) {
-        .hero-h1 {
-          font-size: clamp(36px, 10vw, 48px);
-          letter-spacing: -1.5px;
+        /* Hero section spacing */
+        #hero {
+          padding-top: calc(var(--NAV-H) + 28px);
+          padding-bottom: 56px;
+          min-height: unset;
         }
+        .hero-body {
+          padding: 0 20px;
+        }
+
+        /* Eyebrow pill: was overflowing — now wraps cleanly */
+        .hero-eyebrow {
+          display: flex; /* not inline-flex so it fits the row */
+          max-width: 100%;
+          padding: 7px 14px;
+          margin-bottom: 22px;
+          border-radius: 50px;
+          gap: 9px;
+          white-space: normal; /* allow text to wrap if needed */
+        }
+        .hero-eyebrow-text {
+          font-size: 10px;
+          letter-spacing: 1.6px;
+          line-height: 1.5;
+        }
+        .hero-pulse {
+          flex-shrink: 0;
+          align-self: center;
+        }
+
+        /* Heading */
+        .hero-h1 {
+          font-size: clamp(32px, 10vw, 44px);
+          letter-spacing: -1.5px;
+          margin-bottom: 16px;
+        }
+
+        /* Sub */
+        .hero-sub {
+          font-size: 15px;
+          line-height: 1.75;
+          margin-bottom: 28px;
+        }
+
+        /* Buttons */
         .hero-btns {
           flex-direction: column;
+          gap: 10px;
         }
         .btn-sky,
         .btn-outline {
           width: 100%;
           justify-content: center;
+          padding: 14px 20px;
+          font-size: 14px;
+        }
+
+        /* Stats */
+        .hero-stats {
+          margin-top: 36px;
         }
         .hst-n {
-          font-size: 24px;
+          font-size: 22px;
         }
         .hst {
-          padding: 16px 10px;
+          padding: 14px 8px;
         }
+
+        /* Service cards */
         .svc-card {
           flex-direction: column;
         }
         .svc-thumb {
           width: 100%;
-          height: 140px;
+          height: 130px;
         }
         .svc-thumb img {
-          height: 98px;
+          height: 90px;
+        }
+      }
+
+      /* Extra small (Galaxy Fold, etc.) */
+      @media (max-width: 360px) {
+        .hero-eyebrow-text {
+          font-size: 9px;
+          letter-spacing: 1.2px;
+        }
+        .hero-h1 {
+          font-size: 28px;
         }
         .hero-body {
-          padding: 0 18px;
+          padding: 0 16px;
         }
       }
     </style>
@@ -1065,6 +1132,7 @@
       <div class="dot" data-target="spotlight" data-label="Partners"></div>
       <div class="dot" data-target="clients" data-label="Clients"></div>
     </nav>
+
     <section id="hero">
       <div class="hbg-glow"></div>
       <div class="hbg-grid"></div>
@@ -1072,8 +1140,8 @@
       <div class="hbg-orb"></div>
       <div class="hero-body">
         <div class="hero-eyebrow">
-          <span class="hero-pulse"></span
-          ><span class="hero-eyebrow-text"
+          <span class="hero-pulse"></span>
+          <span class="hero-eyebrow-text"
             >MEP Engineering Excellence — Since 2009</span
           >
         </div>
@@ -1112,6 +1180,7 @@
         <span class="hcue-txt">Scroll</span>
       </div>
     </section>
+
     <section id="about">
       <div class="wrap">
         <div class="about-grid">
@@ -1202,8 +1271,8 @@
           </p>
         </div>
         <div class="svc-grid">
-          <a class="svc-card rv d1" href="services.html"
-            ><div class="svc-thumb">
+          <a class="svc-card rv d1" href="services.html">
+            <div class="svc-thumb">
               <img src="IMAGES/hvac.png" alt="HVAC" />
             </div>
             <div class="svc-body">
@@ -1217,10 +1286,11 @@
               </p>
               <div class="svc-link">
                 View Service <i class="fas fa-arrow-right"></i>
-              </div></div
-          ></a>
-          <a class="svc-card rv d2" href="services.html"
-            ><div class="svc-thumb">
+              </div>
+            </div>
+          </a>
+          <a class="svc-card rv d2" href="services.html">
+            <div class="svc-thumb">
               <img src="IMAGES/mechanical.png" alt="Mechanical" />
             </div>
             <div class="svc-body">
@@ -1236,10 +1306,11 @@
               </p>
               <div class="svc-link">
                 View Service <i class="fas fa-arrow-right"></i>
-              </div></div
-          ></a>
-          <a class="svc-card rv d3" href="services.html"
-            ><div class="svc-thumb">
+              </div>
+            </div>
+          </a>
+          <a class="svc-card rv d3" href="services.html">
+            <div class="svc-thumb">
               <img src="IMAGES/elctrical_.png" alt="Electrical" />
             </div>
             <div class="svc-body">
@@ -1253,10 +1324,11 @@
               </p>
               <div class="svc-link">
                 View Service <i class="fas fa-arrow-right"></i>
-              </div></div
-          ></a>
-          <a class="svc-card rv d4" href="services.html"
-            ><div class="svc-thumb">
+              </div>
+            </div>
+          </a>
+          <a class="svc-card rv d4" href="services.html">
+            <div class="svc-thumb">
               <img src="IMAGES/plumbing.png" alt="Plumbing" />
             </div>
             <div class="svc-body">
@@ -1270,8 +1342,9 @@
               </p>
               <div class="svc-link">
                 View Service <i class="fas fa-arrow-right"></i>
-              </div></div
-          ></a>
+              </div>
+            </div>
+          </a>
         </div>
         <p class="svc-note rv">
           <strong style="color: var(--navy)">Harmony in Every Detail:</strong>
@@ -1281,6 +1354,7 @@
         </p>
       </div>
     </section>
+
     <section id="why">
       <div class="wrap">
         <div class="sec-header rv">
@@ -1363,6 +1437,7 @@
         </div>
       </div>
     </section>
+
     <section id="spotlight">
       <div class="wrap">
         <div class="spot-grid">
@@ -1409,6 +1484,7 @@
         </div>
       </div>
     </section>
+
     <section id="clients">
       <div class="wrap">
         <div class="sec-header rv">
@@ -1429,59 +1505,100 @@
       </div>
       <div class="mq-wrap">
         <div class="mq-track">
-          <img src="IMAGES/CLIENTS/apostolic.png" alt="Apostolic" /><img
-            src="IMAGES/CLIENTS/db.png"
-            alt="DB"
-          /><img
-            src="IMAGES/CLIENTS/felicity-square.png"
-            alt="Felicity Square"
-          /><img src="IMAGES/CLIENTS/lg.png" alt="LG" /><img
-            src="IMAGES/CLIENTS/micro-tech.png"
-            alt="Micro Tech"
-          /><img src="IMAGES/CLIENTS/ola.png" alt="Ola" /><img
-            src="IMAGES/CLIENTS/rsm-towers.png"
-            alt="RSM Towers"
-          /><img src="IMAGES/CLIENTS/sarathas.png" alt="Sarathas" /><img
-            src="IMAGES/CLIENTS/svb.png"
-            alt="SVB"
-          /><img src="IMAGES/CLIENTS/taneira.png" alt="Taneira" /><img
-            src="IMAGES/CLIENTS/teal.png"
-            alt="Teal"
-          /><img
-            src="IMAGES/CLIENTS/titan-eyeplus.jpg"
-            alt="Titan EyePlus"
-          /><img src="IMAGES/CLIENTS/titan.png" alt="Titan" /><img
-            src="IMAGES/CLIENTS/client1.png"
-            alt="Client"
-          />
-          <img src="IMAGES/CLIENTS/apostolic.png" alt="Apostolic" /><img
-            src="IMAGES/CLIENTS/db.png"
-            alt="DB"
-          /><img
-            src="IMAGES/CLIENTS/felicity-square.png"
-            alt="Felicity Square"
-          /><img src="IMAGES/CLIENTS/lg.png" alt="LG" /><img
-            src="IMAGES/CLIENTS/micro-tech.png"
-            alt="Micro Tech"
-          /><img src="IMAGES/CLIENTS/ola.png" alt="Ola" /><img
-            src="IMAGES/CLIENTS/rsm-towers.png"
-            alt="RSM Towers"
-          /><img src="IMAGES/CLIENTS/sarathas.png" alt="Sarathas" /><img
-            src="IMAGES/CLIENTS/svb.png"
-            alt="SVB"
-          /><img src="IMAGES/CLIENTS/taneira.png" alt="Taneira" /><img
-            src="IMAGES/CLIENTS/teal.png"
-            alt="Teal"
-          /><img
-            src="IMAGES/CLIENTS/titan-eyeplus.jpg"
-            alt="Titan EyePlus"
-          /><img src="IMAGES/CLIENTS/titan.png" alt="Titan" /><img
-            src="IMAGES/CLIENTS/client1.png"
-            alt="Client"
-          />
+          <a href="projects.html"
+            ><img src="IMAGES/CLIENTS/apostolic.png" alt="Apostolic"
+          /></a>
+          <a href="projects.html"
+            ><img src="IMAGES/CLIENTS/db.png" alt="DB"
+          /></a>
+          <a href="projects.html"
+            ><img
+              src="IMAGES/CLIENTS/felicity-square.png"
+              alt="Felicity Square"
+          /></a>
+          <a href="projects.html"
+            ><img src="IMAGES/CLIENTS/lg.png" alt="LG"
+          /></a>
+          <a href="projects.html"
+            ><img src="IMAGES/CLIENTS/micro-tech.png" alt="Micro Tech"
+          /></a>
+          <a href="projects.html"
+            ><img src="IMAGES/CLIENTS/ola.png" alt="Ola"
+          /></a>
+          <a href="projects.html"
+            ><img src="IMAGES/CLIENTS/rsm-towers.png" alt="RSM Towers"
+          /></a>
+          <a href="projects.html"
+            ><img src="IMAGES/CLIENTS/sarathas.png" alt="Sarathas"
+          /></a>
+          <a href="projects.html"
+            ><img src="IMAGES/CLIENTS/svb.png" alt="SVB"
+          /></a>
+          <a href="projects.html"
+            ><img src="IMAGES/CLIENTS/taneira.png" alt="Taneira"
+          /></a>
+          <a href="projects.html"
+            ><img src="IMAGES/CLIENTS/teal.png" alt="Teal"
+          /></a>
+          <a href="projects.html"
+            ><img src="IMAGES/CLIENTS/titan-eyeplus.jpg" alt="Titan EyePlus"
+          /></a>
+          <a href="projects.html"
+            ><img src="IMAGES/CLIENTS/titan.png" alt="Titan"
+          /></a>
+          <a href="projects.html"
+            ><img src="IMAGES/CLIENTS/client1.png" alt="Client"
+          /></a>
+
+          <!-- duplicate for infinite scroll -->
+          <a href="projects.html"
+            ><img src="IMAGES/CLIENTS/apostolic.png" alt="Apostolic"
+          /></a>
+          <a href="projects.html"
+            ><img src="IMAGES/CLIENTS/db.png" alt="DB"
+          /></a>
+          <a href="projects.html"
+            ><img
+              src="IMAGES/CLIENTS/felicity-square.png"
+              alt="Felicity Square"
+          /></a>
+          <a href="projects.html"
+            ><img src="IMAGES/CLIENTS/lg.png" alt="LG"
+          /></a>
+          <a href="projects.html"
+            ><img src="IMAGES/CLIENTS/micro-tech.png" alt="Micro Tech"
+          /></a>
+          <a href="projects.html"
+            ><img src="IMAGES/CLIENTS/ola.png" alt="Ola"
+          /></a>
+          <a href="projects.html"
+            ><img src="IMAGES/CLIENTS/rsm-towers.png" alt="RSM Towers"
+          /></a>
+          <a href="projects.html"
+            ><img src="IMAGES/CLIENTS/sarathas.png" alt="Sarathas"
+          /></a>
+          <a href="projects.html"
+            ><img src="IMAGES/CLIENTS/svb.png" alt="SVB"
+          /></a>
+          <a href="projects.html"
+            ><img src="IMAGES/CLIENTS/taneira.png" alt="Taneira"
+          /></a>
+          <a href="projects.html"
+            ><img src="IMAGES/CLIENTS/teal.png" alt="Teal"
+          /></a>
+          <a href="projects.html"
+            ><img src="IMAGES/CLIENTS/titan-eyeplus.jpg" alt="Titan EyePlus"
+          /></a>
+          <a href="projects.html"
+            ><img src="IMAGES/CLIENTS/titan.png" alt="Titan"
+          /></a>
+          <a href="projects.html"
+            ><img src="IMAGES/CLIENTS/client1.png" alt="Client"
+          /></a>
         </div>
       </div>
     </section>
+
     <section id="cta" style="padding: 108px 0; background: var(--off)">
       <div class="wrap">
         <div class="cta-box rv">
@@ -1492,12 +1609,13 @@
             transform your infrastructure.
           </p>
           <div class="cta-btns">
-            <a href="contact-us.html" class="cta-btn1">Get in Touch</a
-            ><a href="services.html" class="cta-btn2">View All Services</a>
+            <a href="contact-us.html" class="cta-btn1">Get in Touch</a>
+            <a href="services.html" class="cta-btn2">View All Services</a>
           </div>
         </div>
       </div>
     </section>
+
     <kmep-footer></kmep-footer>
   </body>
 </html>
