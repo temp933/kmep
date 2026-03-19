@@ -16,7 +16,32 @@
     <link rel="stylesheet" href="style.css" />
     <script src="script.js" defer></script>
     <style>
-      /* Page-specific only */
+      /* ══════════════════════════════════════════
+       GLOBAL OVERFLOW GUARD
+       Prevents any section or component from
+       creating a horizontal scrollbar
+    ══════════════════════════════════════════ */
+      kmep-header,
+      kmep-footer,
+      section,
+      .wrap {
+        max-width: 100%;
+        overflow-x: hidden;
+      }
+      /* Hero sections are positioned so use clip instead */
+      #hero,
+      #about,
+      #services,
+      #why,
+      #spotlight,
+      #clients,
+      #cta {
+        overflow-x: clip;
+      }
+
+      /* ══════════════════════════════════════════
+       HERO
+    ══════════════════════════════════════════ */
       #hero {
         position: relative;
         display: flex;
@@ -31,7 +56,9 @@
           #0a3060 75%,
           #091e38 100%
         );
-        overflow: hidden;
+        overflow: hidden; /* clip ALL absolutely positioned children */
+        width: 100%;
+        max-width: 100%;
       }
       .hbg-glow {
         position: absolute;
@@ -107,6 +134,9 @@
           transparent 70%
         );
         pointer-events: none;
+        /* Prevent orb from creating horizontal scroll on narrow screens */
+        max-width: 80vw;
+        max-height: 80vw;
       }
       .hero-body {
         position: relative;
@@ -115,6 +145,7 @@
         max-width: 1180px;
         margin: 0 auto;
         padding: 0 52px;
+        box-sizing: border-box;
       }
       .hero-eyebrow,
       .hero-h1,
@@ -149,6 +180,7 @@
           transform: translateY(0);
         }
       }
+
       .hero-eyebrow {
         display: inline-flex;
         align-items: center;
@@ -289,6 +321,10 @@
           transform: scaleY(1);
         }
       }
+
+      /* ══════════════════════════════════════════
+       ABOUT
+    ══════════════════════════════════════════ */
       #about {
         padding: 108px 0;
         background: #fff;
@@ -432,6 +468,10 @@
         font-size: 13px;
         flex-shrink: 0;
       }
+
+      /* ══════════════════════════════════════════
+       SERVICES
+    ══════════════════════════════════════════ */
       #services {
         padding: 108px 0;
         background: var(--off);
@@ -571,6 +611,10 @@
         text-align: center;
         max-width: 800px;
       }
+
+      /* ══════════════════════════════════════════
+       WHY
+    ══════════════════════════════════════════ */
       #why {
         padding: 108px 0;
         background: #fff;
@@ -656,6 +700,10 @@
         color: var(--slate);
         line-height: 1.75;
       }
+
+      /* ══════════════════════════════════════════
+       SPOTLIGHT
+    ══════════════════════════════════════════ */
       #spotlight {
         padding: 108px 0;
         background: var(--off);
@@ -780,6 +828,10 @@
         background: var(--sky);
         flex-shrink: 0;
       }
+
+      /* ══════════════════════════════════════════
+       CLIENTS
+    ══════════════════════════════════════════ */
       #clients {
         padding: 90px 0;
         background: var(--navy);
@@ -813,11 +865,15 @@
       .mq-track:hover {
         animation-play-state: paused;
       }
+      .mq-track a {
+        display: flex;
+        align-items: center;
+        flex-shrink: 0;
+      }
       .mq-track img {
         height: 52px;
         width: auto;
         object-fit: contain;
-        flex-shrink: 0;
         opacity: 0.75;
         transition:
           opacity 0.3s,
@@ -835,6 +891,10 @@
           transform: translateX(-50%);
         }
       }
+
+      /* ══════════════════════════════════════════
+       SIDE NAV
+    ══════════════════════════════════════════ */
       .sidenav {
         position: fixed;
         right: 26px;
@@ -901,7 +961,20 @@
         background: rgba(255, 255, 255, 0.56);
       }
 
-      /* ── RESPONSIVE ── */
+      /* ══════════════════════════════════════════════════════
+       RESPONSIVE — INDEX PAGE
+       Breakpoints: 1440 | 1100 | 860 | 600 | 480 | 360
+    ══════════════════════════════════════════════════════ */
+
+      /* 1440px+ */
+      @media (min-width: 1440px) {
+        .hero-body {
+          max-width: 1320px;
+          padding: 0 64px;
+        }
+      }
+
+      /* ≤1100px — narrow desktop / large tablet landscape */
       @media (max-width: 1100px) {
         .about-grid {
           grid-template-columns: 1fr;
@@ -940,21 +1013,36 @@
         }
       }
 
+      /* ≤860px — tablet portrait */
       @media (max-width: 860px) {
         #hero {
-          padding-top: calc(var(--NAV-H) + 44px);
+          padding-top: calc(var(--NAV-H)+44px);
           padding-bottom: 80px;
+          min-height: unset;
         }
         .hbg-photo {
           display: none;
         }
+        .hbg-orb {
+          width: 220px;
+          height: 220px;
+          right: -40px;
+          bottom: -60px;
+        }
+        .hero-body {
+          padding: 0 24px;
+          overflow: visible;
+        }
         .hero-h1 {
           font-size: clamp(40px, 9vw, 58px);
+        }
+        .hero-sub {
+          font-size: 16px;
         }
         .hero-stats {
           grid-template-columns: repeat(2, 1fr);
           max-width: 100%;
-          margin-top: 52px;
+          margin-top: 48px;
         }
         .hst:nth-child(2) {
           border-right: none;
@@ -1001,6 +1089,10 @@
         .svc-link {
           display: none;
         }
+        .svc-note {
+          font-size: 14px;
+          margin-top: 28px;
+        }
         .why-grid {
           grid-template-columns: 1fr;
         }
@@ -1018,58 +1110,85 @@
         .svc-mini-grid {
           grid-template-columns: 1fr;
         }
-        .hero-body {
-          padding: 0 24px;
+        .about-h {
+          font-size: clamp(26px, 5vw, 38px);
+        }
+        .about-p {
+          font-size: 15px;
+        }
+        .pillar {
+          padding: 16px 18px;
+        }
+        .spot-p {
+          font-size: 15px;
+        }
+        .spot-badge {
+          flex-direction: column;
+          align-items: flex-start;
+          gap: 10px;
+        }
+        .chips {
+          gap: 8px;
+        }
+        .chip {
+          padding: 10px 16px;
+          font-size: 13px;
+        }
+        .mq-wrap {
+          margin-top: 36px;
+        }
+        .mq-track {
+          gap: 44px;
+        }
+        .mq-track img {
+          height: 40px;
         }
       }
 
-      /* ── KEY FIX: iPhone SE / 375px ── */
-      @media (max-width: 480px) {
-        /* Hero section spacing */
+      /* ≤600px — phones landscape / small tablets */
+      @media (max-width: 600px) {
         #hero {
-          padding-top: calc(var(--NAV-H) + 28px);
+          padding-top: calc(var(--NAV-H)+36px);
           padding-bottom: 56px;
-          min-height: unset;
         }
         .hero-body {
           padding: 0 20px;
+          overflow: visible;
         }
-
-        /* Eyebrow pill: was overflowing — now wraps cleanly */
+        .hbg-orb {
+          width: 160px;
+          height: 160px;
+          right: -20px;
+          bottom: -40px;
+        }
+        /* Fix eyebrow overflow — key fix */
         .hero-eyebrow {
-          display: flex; /* not inline-flex so it fits the row */
+          display: flex;
           max-width: 100%;
+          width: fit-content;
           padding: 7px 14px;
-          margin-bottom: 22px;
-          border-radius: 50px;
-          gap: 9px;
-          white-space: normal; /* allow text to wrap if needed */
+          margin-bottom: 20px;
+          gap: 8px;
+          white-space: normal;
         }
         .hero-eyebrow-text {
-          font-size: 10px;
-          letter-spacing: 1.6px;
-          line-height: 1.5;
+          font-size: 10.5px;
+          letter-spacing: 1.8px;
+          line-height: 1.4;
         }
         .hero-pulse {
           flex-shrink: 0;
           align-self: center;
         }
-
-        /* Heading */
         .hero-h1 {
-          font-size: clamp(32px, 10vw, 44px);
-          letter-spacing: -1.5px;
-          margin-bottom: 16px;
+          font-size: clamp(36px, 9vw, 52px);
+          letter-spacing: -2px;
+          margin-bottom: 18px;
         }
-
-        /* Sub */
         .hero-sub {
           font-size: 15px;
-          line-height: 1.75;
           margin-bottom: 28px;
         }
-
-        /* Buttons */
         .hero-btns {
           flex-direction: column;
           gap: 10px;
@@ -1081,10 +1200,106 @@
           padding: 14px 20px;
           font-size: 14px;
         }
-
-        /* Stats */
         .hero-stats {
           margin-top: 36px;
+        }
+        .hst-n {
+          font-size: 24px;
+        }
+        .hst {
+          padding: 16px 10px;
+        }
+        #about,
+        #services,
+        #why,
+        #spotlight {
+          padding: 60px 0;
+        }
+        #clients,
+        #cta {
+          padding: 52px 0;
+        }
+        .svc-card {
+          flex-direction: column;
+        }
+        .svc-thumb {
+          width: 100%;
+          height: 140px;
+        }
+        .svc-thumb img {
+          height: 100px;
+        }
+        .svc-grid {
+          gap: 12px;
+        }
+        .pillar-list {
+          gap: 10px;
+        }
+        .p-ico {
+          width: 38px;
+          height: 38px;
+          font-size: 15px;
+        }
+        .wc {
+          padding: 24px 20px;
+        }
+        .wc-ico {
+          width: 44px;
+          height: 44px;
+          font-size: 18px;
+          margin-bottom: 14px;
+        }
+        .wc-title {
+          font-size: 15px;
+        }
+        .wc-desc {
+          font-size: 13px;
+        }
+        .mq-track {
+          gap: 32px;
+        }
+        .mq-track img {
+          height: 34px;
+        }
+      }
+
+      /* ≤480px — iPhone SE and typical portrait phones */
+      @media (max-width: 480px) {
+        /* Enough top padding so eyebrow never overlaps the fixed header */
+        #hero {
+          padding-top: calc(var(--NAV-H) + 36px);
+          padding-bottom: 48px;
+        }
+        /* Remove overflow:hidden from hero-body — it was clipping the left padding visually */
+        .hero-body {
+          padding: 0 20px;
+          overflow: visible;
+        }
+        .hbg-orb {
+          display: none;
+        }
+        .hero-eyebrow {
+          padding: 6px 12px;
+          margin-bottom: 16px;
+          gap: 7px;
+        }
+        .hero-eyebrow-text {
+          font-size: 10px;
+          letter-spacing: 1.5px;
+        }
+        .hero-h1 {
+          font-size: clamp(32px, 9vw, 44px);
+          letter-spacing: -1.5px;
+          margin-bottom: 14px;
+        }
+        .hero-sub {
+          font-size: 14.5px;
+          line-height: 1.7;
+          margin-bottom: 24px;
+        }
+        .hero-stats {
+          margin-top: 28px;
+          border-radius: 12px;
         }
         .hst-n {
           font-size: 22px;
@@ -1092,37 +1307,158 @@
         .hst {
           padding: 14px 8px;
         }
-
-        /* Service cards */
-        .svc-card {
-          flex-direction: column;
+        .hst-l {
+          font-size: 9px;
+          letter-spacing: 1px;
+        }
+        .about-h {
+          font-size: clamp(22px, 7vw, 30px);
+        }
+        .about-p {
+          font-size: 14px;
+          margin-bottom: 24px;
+        }
+        .pillar {
+          padding: 14px 16px;
+          gap: 12px;
+        }
+        .p-ico {
+          width: 34px;
+          height: 34px;
+          font-size: 13px;
+        }
+        .pillar h3 {
+          font-size: 14px;
+        }
+        .pillar p {
+          font-size: 12.5px;
+        }
+        .svc-mini {
+          padding: 18px;
+        }
+        .svc-mini-row {
+          font-size: 13px;
+        }
+        #about,
+        #services,
+        #why,
+        #spotlight {
+          padding: 48px 0;
+        }
+        #clients,
+        #cta {
+          padding: 44px 0;
         }
         .svc-thumb {
-          width: 100%;
-          height: 130px;
+          height: 120px;
         }
         .svc-thumb img {
-          height: 90px;
+          height: 86px;
+        }
+        .svc-name {
+          font-size: 15px;
+        }
+        .svc-desc {
+          font-size: 12.5px;
+        }
+        .svc-body {
+          padding: 14px;
+        }
+        .spot-h {
+          font-size: clamp(20px, 6vw, 28px);
+          margin-bottom: 12px;
+        }
+        .spot-p {
+          font-size: 14px;
+          margin-bottom: 20px;
+        }
+        .spot-img {
+          padding: 24px;
+        }
+        .chip {
+          padding: 9px 14px;
+          font-size: 12.5px;
+        }
+        .chips {
+          gap: 7px;
+          margin-bottom: 22px;
+        }
+        .sb-t strong {
+          font-size: 15px;
+        }
+        .sb-t small {
+          font-size: 10px;
+        }
+        .spot-badge {
+          padding: 16px 18px;
+          border-radius: 12px;
         }
       }
 
-      /* Extra small (Galaxy Fold, etc.) */
+      /* ≤360px — Galaxy Fold / very small phones */
       @media (max-width: 360px) {
+        .hero-body {
+          padding: 0 14px;
+        }
         .hero-eyebrow-text {
           font-size: 9px;
           letter-spacing: 1.2px;
         }
         .hero-h1 {
           font-size: 28px;
+          letter-spacing: -1px;
         }
-        .hero-body {
-          padding: 0 16px;
+        .hero-sub {
+          font-size: 13.5px;
+        }
+        .hst-n {
+          font-size: 20px;
+        }
+        .hst {
+          padding: 12px 6px;
+        }
+        .btn-sky,
+        .btn-outline {
+          font-size: 13px;
+          padding: 12px 16px;
+        }
+        .about-h {
+          font-size: 22px;
+        }
+        .pillar {
+          padding: 12px 14px;
+          gap: 10px;
+        }
+        .p-ico {
+          width: 30px;
+          height: 30px;
+          font-size: 12px;
+        }
+        .wc {
+          padding: 20px 16px;
+        }
+        .wc-title {
+          font-size: 14px;
+        }
+        .wc-desc {
+          font-size: 12.5px;
+        }
+        .chip {
+          padding: 8px 12px;
+          font-size: 12px;
+        }
+        .spot-h {
+          font-size: 20px;
+        }
+        .spot-p {
+          font-size: 13px;
         }
       }
     </style>
   </head>
   <body>
     <kmep-header></kmep-header>
+
     <nav class="sidenav" id="sideNav">
       <div class="dot on" data-target="hero" data-label="Home"></div>
       <div class="dot" data-target="about" data-label="About"></div>
@@ -1133,6 +1469,7 @@
       <div class="dot" data-target="clients" data-label="Clients"></div>
     </nav>
 
+    <!-- HERO -->
     <section id="hero">
       <div class="hbg-glow"></div>
       <div class="hbg-grid"></div>
@@ -1181,6 +1518,7 @@
       </div>
     </section>
 
+    <!-- ABOUT -->
     <section id="about">
       <div class="wrap">
         <div class="about-grid">
@@ -1258,11 +1596,12 @@
       </div>
     </section>
 
+    <!-- SERVICES -->
     <section id="services">
       <div class="wrap">
         <div class="sec-header rv">
           <p class="sec-tag-c">What We Offer</p>
-          <h2 class="display-h" style="font-size: clamp(30px, 4vw, 50px)">
+          <h2 class="display-h" style="font-size: clamp(28px, 4vw, 50px)">
             Our Core Services
           </h2>
           <p class="sec-sub">
@@ -1355,11 +1694,12 @@
       </div>
     </section>
 
+    <!-- WHY -->
     <section id="why">
       <div class="wrap">
         <div class="sec-header rv">
           <p class="sec-tag-c">Why KMEP</p>
-          <h2 class="display-h" style="font-size: clamp(30px, 4vw, 50px)">
+          <h2 class="display-h" style="font-size: clamp(28px, 4vw, 50px)">
             Built Different
           </h2>
           <p class="sec-sub">
@@ -1438,6 +1778,7 @@
       </div>
     </section>
 
+    <!-- SPOTLIGHT -->
     <section id="spotlight">
       <div class="wrap">
         <div class="spot-grid">
@@ -1485,6 +1826,7 @@
       </div>
     </section>
 
+    <!-- CLIENTS -->
     <section id="clients">
       <div class="wrap">
         <div class="sec-header rv">
@@ -1493,7 +1835,7 @@
           </p>
           <h2
             class="display-h"
-            style="font-size: clamp(30px, 4vw, 50px); color: #fff"
+            style="font-size: clamp(28px, 4vw, 50px); color: #fff"
           >
             Trusted by Industry Leaders
           </h2>
@@ -1549,8 +1891,6 @@
           <a href="projects.html"
             ><img src="IMAGES/CLIENTS/client1.png" alt="Client"
           /></a>
-
-          <!-- duplicate for infinite scroll -->
           <a href="projects.html"
             ><img src="IMAGES/CLIENTS/apostolic.png" alt="Apostolic"
           /></a>
@@ -1599,6 +1939,7 @@
       </div>
     </section>
 
+    <!-- CTA -->
     <section id="cta" style="padding: 108px 0; background: var(--off)">
       <div class="wrap">
         <div class="cta-box rv">
